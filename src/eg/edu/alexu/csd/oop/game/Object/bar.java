@@ -1,4 +1,4 @@
-package eg.edu.alexu.csd.oop.game;
+package eg.edu.alexu.csd.oop.game.Object;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;

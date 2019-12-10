@@ -1,4 +1,4 @@
-package eg.edu.alexu.csd.oop.game;
+package eg.edu.alexu.csd.oop.game.Object;
 
 import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.JPanel;
 import java.awt.*;
 public class plate extends JPanel {
-	boolean moving=true;
+	public boolean moving=true;
 	Color c=new Color((int)(Math.random() * 0x1000000));
 	    int xst[]=new int[4];
 	    int yst[]=new int[4];
