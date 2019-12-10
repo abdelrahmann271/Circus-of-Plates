@@ -2,11 +2,15 @@ package eg.edu.alexu.csd.oop.game.Object;
 
 import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 import javax.swing.JPanel;
+
+import eg.edu.alexu.csd.oop.game.GameObject;
+
 import java.awt.*;
-public class plate extends JPanel {
+public class plate extends JPanel implements GameObject {
 	public boolean moving=true;
 	Color c=new Color((int)(Math.random() * 0x1000000));
 	    int xst[]=new int[4];
@@ -48,4 +52,9 @@ public class plate extends JPanel {
 	    }
 	}
 	public int getY() {return yst[1];}
+	@Override
+	public BufferedImage[] getSpriteImages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
