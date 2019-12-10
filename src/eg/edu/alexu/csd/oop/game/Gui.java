@@ -1,4 +1,4 @@
-package habd;
+package eg.edu.alexu.csd.oop.game;
 
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -15,11 +15,12 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 public class Gui extends JPanel  {
-    public int create=0,x=400,counter=0;
+    public int create=0,x=400,counter=0,y=500;
     public int xs[]= {-70,-65,-15,-10};
     public int ys[]= {75,90,90,75};
     ArrayList<plate> List=new ArrayList<>();
     ArrayList <plate> catched=new ArrayList<>();
+    ArrayList <plate> temp=new ArrayList<>();
 	private JFrame frame;
 	private JTextField textField;
 
@@ -71,9 +72,14 @@ public class Gui extends JPanel  {
 				            x+=30;
 				        }
 				        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				            x-=30;
+				           x-=30;
 				        }
-
+				        if (e.getKeyCode() == KeyEvent.VK_UP) {
+				        	y-=30;
+				        }
+				        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				        	y+=30;
+				        }
 				    }
 
 				    @Override
@@ -86,11 +92,18 @@ public class Gui extends JPanel  {
 				          if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				              x-=30;
 				          }
-
+				          
+				          if (e.getKeyCode() == KeyEvent.VK_UP) {
+					        	y-=30;
+					        }
+					        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					        	y+=30;
+					        }
 				    }
 
 				    @Override
 				    public void keyReleased(KeyEvent e) {
+				    
 				    	
 				    }
 					}
@@ -106,10 +119,9 @@ public class Gui extends JPanel  {
 			    executorService.scheduleAtFixedRate(new Runnable() {
 			        @Override
 			        public void run() {	
-			        	
-			        	repaint();  
+			          repaint();
 			        }
-			    }, 2000, 100, TimeUnit.MILLISECONDS);
+			    }, 2000, 80, TimeUnit.MILLISECONDS);
 		}
 		private static final long serialVersionUID = 1L;
 	public void paintComponent(Graphics g) {
@@ -119,27 +131,35 @@ public class Gui extends JPanel  {
      	   List.add(t);
      	   create=0;
         }
-        
 		super.paintComponent(g);
-		bar b=new bar();
+	   bar b=new bar();
 		b.setX(x);
+		b.setY(y);
 		b.draw(g);
-	    for(plate k : List) {k.draw(g);
-	    if(k.getY()>(500-15*counter)&&x==400&&k.getY()<(550)) {
-	    	List.remove(k);
+		temp.clear();
+	    for(plate k : List) {
+	    if(k.getY()>(y-15*counter)&&x==400&&k.getY()<(y+50-15*counter)) {
+	    	temp.add(k);
 	    	k.setX(x);
-	    	k.setY(500-counter*15);
+	    	k.setY(y-counter*15);
 	    	k.moving=false;
+	    	k.setcounter(counter);
 	    	catched.add(k);
 	    	counter++;
 	    }
-	    
+	    else {k.draw(g);}
+	    if(k.getY()>1000) {temp.add(k);}
 	   }
-	    for(plate k : catched) {
+	    for(plate k : temp) {List.remove(k);}
+	  for (plate k : catched) {
 	    	k.setX(x);
-	    	k.draw(g);}		
-				
+	    	k.setY(y-15*k.getcounter());
+	    	k.draw(g);}	
+	  
+	  
+	  
 	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub

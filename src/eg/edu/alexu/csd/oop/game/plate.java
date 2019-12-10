@@ -1,4 +1,4 @@
-package habd;
+package eg.edu.alexu.csd.oop.game;
 
 import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
@@ -11,7 +11,7 @@ public class plate extends JPanel {
 	Color c=new Color((int)(Math.random() * 0x1000000));
 	    int xst[]=new int[4];
 	    int yst[]=new int[4];
-	     int x=400,y=500;
+	     int x=400,y=500,counter=0;
 		public plate(int x[],int y[]) {
 	    	this.xst=x.clone();
 	    	this.yst=y.clone();
@@ -19,6 +19,8 @@ public class plate extends JPanel {
 	    }
 		public void setX(int X) {x=X;}
 		public void setY(int Y) {y=Y;}
+		public void setcounter(int c) {counter=c;}
+		public int getcounter(){return counter;}
 	public void draw(Graphics g) {
 		g.setColor(Color.orange);
 		g.fillRect(0, 90, 400, 10);
