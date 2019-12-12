@@ -135,7 +135,7 @@ public abstract class Plate extends JPanel implements GameObject  {
 		BufferedImage[] out=new BufferedImage[11];
 		File file;
 		String path="plates";
-		System.out.println(type+ " ff");
+		//System.out.println(type+ " ff");
 		String []color= {"black","blue","cyan","darkred"
 				,"gold","green","orange","pink","purple","red","yellow"};
 		for(int i=0;i<11;i++)
