@@ -9,7 +9,8 @@ import javax.swing.JPanel;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
-public class bar extends JPanel implements GameObject  {
+
+public class Bar extends JPanel implements GameObject  {
     int x=400,y=500,width,height;
     
 	public void draw(Graphics g) {

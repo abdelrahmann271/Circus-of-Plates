@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class PotPlate extends Plate  {
 
-	PotPlate() throws IOException {
+	public PotPlate() throws IOException {
 		super();
 		setType("pot");
 		// TODO Auto-generated constructor stub

@@ -8,7 +8,7 @@ import Objects.Plate;
 import Objects.*;
 import Objects.NonBasedPlate;
 import Objects.Plate;
-import Objects.bar;
+import Objects.Bar;
 
 
 
@@ -155,7 +155,7 @@ public class Gui extends JPanel  {
 		  create=0;
 	  }
 	  super.paintComponent(g);
-	  bar b=new bar();
+	  Bar b=new Bar();
 		b.setX(x);
 		b.setY(y);
 		b.setWidth(width);

@@ -1,9 +1,11 @@
 package Worlds;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
+import Objects.*;
+import Objects.Plate;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 
@@ -17,10 +19,19 @@ public class GameWorld implements World {
 	private final List<GameObject> moving = new LinkedList<GameObject>();
 	private final List<GameObject> control = new LinkedList<GameObject>();
 	
-	public GameWorld(int screenWidth, int screenHeight) {
+	public GameWorld(int screenWidth, int screenHeight) throws IOException {
 		
 		this.width = screenWidth;
 		this.height = screenHeight;
+		
+		PotPlate pp = new PotPlate(100,100);
+		pp.SetSpriteImages();
+		control.add(pp);
+		
+		Bar bar1 = new Bar();
+		
+		
+		
 	}
 
 	@Override

@@ -165,6 +165,7 @@ public abstract class Plate extends JPanel implements GameObject  {
 		this.SpriteImages=out;
 	
 	}
+	
 
 }
 
