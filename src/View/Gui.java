@@ -1,10 +1,10 @@
-package eg.edu.alexu.csd.oop.game.View;
+package View;
 
 import javax.swing.*;
 import javax.swing.JFrame;
 
-import eg.edu.alexu.csd.oop.game.Object.bar;
-import eg.edu.alexu.csd.oop.game.Object.plate1;
+import Objects.bar;
+import Objects.plate1;
 
 import java.util.*;
 import java.util.Timer;
@@ -36,6 +36,7 @@ public class Gui extends JPanel  {
 				try {
 					Gui window = new Gui();
 					window.frame.setVisible(true);
+					window.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,6 +67,7 @@ public class Gui extends JPanel  {
 		
 
 		public Canvas() {
+			//this.setBackground(Color.black);
 			this.addKeyListener(new KeyListener() 
 					{
 				 @Override
