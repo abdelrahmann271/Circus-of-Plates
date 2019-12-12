@@ -2,6 +2,7 @@ package Objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +11,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
+
+
 
 public abstract class Plate extends JPanel implements GameObject  {
 	int x=400;
@@ -150,7 +153,7 @@ public abstract class Plate extends JPanel implements GameObject  {
 	{
 		BufferedImage[] out=new BufferedImage[11];
 		File file;
-		String path="C:\\Users\\OWNER\\git\\circusofplates6\\plates";
+		String path="plates";
 		//System.out.println(type+ " ff");
 		String []color= {"black","blue","cyan","darkred"
 				,"gold","green","orange","pink","purple","red","yellow"};
@@ -164,3 +167,4 @@ public abstract class Plate extends JPanel implements GameObject  {
 	}
 
 }
+

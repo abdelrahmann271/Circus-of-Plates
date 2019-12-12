@@ -3,8 +3,14 @@ package View;
 import javax.swing.*;
 import javax.swing.JFrame;
 
+
 import Objects.Plate;
 import Objects.*;
+import Objects.NonBasedPlate;
+import Objects.Plate;
+import Objects.bar;
+
+
 
 import java.util.*;
 import java.util.Timer;
