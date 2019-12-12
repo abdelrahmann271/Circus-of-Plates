@@ -88,7 +88,7 @@ public class PlateFactory {
 		else
 		{
 			
-			System.out.println("ReUsed");
+			//System.out.println("ReUsed");
 			Vector<Plate>v=new Vector<Plate>();
 			v=Garbage.get(plateType);
 			a=v.firstElement();
