@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.JFrame;
 
 import eg.edu.alexu.csd.oop.game.Object.bar;
-import eg.edu.alexu.csd.oop.game.Object.plate;
+import eg.edu.alexu.csd.oop.game.Object.plate1;
 
 import java.util.*;
 import java.util.Timer;
@@ -21,9 +21,9 @@ public class Gui extends JPanel  {
     public int create=0,x=400,counter=0,y=500;
     public int xs[]= {-70,-65,-15,-10};
     public int ys[]= {75,90,90,75};
-    ArrayList<plate> List=new ArrayList<>();
-    ArrayList <plate> catched=new ArrayList<>();
-    ArrayList <plate> temp=new ArrayList<>();
+    ArrayList<plate1> List=new ArrayList<>();
+    ArrayList <plate1> catched=new ArrayList<>();
+    ArrayList <plate1> temp=new ArrayList<>();
 	private JFrame frame;
 	private JTextField textField;
 
@@ -114,7 +114,7 @@ public class Gui extends JPanel  {
 					);
 			this.setFocusable(true);
             this.requestFocusInWindow();
-			plate p=new plate(xs,ys);
+			plate1 p=new plate1(xs,ys);
      	   List.add(p);
      	   
      	   
@@ -125,12 +125,13 @@ public class Gui extends JPanel  {
 			          repaint();
 			        }
 			    }, 2000, 80, TimeUnit.MILLISECONDS);
+			    
 		}
 		private static final long serialVersionUID = 1L;
 	public void paintComponent(Graphics g) {
 	    create++;
         if(create%10==0) {
-     	   plate t=new plate(xs,ys);
+     	   plate1 t=new plate1(xs,ys);
      	   List.add(t);
      	   create=0;
         }
@@ -140,7 +141,7 @@ public class Gui extends JPanel  {
 		b.setY(y);
 		b.draw(g);
 		temp.clear();
-	    for(plate k : List) {
+	    for(plate1 k : List) {
 	    if(k.getY()>(y-15*counter)&&x==400&&k.getY()<(y+50-15*counter)) {
 	    	temp.add(k);
 	    	k.setX(x);
@@ -153,8 +154,8 @@ public class Gui extends JPanel  {
 	    else {k.draw(g);}
 	    if(k.getY()>1000) {temp.add(k);}
 	   }
-	    for(plate k : temp) {List.remove(k);}
-	  for (plate k : catched) {
+	    for(plate1 k : temp) {List.remove(k);}
+	  for (plate1 k : catched) {
 	    	k.setX(x);
 	    	k.setY(y-15*k.getcounter());
 	    	k.draw(g);}	

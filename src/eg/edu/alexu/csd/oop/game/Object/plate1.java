@@ -10,13 +10,13 @@ import javax.swing.JPanel;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
 import java.awt.*;
-public class plate extends JPanel implements GameObject {
+public class plate1 extends JPanel implements GameObject {
 	public boolean moving=true;
 	Color c=new Color((int)(Math.random() * 0x1000000));
 	    int xst[]=new int[4];
 	    int yst[]=new int[4];
 	     int x=400,y=500,counter=0;
-		public plate(int x[],int y[]) {
+		public plate1(int x[],int y[]) {
 	    	this.xst=x.clone();
 	    	this.yst=y.clone();
 	    	 
