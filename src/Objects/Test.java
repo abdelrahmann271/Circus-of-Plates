@@ -1,4 +1,4 @@
-package eg.edu.alexu.csd.oop.game.Object;
+package Objects;
 import java.awt.Graphics;
 
 import java.awt.Image;

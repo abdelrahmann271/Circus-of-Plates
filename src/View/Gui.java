@@ -1,10 +1,10 @@
-package eg.edu.alexu.csd.oop.game.View;
+package View;
 
 import javax.swing.*;
 import javax.swing.JFrame;
 
-import eg.edu.alexu.csd.oop.game.Object.*;
-
+import Objects.Plate;
+import Objects.*;
 
 import java.util.*;
 import java.util.Timer;
