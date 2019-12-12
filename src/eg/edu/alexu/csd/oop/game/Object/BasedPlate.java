@@ -1,13 +1,17 @@
 package eg.edu.alexu.csd.oop.game.Object;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
+//import java.awt.image.BufferedImage;
+//import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 
 public class BasedPlate extends Plate {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	BasedPlate() throws IOException {
 		super();
 		setType("platewithbase");

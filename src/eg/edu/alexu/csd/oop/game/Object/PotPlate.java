@@ -4,11 +4,14 @@ import java.io.IOException;
 
 public class PotPlate extends Plate  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	PotPlate() throws IOException {
 		super();
 		setType("pot");
 		this.SetSpriteImages();
-		// TODO Auto-generated constructor stub
 	}
 	PotPlate(int X,int Y) throws IOException
 	{

@@ -2,9 +2,9 @@ package eg.edu.alexu.csd.oop.game.Object;
 import java.awt.Graphics;
 
 import java.awt.Image;
-import java.awt.List;
+//import java.awt.List;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
+//import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,11 +13,15 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageTypeSpecifier;
+//import javax.imageio.ImageTypeSpecifier;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Test extends JPanel {
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 int x=20;
 int ads=(int) ((Math.random()*11));
 ArrayList<Plate> list=new ArrayList<Plate>();

@@ -36,6 +36,7 @@ public class Gui extends JPanel  {
 				try {
 					Gui window = new Gui();
 					window.frame.setVisible(true);
+					window.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,6 +67,7 @@ public class Gui extends JPanel  {
 		
 
 		public Canvas() {
+			//this.setBackground(Color.black);
 			this.addKeyListener(new KeyListener() 
 					{
 				 @Override
