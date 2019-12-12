@@ -73,21 +73,10 @@ public class GUItestFeatures extends javax.swing.JFrame {
 		//Just Put the image path .. 
 		File file = new File("C:\\Users\\Abdelrahman Nour\\Desktop\\Tent2.png");
 		BufferedImage myImage = ImageIO.read(file);
-		frame.setContentPane(new ImagePanel(myImage));
+		frame.setContentPane(new Background(myImage));
 
 
 
 	}
 }
 
-class ImagePanel extends JComponent {
-    private Image image;
-    public ImagePanel(Image image) {
-        this.image = image;
-    }
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
-    }
-}
