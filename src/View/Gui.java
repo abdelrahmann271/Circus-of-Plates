@@ -1,6 +1,7 @@
 package View;
 
 import javax.swing.*;
+
 import javax.swing.JFrame;
 
 import Objects.bar;
@@ -17,7 +18,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 public class Gui extends JPanel  {
+	
     public int create=0,x=400,counter=0,y=500;
     public int xs[]= {-70,-65,-15,-10};
     public int ys[]= {75,90,90,75};
@@ -187,3 +190,4 @@ public class Gui extends JPanel  {
 	
 
 }
+
