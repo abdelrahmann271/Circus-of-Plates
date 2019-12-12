@@ -1,14 +1,15 @@
-package View;
+package eg.edu.alexu.csd.oop.game.View;
 
 import javax.swing.*;
 import javax.swing.JFrame;
 
-import Objects.bar;
-import Objects.plate1;
+import eg.edu.alexu.csd.oop.game.Object.*;
+
 
 import java.util.*;
 import java.util.Timer;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -18,14 +19,13 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 public class Gui extends JPanel  {
-    public int create=0,x=400,counter=0,y=500;
-    public int xs[]= {-70,-65,-15,-10};
-    public int ys[]= {75,90,90,75};
-    ArrayList<plate1> List=new ArrayList<>();
-    ArrayList <plate1> catched=new ArrayList<>();
-    ArrayList <plate1> temp=new ArrayList<>();
+    public int create=0,x=400,y=500,ads,width;
+    boolean caught=false;
+    ArrayList<Plate> List=new ArrayList<>();
+    ArrayList <Plate> catched=new ArrayList<>();
+    ArrayList <Plate> temp=new ArrayList<>();
 	private JFrame frame;
-	private JTextField textField;
+	
 
 	/**
 	 * Launch the application.
@@ -36,7 +36,6 @@ public class Gui extends JPanel  {
 				try {
 					Gui window = new Gui();
 					window.frame.setVisible(true);
-					window.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -67,7 +66,6 @@ public class Gui extends JPanel  {
 		
 
 		public Canvas() {
-			//this.setBackground(Color.black);
 			this.addKeyListener(new KeyListener() 
 					{
 				 @Override
@@ -116,51 +114,89 @@ public class Gui extends JPanel  {
 					);
 			this.setFocusable(true);
             this.requestFocusInWindow();
-			plate1 p=new plate1(xs,ys);
-     	   List.add(p);
-     	   
-     	   
+            try {
+				Plate p =new  NonBasedPlate(-150,75);
+				List.add(p);
+				width=p.getWidth();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            
 			  final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 			    executorService.scheduleAtFixedRate(new Runnable() {
 			        @Override
 			        public void run() {	
 			          repaint();
 			        }
-			    }, 2000, 80, TimeUnit.MILLISECONDS);
+			    }, 2000, 50, TimeUnit.MILLISECONDS);
 			    
 		}
 		private static final long serialVersionUID = 1L;
 	public void paintComponent(Graphics g) {
-	    create++;
-        if(create%10==0) {
-     	   plate1 t=new plate1(xs,ys);
-     	   List.add(t);
-     	   create=0;
-        }
-		super.paintComponent(g);
-	   bar b=new bar();
+
+	  create++;
+	  if(create%15==0) {
+		  try {
+			Plate p =new  NonBasedPlate(-150,75);
+			p.SetSpriteImages();
+			p.setColor((int) ((Math.random()*11)));
+			List.add(p);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  create=0;
+	  }
+	  super.paintComponent(g);
+	  bar b=new bar();
 		b.setX(x);
 		b.setY(y);
+		b.setWidth(width);
 		b.draw(g);
 		temp.clear();
-	    for(plate1 k : List) {
-	    if(k.getY()>(y-15*counter)&&x==400&&k.getY()<(y+50-15*counter)) {
-	    	temp.add(k);
-	    	k.setX(x);
-	    	k.setY(y-counter*15);
-	    	k.moving=false;
-	    	k.setcounter(counter);
-	    	catched.add(k);
-	    	counter++;
+		for(Plate p : List) {
+			caught=false;
+			for(int i=catched.size()-1;i>=0;i--) {
+				Plate t=catched.get(i);
+			if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<10) {
+					caught=true;i=-1;
+					p.setY(t.getY()-p.getHeight());
+					p.setHeightFromClown(b.getY()-p.getY());
+				}
+			}
+		if(caught||(Math.abs(p.getY()+p.getHeight()-b.getY())<10&&(Math.abs(p.getX()-b.getX())<3*p.getWidth()/4))) {
+			temp.add(p);
+			if(!caught) {
+				p.setY(b.getY()-p.getHeight());
+				p.setHeightFromClown(b.getY()-p.getY());
+			}
+			
+			p.setShiftX(p.getX()-b.getX());
+			catched.add(p);
+		    
+		}
+		else if(p.getX()==400) {
+	    	p.setY(p.getY()+10);
+	    	p.draw(g);}
+	    else {
+		p.setX(p.getX()+10);
+		p.draw(g);
 	    }
-	    else {k.draw(g);}
-	    if(k.getY()>1000) {temp.add(k);}
-	   }
-	    for(plate1 k : temp) {List.remove(k);}
-	  for (plate1 k : catched) {
-	    	k.setX(x);
-	    	k.setY(y-15*k.getcounter());
-	    	k.draw(g);}	
+		  if(p.getY()>1000) {
+		    	temp.add(p);
+		    }
+	}
+		
+	for(Plate p : catched) {
+		p.setX(p.getShiftX()+b.getX());
+		p.setY(b.getY()-p.getHeightFromClown());
+		p.draw(g);
+	}
+	for(Plate p : temp) {
+		List.remove(p);
+	}
+
 	  
 	  
 	  

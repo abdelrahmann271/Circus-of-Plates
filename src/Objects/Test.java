@@ -1,4 +1,4 @@
-package Objects;
+package eg.edu.alexu.csd.oop.game.Object;
 import java.awt.Graphics;
 
 import java.awt.Image;
@@ -17,86 +17,56 @@ import javax.imageio.ImageTypeSpecifier;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
 public class Test extends JPanel {
 int x=20;
 int ads=(int) ((Math.random()*11));
-ArrayList<Plate> list=new ArrayList<Plate>();
-ArrayList<Plate> list2=new ArrayList<Plate>();
-public Test() throws IOException 
+ArrayList<Image> list=new ArrayList<Image>();
+public Test()
 {
 	this.setFocusable(true);
     this.requestFocusInWindow();
     Image img = createImageWithText();
-    PlateFactory b = new PlateFactory();
-    PlateFactory a=b.getInstance();
-    System.out.println(System.identityHashCode(a));
-    System.out.println(System.identityHashCode(b.getInstance()));
+
    // g.drawImage(img,50,50,this);
-	for(int i=0;i<5;i++)
-	{
-		
-			list.add(b.GenerateRandomPlate());
 	
-		
-	}
-	for(int i=0;i<5;i++)
-	{
-		Plate as=list.get(i);
-		b.addToGarbage(as);
-		//list2.add(b.GenerateRandomPlate());
-	}
-	for(int i=0;i<5;i++)
-	{
-		
-			list2.add(b.GenerateRandomPlate());
-	}
 	  final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 	    executorService.scheduleAtFixedRate(new Runnable() {
 	        @Override
 	        public void run() {	
 	        	
 	       x++;
-	     //  System.out.println("asd");
+	       System.out.println("asd");
 	          repaint();
 	          
 	        }
 	    }, 2000, 80, TimeUnit.MILLISECONDS);
 }
-
    public void paint(Graphics g) {
 	   super.paint(g);
       Image img = createImageWithText();
     
-    for(int i=0;i<list.size();i++)
-    {
-    	Plate a=list.get(i);
-    	a.setX(50+30*i);
-    	a.setY(50+30*i);
-    	
-
-    	a.draw(g);
-    	
-    	Plate b=list2.get(i);
-    	b.setX(200+30*i);
-    	b.setY(50+30*i);
-    	b.draw(g);
-    	
-    	
-    	
-    }
-  
-      
-	  // a.setColor(2);
-	  // img=a.getImage();
-	 // System.out.println(a.getHeight());
-
-	  // a.setX(60+x*10);
+      Plate a = null;
+	try {
+		a = new NonBasedPlate(50,50);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	//System.out.println("sd");
+	
+	
+	
+	
+	   a.setColor(2);
+	   img=a.getImage();
+	  // System.out.println();
+	  //a.draw(g);
+	   a.setX(60+x*10);
  
   //g.drawImage(img, 50-100,50, this);
 	  // g.drawImage(img, 50,50, this);
-	 //  a.draw(g);
-	//   g.drawLine(0, 10+x*10, 20, 30);
+	   a.draw(g);
+	   g.drawLine(0, 10+x*10, 20, 30);
 	   repaint();
         
 
@@ -109,10 +79,10 @@ public Test() throws IOException
       int a=1;
       File file;
       if(a==1)
-     file =new File("plates\\goldplatewithdeepbase.png");
+     file =new File("C:\\Users\\OWNER\\git\\circusofplates6\\plates\\goldplatewithdeepbase.png");
       else
       {
-    	  file=new File("C:\\Users\\Hagrass\\git\\circusofplates\\blackplatewithdeepbase.png");
+    	  file=new File("C:\\Users\\OWNER\\git\\circusofplates6\\plates\\blackplatewithdeepbase.png");
       }
       BufferedImage bufferedImage2=null;
       try {
