@@ -20,53 +20,53 @@ import javax.swing.JPanel;
 public class Test extends JPanel {
 int x=20;
 int ads=(int) ((Math.random()*11));
-ArrayList<Image> list=new ArrayList<Image>();
-public Test()
+ArrayList<Plate> list=new ArrayList<Plate>();
+public Test() throws IOException
 {
 	this.setFocusable(true);
     this.requestFocusInWindow();
     Image img = createImageWithText();
-
+    PlateFactory b = new PlateFactory();
    // g.drawImage(img,50,50,this);
-	
+	for(int i=0;i<5;i++)
+	{
+		list.add(b.GenerateRandomPlate());
+	}
 	  final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 	    executorService.scheduleAtFixedRate(new Runnable() {
 	        @Override
 	        public void run() {	
 	        	
 	       x++;
-	       System.out.println("asd");
+	     //  System.out.println("asd");
 	          repaint();
 	          
 	        }
 	    }, 2000, 80, TimeUnit.MILLISECONDS);
 }
+
    public void paint(Graphics g) {
 	   super.paint(g);
       Image img = createImageWithText();
     
-      Plate a = null;
-	try {
-		a = new NonBasedPlate(50,50);
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	//System.out.println("sd");
-	
-	
-	
-	
-	   a.setColor(2);
-	   img=a.getImage();
-	  // System.out.println();
-	  //a.draw(g);
-	   a.setX(60+x*10);
+    for(int i=0;i<list.size();i++)
+    {
+    	Plate a=list.get(i);
+    	a.setX(50+30*i);
+    	a.setY(50+30*i);
+    	a.draw(g);
+    }
+      
+	  // a.setColor(2);
+	  // img=a.getImage();
+	 // System.out.println(a.getHeight());
+
+	  // a.setX(60+x*10);
  
   //g.drawImage(img, 50-100,50, this);
 	  // g.drawImage(img, 50,50, this);
-	   a.draw(g);
-	   g.drawLine(0, 10+x*10, 20, 30);
+	 //  a.draw(g);
+	//   g.drawLine(0, 10+x*10, 20, 30);
 	   repaint();
         
 
