@@ -17,20 +17,39 @@ import javax.imageio.ImageTypeSpecifier;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 public class Test extends JPanel {
 int x=20;
 int ads=(int) ((Math.random()*11));
 ArrayList<Plate> list=new ArrayList<Plate>();
-public Test() throws IOException
+ArrayList<Plate> list2=new ArrayList<Plate>();
+public Test() throws IOException 
 {
 	this.setFocusable(true);
     this.requestFocusInWindow();
     Image img = createImageWithText();
     PlateFactory b = new PlateFactory();
+    PlateFactory a=b.getInstance();
+    System.out.println(System.identityHashCode(a));
+    System.out.println(System.identityHashCode(b.getInstance()));
    // g.drawImage(img,50,50,this);
 	for(int i=0;i<5;i++)
 	{
-		list.add(b.GenerateRandomPlate());
+		
+			list.add(b.GenerateRandomPlate());
+	
+		
+	}
+	for(int i=0;i<5;i++)
+	{
+		Plate as=list.get(i);
+		b.addToGarbage(as);
+		//list2.add(b.GenerateRandomPlate());
+	}
+	for(int i=0;i<5;i++)
+	{
+		
+			list2.add(b.GenerateRandomPlate());
 	}
 	  final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 	    executorService.scheduleAtFixedRate(new Runnable() {
@@ -54,8 +73,19 @@ public Test() throws IOException
     	Plate a=list.get(i);
     	a.setX(50+30*i);
     	a.setY(50+30*i);
+    	
+
     	a.draw(g);
+    	
+    	Plate b=list2.get(i);
+    	b.setX(200+30*i);
+    	b.setY(50+30*i);
+    	b.draw(g);
+    	
+    	
+    	
     }
+  
       
 	  // a.setColor(2);
 	  // img=a.getImage();

@@ -1,12 +1,14 @@
 package eg.edu.alexu.csd.oop.game.Object;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 public class PlateFactory {
 	static PlateFactory pf=new PlateFactory();
-	static Map<Integer,Plate> mp=new HashMap<Integer,Plate>();
+	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
 	public PlateFactory getInstance()
 	{
 		return pf;
@@ -18,32 +20,51 @@ public class PlateFactory {
 	 */
 	public void addToGarbage(Plate garbage)
 	{
+		Vector<Plate>v=new Vector<Plate>();
+		
 		if(garbage.getType().compareTo("platewithbase")==0)
 		{
-			mp.put(0, garbage);
+			if(Garbage.get(0)!=null)
+			v=Garbage.get(0);
+			v.add(garbage);
+			Garbage.put(0, v);
+			return ;
 		}
 
 		if(garbage.getType().compareTo("platewithoutbase")==0)
 		{
-			mp.put(1, garbage);
+			if(Garbage.get(1)!=null)
+			v=Garbage.get(1);
+			v.add(garbage);
+			Garbage.put(1, v);
+			return;
 		}
 
 		if(garbage.getType().compareTo("platewithdeepbase")==0)
 		{
-			mp.put(2, garbage);
+			if(Garbage.get(2)!=null)
+			v=Garbage.get(2);
+			v.add(garbage);
+			Garbage.put(2, v);
+			return;
 		}
 
 		if(garbage.getType().compareTo("pot")==0)
 		{
-			mp.put(3, garbage);
+			if(Garbage.get(3)!=null)
+			v=Garbage.get(3);
+			v.add(garbage);
+			Garbage.put(3, v);
+			return;
 		}
+		
 	}
 	public Plate GenerateRandomPlate() throws IOException
 	{
 		int plateType=(int) (Math.random()*4);
 		int plateColor=(int)(Math.random()*11);
 		Plate a=null;
-		if(mp.get(plateType)==null)
+		if(Garbage.get(plateType)==null||Garbage.get(plateType).size()==0)
 		{
 			if(plateType==0)//BasedPlate
 			{
@@ -61,8 +82,20 @@ public class PlateFactory {
 			{
 				a=new PotPlate();
 			}
+			a.setColor(plateColor);
+			
 		}
-		a.setColor(plateColor);
+		else
+		{
+			
+			System.out.println("ReUsed");
+			Vector<Plate>v=new Vector<Plate>();
+			v=Garbage.get(plateType);
+			a=v.firstElement();
+			v.remove(0);
+			Garbage.put(plateType, v);
+		}
+
 		return a;
 	}
 
