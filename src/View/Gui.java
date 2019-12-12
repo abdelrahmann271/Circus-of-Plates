@@ -161,17 +161,39 @@ public class Gui extends JPanel  {
 		b.setWidth(width);
 		b.draw(g);
 		temp.clear();
+		Plate k=null;
+	    if(catched.size()!=0) {
+	    	int n=catched.size();
+	    for(int j=0;j<n;j++) {
+	    	int miny=1500;
+	    	for(int i=0;i<n-j;i++) {
+	    		if(catched.get(i).getY()<miny) {
+	    			miny=catched.get(i).getY();
+	    			k=catched.get(i);
+	    		}
+	    	}
+	    	catched.remove(k);temp.add(k);
+	       }
+	    catched=(ArrayList<Plate>)temp.clone();
+		for(Plate p : catched) {
+			p.setX(p.getShiftX()+b.getX());
+			p.setY(b.getY()-p.getHeightFromClown());
+			
+		}
+	   
+	    }
+		temp.clear();
 		for(Plate p : List) {
 			caught=false;
-			for(int i=catched.size()-1;i>=0;i--) {
+			for(int i=0;i<catched.size();i++) {
 				Plate t=catched.get(i);
-			if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<10) {
-					caught=true;i=-1;
+			if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<=5) {
+					caught=true;i=catched.size();
 					p.setY(t.getY()-p.getHeight());
 					p.setHeightFromClown(b.getY()-p.getY());
 				}
 			}
-		if(caught||(Math.abs(p.getY()+p.getHeight()-b.getY())<10&&(Math.abs(p.getX()-b.getX())<3*p.getWidth()/4))) {
+		if(caught||(Math.abs(p.getY()+p.getHeight()-b.getY())<=5&&(Math.abs(p.getX()-b.getX())<3*p.getWidth()/4))) {
 			temp.add(p);
 			if(!caught) {
 				p.setY(b.getY()-p.getHeight());
