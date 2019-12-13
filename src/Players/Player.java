@@ -294,6 +294,7 @@ public class Player extends JPanel implements Observer, GameObject  {
 		// TODO Auto-generated method stub
 		UpdatePlayerScore((int)newScore);
 		//kjljkljlk
+		//llklkkl
 	}
 
 }
