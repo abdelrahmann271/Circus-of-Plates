@@ -1,3 +1,4 @@
+<<<<<<< Upstream, based on origin/ayman
 /BasedPlate.class
 /DeepPlate.class
 /NonBasedPlate.class
@@ -17,3 +18,18 @@
 /Clown.class
 /PlateFactory.class
 >>>>>>> df43748 jk
+=======
+/BasedPlate.class
+/DeepPlate.class
+/NonBasedPlate.class
+/Plate.class
+/PotPlate.class
+/State.class
+/Test$1.class
+/Test.class
+/bar.class
+/plate1.class
+/Bar.class
+/Clown.class
+/PlateFactory.class
+>>>>>>> 6570acb k
