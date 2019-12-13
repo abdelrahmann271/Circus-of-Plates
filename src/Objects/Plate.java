@@ -134,7 +134,6 @@ public abstract class Plate extends JPanel implements GameObject  {
 
 	@Override
 	public BufferedImage[] getSpriteImages() {
-		// TODO Auto-generated method stub
 		return SpriteImages;
 	}
 	

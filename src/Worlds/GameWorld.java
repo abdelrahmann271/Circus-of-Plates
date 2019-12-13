@@ -8,6 +8,8 @@ import Objects.*;
 import Objects.Plate;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
+import Players.*;
+
 
 public class GameWorld implements World {
 	
@@ -24,11 +26,19 @@ public class GameWorld implements World {
 		this.width = screenWidth;
 		this.height = screenHeight;
 		
-		PotPlate pp = new PotPlate(100,100);
-		pp.SetSpriteImages();
-		control.add(pp);
+//		NonBasedPlate pp = new NonBasedPlate(100,100);
+		//pp.SetSpriteImages();
+//		control.add(pp);
 		
-		Bar bar1 = new Bar();
+		
+		
+		Clown c = new Clown(100, 100, "E:\\JavaProjectsEclipse\\CircusOfPlates\\clowns\\output-onlinepngtools.png");
+		control.add(c);
+		
+//		
+//		
+//		Bar bar1 = new Bar();
+//		constant.add(bar1);
 		
 		
 		
@@ -79,13 +89,13 @@ public class GameWorld implements World {
 	@Override
 	public int getSpeed() {
 
-		return 0;
+		return 10;
 	}
 
 	@Override
 	public int getControlSpeed() {
 
-		return 0;
+		return 10;
 	}
 
 }

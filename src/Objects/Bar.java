@@ -11,7 +11,7 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
 
 public class Bar extends JPanel implements GameObject  {
-    int x=400,y=500,width,height;
+    int x=100,y=100,width,height;
     
 	public void draw(Graphics g) {
 		g.setColor(Color.blue);
