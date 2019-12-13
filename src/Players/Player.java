@@ -143,8 +143,6 @@ public class Player extends JPanel implements Observer, GameObject  {
 	public void update(Observable o, Object newScore) {
 		// TODO Auto-generated method stub
 		UpdatePlayerScore((int)newScore);
-		
-		
 	}
 
 }
