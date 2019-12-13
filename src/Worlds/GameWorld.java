@@ -32,13 +32,23 @@ public class GameWorld implements World {
 		
 		
 		
-		Clown c = new Clown(100, 100, "E:\\JavaProjectsEclipse\\CircusOfPlates\\clowns\\output-onlinepngtools.png");
+		Clown c = new Clown(400, 500, "E:\\JavaProjectsEclipse\\CircusOfPlates\\clowns\\output-onlinepngtools.png");
 		control.add(c);
 		
 //		
 //		
-//		Bar bar1 = new Bar();
-//		constant.add(bar1);
+		Bar bar1 = new Bar(0,100,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar1);
+		Bar bar6 = new Bar(200,100,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar6);
+		Bar bar2 = new Bar(0,200,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar2);
+		Bar bar3 = new Bar(0,300,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar3);
+//		Bar bar4 = new Bar(200,400,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+//		constant.add(bar4);
+		Bar bar5 = new Bar(0,400,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar5);
 		
 		
 		
