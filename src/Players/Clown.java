@@ -1,4 +1,4 @@
-package Objects;
+package Players;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
