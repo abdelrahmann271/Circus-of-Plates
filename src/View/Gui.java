@@ -1,9 +1,24 @@
 package View;
+<<<<<<< Upstream, based on origin/ayman
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+=======
+
+import javax.swing.*;
+import javax.swing.JFrame;
+
+import Objects.NonBasedPlate;
+import Objects.Plate;
+import Objects.Bar;
+
+
+import java.util.*;
+import java.util.Timer;
+import java.awt.image.BufferedImage;
+>>>>>>> 1b9091a d
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -111,6 +126,7 @@ public class Gui implements World {
 		  //control.add(new ImageObject(100,100,"/blackplatewithoutbase.png"));
 		  //constant.add(new ImageObject(100,100,"/blackplatewithoutbase.png"));
 	  }
+<<<<<<< Upstream, based on origin/ayman
 	
 	@Override
 	public List<GameObject> getConstantObjects() {
@@ -155,6 +171,24 @@ public class Gui implements World {
 				moving.add(p);
 			} catch (IOException e) {
 				e.printStackTrace();
+=======
+	  super.paintComponent(g);
+	  Bar b=new Bar();
+		b.setX(x);
+		b.setY(y);
+		b.setWidth(width);
+		b.draw(g);
+		temp.clear();
+		for(Plate p : List) {
+			caught=false;
+			for(int i=catched.size()-1;i>=0;i--) {
+				Plate t=catched.get(i);
+			if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<10) {
+					caught=true;i=-1;
+					p.setY(t.getY()-p.getHeight());
+					p.setHeightFromClown(b.getY()-p.getY());
+				}
+>>>>>>> 1b9091a d
 			}
 			  create=0;
 		  }
