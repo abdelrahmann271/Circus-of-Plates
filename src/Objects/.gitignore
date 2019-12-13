@@ -8,6 +8,12 @@
 /Test.class
 /bar.class
 /plate1.class
+<<<<<<< Upstream, based on origin/ayman
 /PlateFactory.class
 /ConstantBar.class
 /ControlBar.class
+=======
+/Bar.class
+/Clown.class
+/PlateFactory.class
+>>>>>>> df43748 jk

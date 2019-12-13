@@ -26,6 +26,7 @@ public class GameWorld implements World {
 		this.width = screenWidth;
 		this.height = screenHeight;
 		
+<<<<<<< Upstream, based on origin/ayman
 //		NonBasedPlate pp = new NonBasedPlate(100,100);
 		//pp.SetSpriteImages();
 //		control.add(pp);
@@ -49,6 +50,13 @@ public class GameWorld implements World {
 //		constant.add(bar4);
 		Bar bar5 = new Bar(0,400,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
 		constant.add(bar5);
+=======
+		PotPlate pp = new PotPlate(100,100);
+		pp.SetSpriteImages();
+		control.add(pp);
+		
+		Bar bar1 = new Bar();
+>>>>>>> df43748 jk
 		
 		
 		
@@ -87,7 +95,11 @@ public class GameWorld implements World {
 	@Override
 	public boolean refresh() {
 
+<<<<<<< Upstream, based on origin/ayman
 		return true;
+=======
+		return false;
+>>>>>>> df43748 jk
 	}
 
 	@Override
@@ -99,13 +111,21 @@ public class GameWorld implements World {
 	@Override
 	public int getSpeed() {
 
+<<<<<<< Upstream, based on origin/ayman
 		return 10;
+=======
+		return 0;
+>>>>>>> df43748 jk
 	}
 
 	@Override
 	public int getControlSpeed() {
 
+<<<<<<< Upstream, based on origin/ayman
 		return 10;
+=======
+		return 0;
+>>>>>>> df43748 jk
 	}
 
 }
