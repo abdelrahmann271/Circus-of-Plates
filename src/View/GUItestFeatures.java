@@ -4,41 +4,37 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import Worlds.GameWorld;
-import eg.edu.alexu.csd.oop.game.GameEngine;
-import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
-
-import java.awt.Color;
-
+import Objects.*;
+import eg.edu.alexu.csd.oop.game.GameObject;
+import eg.edu.alexu.csd.oop.game.World;
+import eg.edu.alexu.csd.oop.game.sample.object.ImageObject;
 
 
-public class GUItestFeatures extends javax.swing.JFrame {
+
+public class GUItestFeatures  implements World{
 	
-
+	private final List<GameObject> constant = new LinkedList<GameObject>();
+	private final List<GameObject> moving = new LinkedList<GameObject>();
+	private final List<GameObject> control = new LinkedList<GameObject>();
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	//Values in the constructor will change
-	GameWorld gameWorldFirstLevel = new GameWorld(1000,1000); //Just trying the game engine with any world
 
 	/**
 	 * Launch the application.
@@ -49,22 +45,31 @@ public class GUItestFeatures extends javax.swing.JFrame {
 				try {
 					GUItestFeatures window = new GUItestFeatures();
 					window.frame.setVisible(true);
-					window.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);	//Make The Game window take all the screen				
+					window.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);	//Make The Game window take all the screen
+					
+				
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});	
+		});
+		
+		
 	}
+
 	/**
 	 * Create the application.
 	 * @throws IOException 
 	 */
 	public GUItestFeatures() throws IOException {
-		getContentPane().setEnabled(false);
-		getContentPane().setLayout(null);
+		//getContentPane().setEnabled(false);
+		//getContentPane().setLayout(null);
 		initialize();
+
 	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
@@ -74,44 +79,74 @@ public class GUItestFeatures extends javax.swing.JFrame {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//Just Put the background image path .. 
-		File file = new File("C:\\Users\\Abdelrahman Nour\\Desktop\\Tent2.png");
-		BufferedImage myImage = ImageIO.read(file);
-		frame.setContentPane(new Background(myImage));
-		//Adding the JMenu bar for the game engine controllers...
-		JMenuBar  menuBar = new JMenuBar();
-		JMenu menu = new JMenu("File");
-		menu.setBackground(Color.YELLOW);
-		JMenuItem newMenuItem = new JMenuItem("New");
-		JMenuItem pauseMenuItem = new JMenuItem("Pause");
-		JMenuItem resumeMenuItem = new JMenuItem("Resume");
-		menu.add(newMenuItem);
-		menu.addSeparator();
-		menu.add(pauseMenuItem);
-		menu.add(resumeMenuItem);
-		menuBar.add(menu);
-		frame.setJMenuBar(menuBar);
-		
-		final GameController gameController = GameEngine.start("Very Simple Game in 99 Line of Code", gameWorldFirstLevel, menuBar, Color.BLACK);
-		newMenuItem.addActionListener(new ActionListener() {
-		@Override public void actionPerformed(ActionEvent e) {
-				gameController.changeWorld(gameWorldFirstLevel);
-			}
-		});
-		pauseMenuItem.addActionListener(new ActionListener() {
-		@Override public void actionPerformed(ActionEvent e) {
-				gameController.pause();
-			}
-		});
-		resumeMenuItem.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent e) {
-				gameController.resume();
-			}
-		});
-		
-		
+		//Just Put the image path .. 
+		//File file = new File("C:\\Users\\Abdelrahman Nour\\Desktop\\Tent2.png");
+		//BufferedImage myImage = ImageIO.read(file);
+		//frame.setContentPane(new Background(myImage));
+        for(int i=0;i<11;i++) {
+        	//GameObject obj=new ImageObject(400,75,"plates\\blackplatewithoutbase.png");
+        	moving.add(new ImageObject(50,50,"/plates/blackplatewithoutbase.png"));
+        }
 
 
+	}
+
+	@Override
+	public List<GameObject> getConstantObjects() {
+		// TODO Auto-generated method stub
+		return constant;
+	}
+
+	@Override
+	public List<GameObject> getMovableObjects() {
+		// TODO Auto-generated method stub
+		return moving;
+	}
+
+	@Override
+	public List<GameObject> getControlableObjects() {
+		// TODO Auto-generated method stub
+		return control;
+	}
+
+	@Override
+	public boolean refresh() {
+		// TODO Auto-generated method stub
+		for(int i=0;i<11;i++) {
+			moving.get(i).setX(moving.get(i).getX()+10);
+		}
+		
+		return false;
+	}
+
+	@Override
+	public String getStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSpeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getControlSpeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
 

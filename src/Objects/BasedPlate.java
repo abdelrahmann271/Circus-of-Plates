@@ -20,6 +20,7 @@ public class BasedPlate extends Plate {
 		this.x=X;
 		this.y=Y;
 		setType("platewithbase");
+		this.setColor((int) ((Math.random()*11)));
 		SetSpriteImages();
 	}
 }

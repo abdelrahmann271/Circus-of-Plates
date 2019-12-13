@@ -1,253 +1,231 @@
 package View;
-
-import javax.swing.*;
-import javax.swing.JFrame;
-
-
-import Objects.Plate;
-import Objects.*;
-import Objects.NonBasedPlate;
-import Objects.Plate;
-import Objects.Bar;
-
-
-
-import java.util.*;
-import java.util.Timer;
-import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.awt.event.*;
-import java.awt.geom.AffineTransform;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-public class Gui extends JPanel  {
-    public int create=0,x=400,y=500,ads,width;
-    boolean caught=false;
-    ArrayList<Plate> List=new ArrayList<>();
-    ArrayList <Plate> catched=new ArrayList<>();
-    ArrayList <Plate> temp=new ArrayList<>();
-	private JFrame frame;
-	
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Gui window = new Gui();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+import javax.imageio.ImageIO;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import Objects.*;
+
+import eg.edu.alexu.csd.oop.game.GameEngine;
+import eg.edu.alexu.csd.oop.game.GameObject;
+import eg.edu.alexu.csd.oop.game.World;
+import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
+import eg.edu.alexu.csd.oop.game.sample.object.ImageObject;
+
+public class Gui implements World {
+	static List<GameObject> constant = new LinkedList<GameObject>();
+	static List<GameObject> moving = new LinkedList<GameObject>();
+	static List<GameObject> control = new LinkedList<GameObject>();
+	static List<GameObject> temp = new LinkedList<GameObject>();
+	public int create=0,x=400,y=500,ads,width;
+	boolean caught=false;
+	  public static void main(String[]agrs) {
+			JMenuBar  menuBar = new JMenuBar();
+			JMenu menu = new JMenu("File");
+			JMenuItem newMenuItem = new JMenuItem("New");
+			JMenuItem pauseMenuItem = new JMenuItem("Pause");
+			JMenuItem resumeMenuItem = new JMenuItem("Resume");
+			menu.add(newMenuItem);
+			menu.addSeparator();
+			menu.add(pauseMenuItem);
+			menu.add(resumeMenuItem);
+			menuBar.add(menu);
+			final GameController gameController = GameEngine.start("Circus of plates", new View.Gui(), menuBar, Color.lightGray);
+			newMenuItem.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+					gameController.changeWorld(new View.Gui());
 				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public Gui() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Canvas canvas =new Canvas();
-        frame.add(canvas);
-
-    }
-	
-	public class Canvas extends JPanel implements KeyListener {
+			});
+			pauseMenuItem.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+					gameController.pause();
+				}
+			});
+			resumeMenuItem.addActionListener(new ActionListener() {
+				@Override public void actionPerformed(ActionEvent e) {
+					gameController.resume();
+				}
+			});
 		
-
-		public Canvas() {
-			this.addKeyListener(new KeyListener() 
-					{
-				 @Override
-				    public void keyTyped(KeyEvent e) {
-
-				        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				            x+=30;
-				        }
-				        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				           x-=30;
-				        }
-				        if (e.getKeyCode() == KeyEvent.VK_UP) {
-				        	y-=30;
-				        }
-				        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				        	y+=30;
-				        }
-				    }
-
-				    @Override
-				    public void keyPressed(KeyEvent e) {
-				         
-				    	  if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				              x+=30;
-				              
-				          }
-				          if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				              x-=30;
-				          }
-				          
-				          if (e.getKeyCode() == KeyEvent.VK_UP) {
-					        	y-=30;
-					        }
-					        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					        	y+=30;
-					        }
-				    }
-
-				    @Override
-				    public void keyReleased(KeyEvent e) {
-				    
-				    	
-				    }
-					}
-					
-					);
-			this.setFocusable(true);
-            this.requestFocusInWindow();
-            try {
-				Plate p =new  NonBasedPlate(-150,75);
-				List.add(p);
-				width=p.getWidth();
-			} catch (IOException e1) {
+		
+		  
+		  
+	  }
+	  public Gui()  {
+		         
+		         
+		  
+	        	//GameObject obj=new ImageObject(400,75,"plates\\blackplatewithoutbase.png");
+	        	
+	        		
+			try {
+				moving.add(new NonBasedPlate(-150,75));
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				e.printStackTrace();
 			}
-            
-			  final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-			    executorService.scheduleAtFixedRate(new Runnable() {
-			        @Override
-			        public void run() {	
-			          repaint();
-			        }
-			    }, 2000, 50, TimeUnit.MILLISECONDS);
-			    
-		}
-		private static final long serialVersionUID = 1L;
-	public void paintComponent(Graphics g) {
-
-	  create++;
-	  if(create%15==0) {
+				
+	        
+		  
+			try {
+				control.add(new ControlBar(150,500));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		 
 		  try {
-			Plate p =new  NonBasedPlate(-150,75);
-			p.SetSpriteImages();
-			p.setColor((int) ((Math.random()*11)));
-			List.add(p);
+			constant.add(new ConstantBar(0,75+moving.get(0).getHeight()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		  create=0;
+			  
+		 
+		  //control.add(new ImageObject(100,100,"/blackplatewithoutbase.png"));
+		  //constant.add(new ImageObject(100,100,"/blackplatewithoutbase.png"));
 	  }
-	  super.paintComponent(g);
-	  Bar b=new Bar();
-		b.setX(x);
-		b.setY(y);
-		b.setWidth(width);
-		b.draw(g);
-		temp.clear();
-		Plate k=null;
-	    if(catched.size()!=0) {
-	    	int n=catched.size();
-	    for(int j=0;j<n;j++) {
-	    	int miny=1500;
-	    	for(int i=0;i<n-j;i++) {
-	    		if(catched.get(i).getY()<miny) {
-	    			miny=catched.get(i).getY();
-	    			k=catched.get(i);
-	    		}
-	    	}
-	    	catched.remove(k);temp.add(k);
-	       }
-	    catched=(ArrayList<Plate>)temp.clone();
-		for(Plate p : catched) {
-			p.setX(p.getShiftX()+b.getX());
-			p.setY(b.getY()-p.getHeightFromClown());
-			
-		}
-	   
-	    }
-		temp.clear();
-		for(Plate p : List) {
-			caught=false;
-			for(int i=0;i<catched.size();i++) {
-				Plate t=catched.get(i);
-			if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<=5) {
-					caught=true;i=catched.size();
-					p.setY(t.getY()-p.getHeight());
-					p.setHeightFromClown(b.getY()-p.getY());
-				}
-			}
-		if(caught||(Math.abs(p.getY()+p.getHeight()-b.getY())<=5&&(Math.abs(p.getX()-b.getX())<3*p.getWidth()/4))) {
-			temp.add(p);
-			if(!caught) {
-				p.setY(b.getY()-p.getHeight());
-				p.setHeightFromClown(b.getY()-p.getY());
-			}
-			
-			p.setShiftX(p.getX()-b.getX());
-			catched.add(p);
-		    
-		}
-		else if(p.getX()==400) {
-	    	p.setY(p.getY()+10);
-	    	p.draw(g);}
-	    else {
-		p.setX(p.getX()+10);
-		p.draw(g);
-	    }
-		  if(p.getY()>1000) {
-		    	temp.add(p);
-		    }
-	}
-		
-	for(Plate p : catched) {
-		p.setX(p.getShiftX()+b.getX());
-		p.setY(b.getY()-p.getHeightFromClown());
-		p.draw(g);
-	}
-	for(Plate p : temp) {
-		List.remove(p);
+	
+	@Override
+	public List<GameObject> getConstantObjects() {
+		// TODO Auto-generated method stub
+		return constant;
 	}
 
-	  
-	  
-	  
-	}
-	
 	@Override
-	public void keyTyped(KeyEvent e) {
+	public List<GameObject> getMovableObjects() {
 		// TODO Auto-generated method stub
-		
+		return moving;
 	}
+
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public List<GameObject> getControlableObjects() {
 		// TODO Auto-generated method stub
-		
+		return control;
 	}
+
 	@Override
-	public void keyReleased(KeyEvent e) {
+	public int getWidth() {
 		// TODO Auto-generated method stub
-		
+		return 1000;
 	}
+
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return 700;
+	}
+
+	@Override
+	public boolean refresh() {
+		// TODO Auto-generated method stub
+
+		  create++;
+		  if(create%15==0) {
+			  try {
+				Plate p =new  NonBasedPlate(-150,constant.get(0).getY()-moving.get(0).getHeight());
+				
+				//p.setColor((int) ((Math.random()*11)));
+				moving.add(p);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			  create=0;
+		  }
+		
+			temp.clear();
+			
+			
+		    if(control.size()>1) {
+		    	GameObject k=control.get(0);
+				control.remove(0);
+				GameObject f=null;
+		    	int n=control.size();
+		    for(int j=0;j<n;j++) {
+		    	int miny=1500;
+		    	for(int i=0;i<n-j;i++) {
+		    		if(control.get(i).getY()<miny) {
+		    			miny=control.get(i).getY();
+		    			f=control.get(i);
+		    		}
+		    	}
+		    	control.remove(f);temp.add(f);
+		       }
+		    control.clear();
+		    control.add(k);
+		    for(GameObject O : temp) {control.add(O);}
+		   
+		    }
+		    
+			for(GameObject f : moving) {
+				Plate p=(Plate)f;
+				caught=false;
+				for(int i=0;i<control.size();i++) {
+					Plate t=(Plate)control.get(i);
+				if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<=10) {
+						caught=true;i=control.size();
+						p.setY(t.getY()-p.getHeight());
+						//p.setHeightFromClown(control.get(0).getY()-p.getY());
+					}
+				}
+			if(caught||(Math.abs(p.getY()+p.getHeight()-control.get(0).getY())<=10&&(Math.abs(p.getX()-control.get(0).getX())<3*p.getWidth()/4))) {
+				temp.add(p);
+				if(!caught) {
+					p.setY(control.get(0).getY()-p.getHeight());
+					//p.setHeightFromClown(control.get(0).getY()-p.getY());
+				}
+				
+				//p.setShiftX(p.getX()-control.get(0).getX());
+				control.add(p);
+			    
+			}
+			else if(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth()) {
+		    	p.setY(p.getY()+10);
+		    	}
+		    else {
+			p.setX(p.getX()+10);
+			
+		    }
+			  if(p.getY()>1000) {
+			    	temp.add(p);
+			    }
+		}
 	
-	
-}
-	
+		for(GameObject t : temp) {
+			Plate p=(Plate)t;
+			moving.remove(p);
+		}
+
+		return true;
+	}
+
+	@Override
+	public String getStatus() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
+	@Override
+	public int getSpeed() {
+		// TODO Auto-generated method stub
+		return 50;
+	}
+
+	@Override
+	public int getControlSpeed() {
+		// TODO Auto-generated method stub
+		return 20;
+	}
 
 }

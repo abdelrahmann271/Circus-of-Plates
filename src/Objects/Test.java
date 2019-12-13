@@ -62,7 +62,7 @@ public Test()
 	  // System.out.println();
 	  //a.draw(g);
 	   a.setX(60+x*10);
- 
+       
   //g.drawImage(img, 50-100,50, this);
 	  // g.drawImage(img, 50,50, this);
 	   a.draw(g);

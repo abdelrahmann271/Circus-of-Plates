@@ -15,6 +15,7 @@ public class NonBasedPlate  extends Plate {
 		super();
 		this.x=X;
 		this.y=Y;
+		this.setColor((int) ((Math.random()*11)));
 		setType("platewithoutbase");
 		SetSpriteImages();
 	}
