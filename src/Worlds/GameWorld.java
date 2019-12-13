@@ -67,7 +67,7 @@ public class GameWorld implements World {
 	@Override
 	public boolean refresh() {
 
-		return false;
+		return true;
 	}
 
 	@Override
