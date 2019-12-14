@@ -39,6 +39,7 @@ public class PotPlate extends Plate  {
 		this.x=X;
 		this.y=Y;
 		setType("pot");
+		this.setColor((int) ((Math.random()*11)));
 		this.SetSpriteImages();
 	}
 

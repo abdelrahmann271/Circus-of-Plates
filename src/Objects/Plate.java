@@ -336,7 +336,6 @@ package Objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -346,9 +345,11 @@ import javax.swing.JPanel;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
 
-
-
 public abstract class Plate extends JPanel implements GameObject  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int x=400;
 	int y=500;
 	int height;
@@ -402,18 +403,7 @@ public abstract class Plate extends JPanel implements GameObject  {
 		this.y=y;
 		
 	}
-	public void setHeightFromClown(int h) {
-		this.height=h;
-	}
-	public int getHeightFromClown() {
-		return this.height;
-	}
-    public void setShiftX(int dx) {
-    	this.dx=dx;
-    }
-    public int getShiftX() {
-    	return dx;
-    }
+
 	@Override
 	public int getWidth() {
 		// TODO Auto-generated method stub
@@ -485,17 +475,20 @@ public abstract class Plate extends JPanel implements GameObject  {
 	}
 	public  void SetSpriteImages() throws IOException
 	{
-		BufferedImage[] out=new BufferedImage[11];
-		File file;
+		BufferedImage[] out=new BufferedImage[1];
+		//File file;
 		String path="plates";
 		//System.out.println(type+ " ff");
 		String []color= {"black","blue","cyan","darkred"
 				,"gold","green","orange","pink","purple","red","yellow"};
-		for(int i=0;i<11;i++)
+		/*for(int i=0;i<11;i++)
 		{   
 			file=new File(path+"\\"+color[i]+type+".png");
 			out[i]=ImageIO.read(file);
-		}
+		}*/
+		File file= new File(path+"\\"+color[this.getColor()]+type+".png");
+		out[0]=ImageIO.read(file);
+	   
 		this.SpriteImages=out;
 	
 	}
