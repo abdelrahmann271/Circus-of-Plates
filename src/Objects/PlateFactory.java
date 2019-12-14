@@ -1,17 +1,19 @@
 package Objects;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 public class PlateFactory {
-	static PlateFactory pf=new PlateFactory();
+	private static PlateFactory pf=new PlateFactory();
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
-	public PlateFactory getInstance()
+	public static PlateFactory getUniqueInstance()
 	{
 		return pf;
+	}
+	private PlateFactory() {
+		// TODO Auto-generated constructor stub
 	}
 	/**
 	 * 

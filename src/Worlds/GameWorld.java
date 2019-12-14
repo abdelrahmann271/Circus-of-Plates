@@ -32,8 +32,8 @@ public class GameWorld implements World {
 		
 		
 		
-		Clown c = new Clown(400, 400, "E:\\JavaProjectsEclipse\\CircusOfPlates\\clowns\\output-onlinepngtools.png");
-		control.add(c);
+		//Clown c = new Clown(400, 400, "E:\\JavaProjectsEclipse\\CircusOfPlates\\clowns\\output-onlinepngtools.png");
+		//control.add(c);
 		
 //		
 //		

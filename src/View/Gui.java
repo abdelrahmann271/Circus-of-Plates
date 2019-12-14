@@ -1,14 +1,16 @@
 package View;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -22,13 +24,23 @@ import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
 
 
 public class Gui implements World {
+	
 	static List<GameObject> constant = new LinkedList<GameObject>();
 	static List<GameObject> moving = new LinkedList<GameObject>();
 	static List<GameObject> control = new LinkedList<GameObject>();
 	static List<GameObject> temp = new LinkedList<GameObject>();
-	public int create=0,width;
-	boolean caught=false,gameover=false,win=false;
-	PlateFactory pf= new PlateFactory();
+	
+	public int create=0;
+	boolean caught=false;
+	boolean gameover=false;
+	boolean win=false;
+	
+	PlateFactory pf= PlateFactory.getUniqueInstance();
+	
+	
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private final double width = screenSize.getWidth();
+	private final double height = screenSize.getHeight();
 	
 	
 	  public static void main(String[]agrs) {
@@ -42,7 +54,7 @@ public class Gui implements World {
 			menu.add(pauseMenuItem);
 			menu.add(resumeMenuItem);
 			menuBar.add(menu);
-			final GameController gameController = GameEngine.start("Circus of plates", new View.Gui(), menuBar, Color.lightGray);
+			final GameController gameController = GameEngine.start("Circus of plates", new View.Gui(), menuBar, Color.BLACK);
 			newMenuItem.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
 					gameController.changeWorld(new View.Gui());
@@ -77,8 +89,20 @@ public class Gui implements World {
 			try {
 				
 				Player clown =new Player("");
-				clown.setX(150);clown.setY(600);clown.ChoosePlayerCharacter((int)Math.random()*8);
+				//Ayman Set Dimensions 
+				//clown.setX(150);
+				//clown.setY(600);
+				
+				//Dimensions for screen suitability
+				clown.setX((int)screenSize.getWidth()/2);
+				clown.setY((int)screenSize.getHeight()-300);
+				
+				// Mlhash Lzma now
+				//System.out.println((int)Math.random()*8);
+				//clown.ChoosePlayerCharacter(2);		
+				//clown.SetScaleImage(1, 1);
 				clown.setSpriteImages();
+				//clown.SetScaleImage(100, 100);
 				control.add(clown);
 				
 			} catch (IOException e) {
@@ -86,7 +110,9 @@ public class Gui implements World {
 				e.printStackTrace();
 			}
 		    
-			control.add(new Stick());
+			//Adding two sticks to the clown
+			control.add(new Stick((int)screenSize.getWidth()-670,(int)screenSize.getHeight()-250,0));
+			control.add(new Stick((int)screenSize.getWidth()-540,(int)screenSize.getHeight()-250,1));
 			
 		 
 		  try {
@@ -119,13 +145,13 @@ public class Gui implements World {
 	@Override
 	public int getWidth() {
 		// TODO Auto-generated method stub
-		return 1500;
+		return (int) this.width;
 	}
 
 	@Override
 	public int getHeight() {
 		// TODO Auto-generated method stub
-		return 800;
+		return (int) this.height-100;
 	}
 
 	@Override
@@ -222,7 +248,7 @@ public class Gui implements World {
 	@Override
 	public String getStatus() {
 		// TODO Auto-generated method stub
-		return "";
+		return "Score ";
 	}
 
 	@Override

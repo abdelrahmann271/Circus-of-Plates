@@ -83,7 +83,8 @@ public class Player extends JPanel implements Observer, GameObject  {
 	@Override
 	public BufferedImage[] getSpriteImages() {
 		// TODO Auto-generated method stub
-		File file=new File("clowns\\avatar.png");
+		//File file=new File("clowns\\56.png");
+		File file=new File("clowns\\56.png");
 		BufferedImage img[]=new BufferedImage[1];
 		try {
 			img[0]=ImageIO.read(file);
@@ -120,9 +121,11 @@ public class Player extends JPanel implements Observer, GameObject  {
 	public void ChoosePlayerCharacter(int ClownNumber)
 	{
 		this.ClownNumber=ClownNumber;
+		System.out.println(this.ClownNumber+"a7o");
 	}
 	public BufferedImage getImage()
 	{
+		
 		return SpriteImages[ClownNumber];
 	}
 	public void UpdatePlayerScore(int NewScore)
