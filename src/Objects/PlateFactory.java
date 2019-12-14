@@ -7,12 +7,26 @@ import java.util.Map;
 import java.util.Vector;
 
 public class PlateFactory {
+	int supportedColors=11;
 	static PlateFactory pf=new PlateFactory();
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
 	public PlateFactory getInstance()
 	{
 		return pf;
 	}
+	/**
+	 * number of supported plate colors 1-11
+	 * @param n
+	 */
+	public void setSupportedColors(int n)
+	{
+		supportedColors=n;
+	}
+	public int getSupportedColors()
+	{
+		return supportedColors;
+	}
+	
 	/**
 	 * 
 	 * @return random plate with random color;
@@ -62,7 +76,7 @@ public class PlateFactory {
 	public Plate GenerateRandomPlate() throws IOException
 	{
 		int plateType=(int) (Math.random()*4);
-		int plateColor=(int)(Math.random()*11);
+		int plateColor=(int)(Math.random()*supportedColors);
 		Plate a=null;
 		if(Garbage.get(plateType)==null||Garbage.get(plateType).size()==0)
 		{
