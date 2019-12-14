@@ -119,13 +119,16 @@ public abstract class Plate extends JPanel implements GameObject  {
 	}
 	public BufferedImage getImage()
 	{
+		System.out.println(SpriteImages.length+" s "+color);
 		return SpriteImages[color];
 	}
 
 	@Override
 	public BufferedImage[] getSpriteImages() {
 		// TODO Auto-generated method stub
-		return SpriteImages;
+		BufferedImage []img=new BufferedImage[1];
+		img[0]=getImage();
+		return img;
 	}
 	
 	public void draw(Graphics g)
@@ -141,19 +144,19 @@ public abstract class Plate extends JPanel implements GameObject  {
 	}
 	public  void SetSpriteImages() throws IOException
 	{
-		BufferedImage[] out=new BufferedImage[1];
-		//File file;
+		BufferedImage[] out=new BufferedImage[11];
+		File file;
 		String path="plates";
 		//System.out.println(type+ " ff");
 		String []color= {"black","blue","cyan","darkred"
 				,"gold","green","orange","pink","purple","red","yellow"};
-		/*for(int i=0;i<11;i++)
+		for(int i=0;i<11;i++)
 		{   
 			file=new File(path+"\\"+color[i]+type+".png");
 			out[i]=ImageIO.read(file);
-		}*/
-		File file= new File(path+"\\"+color[this.getColor()]+type+".png");
-		out[0]=ImageIO.read(file);
+		}
+		//File file= new File(path+"\\"+color[this.getColor()]+type+".png");
+		//out[0]=ImageIO.read(file);
 	   
 		this.SpriteImages=out;
 	
