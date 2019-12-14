@@ -20,13 +20,17 @@ import javax.swing.JPanel;
 public class Test extends JPanel {
 int x=20;
 int ads=(int) ((Math.random()*11));
-ArrayList<Image> list=new ArrayList<Image>();
-public Test()
+ArrayList<Plate> list=new ArrayList<Plate>();
+public Test() throws IOException
 {
 	this.setFocusable(true);
     this.requestFocusInWindow();
     Image img = createImageWithText();
-
+    PlateFactory b=new PlateFactory().getInstance();
+   // System.out.println(System.identityHashCode(b));
+    b.setSupportedColors(11);
+    list.add(b.GenerateRandomPlate());
+ 
    // g.drawImage(img,50,50,this);
 	
 	  final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
@@ -35,7 +39,7 @@ public Test()
 	        public void run() {	
 	        	
 	       x++;
-	       System.out.println("asd");
+	       
 	          repaint();
 	          
 	        }
@@ -44,6 +48,7 @@ public Test()
    public void paint(Graphics g) {
 	   super.paint(g);
       Image img = createImageWithText();
+<<<<<<< Upstream, based on origin/ayman
     
       Plate a = null;
 	try {
@@ -67,6 +72,44 @@ public Test()
 	  // g.drawImage(img, 50,50, this);
 	   a.draw(g);
 	   g.drawLine(0, 10+x*10, 20, 30);
+=======
+      for(int i=0;i<list.size();i++)
+      {
+    	  Plate a=list.get(i);
+    	  a.setX(50+i*20);
+    	  a.setY(50+i*20);
+    	//  a.draw(g);
+    	  BufferedImage[]out=a.getSpriteImages();
+    	  g.drawImage(out[0], 50+i*20,50+i*20, this);
+    	  
+      }
+  /*
+     Plate a = null;
+	try {
+		a = b.GenerateRandomPlate();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+  	
+  	a.setX(50);
+  	a.setY(50);
+  //	a.draw(g);
+  	//System.out.println("sd");
+  	
+  	 //g.drawImage(img, 50,50, this);
+  	
+  	
+  	   //img=a.getImage();
+  	  // System.out.println();
+  	  //a.draw(g);
+  	   a.setX(60+x*10);
+   
+    //g.drawImage(img, 50-100,50, this);
+  	  // g.drawImage(img, 50,50, this);
+  	   a.draw(g);
+  	   */
+>>>>>>> 0d885cf jkk
 	   repaint();
         
 
