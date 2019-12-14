@@ -20,17 +20,13 @@ import javax.swing.JPanel;
 public class Test extends JPanel {
 int x=20;
 int ads=(int) ((Math.random()*11));
-ArrayList<Plate> list=new ArrayList<Plate>();
-public Test() throws IOException
+ArrayList<Image> list=new ArrayList<Image>();
+public Test()
 {
 	this.setFocusable(true);
     this.requestFocusInWindow();
     Image img = createImageWithText();
-    PlateFactory b=new PlateFactory().getInstance();
-   // System.out.println(System.identityHashCode(b));
-    b.setSupportedColors(11);
-    list.add(b.GenerateRandomPlate());
- 
+
    // g.drawImage(img,50,50,this);
 	
 	  final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
@@ -39,7 +35,7 @@ public Test() throws IOException
 	        public void run() {	
 	        	
 	       x++;
-	       
+	       System.out.println("asd");
 	          repaint();
 	          
 	        }
@@ -48,7 +44,6 @@ public Test() throws IOException
    public void paint(Graphics g) {
 	   super.paint(g);
       Image img = createImageWithText();
-
     
       Plate a = null;
 	try {
@@ -72,35 +67,6 @@ public Test() throws IOException
 	  // g.drawImage(img, 50,50, this);
 	   a.draw(g);
 	   g.drawLine(0, 10+x*10, 20, 30);
-
-     
-  /*
-     Plate a = null;
-	try {
-		a = b.GenerateRandomPlate();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-  	
-  	a.setX(50);
-  	a.setY(50);
-  //	a.draw(g);
-  	//System.out.println("sd");
-  	
-  	 //g.drawImage(img, 50,50, this);
-  	
-  	
-  	   //img=a.getImage();
-  	  // System.out.println();
-  	  //a.draw(g);
-  	   a.setX(60+x*10);
-   
-    //g.drawImage(img, 50-100,50, this);
-  	  // g.drawImage(img, 50,50, this);
-  	   a.draw(g);
-  	   */
-
 	   repaint();
         
 
@@ -113,7 +79,7 @@ public Test() throws IOException
       int a=1;
       File file;
       if(a==1)
-     file =new File("plates\\goldplatewithdeepbase.png");
+     file =new File("C:\\Users\\OWNER\\git\\circusofplates6\\plates\\goldplatewithdeepbase.png");
       else
       {
     	  file=new File("C:\\Users\\OWNER\\git\\circusofplates6\\plates\\blackplatewithdeepbase.png");

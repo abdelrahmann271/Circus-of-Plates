@@ -1,21 +1,23 @@
-package Objects;
+package Players;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
-import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
-public class ConstantBar  implements GameObject {
-   int x,y,length,width;
-   	
-	public ConstantBar(int x,int y) throws IOException {
-		this.x=x;
-		this.y=y;
+
+public class Stick extends JPanel implements GameObject {
+	int x=150-this.getWidth(),y=600-this.getHeight();
+	public Stick(){
+		int x=150-this.getWidth(),y=600-this.getHeight();
+		setX(x);
+		setY(y);
 	}
-	
 	@Override
+
 	public int getX() {
 		// TODO Auto-generated method stub
 		return x;
@@ -42,7 +44,7 @@ public class ConstantBar  implements GameObject {
 	@Override
 	public int getWidth() {
 		// TODO Auto-generated method stub
-		return getSpriteImages()[0].getWidth() ;
+		return getSpriteImages()[0].getWidth();
 	}
 
 	@Override
@@ -60,7 +62,7 @@ public class ConstantBar  implements GameObject {
 	@Override
 	public BufferedImage[] getSpriteImages() {
 		// TODO Auto-generated method stub
-		File file=new File("plates\\bar.png");
+		File file =new File("sticks\\leftstick_1.png");
 		BufferedImage img[]=new BufferedImage[1];
 		try {
 			img[0]=ImageIO.read(file);
@@ -69,6 +71,8 @@ public class ConstantBar  implements GameObject {
 			e.printStackTrace();
 		}
 		return img;
+		
+		
 	}
 
 }

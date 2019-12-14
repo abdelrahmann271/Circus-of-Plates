@@ -114,4 +114,3 @@ public class GUItestFeatures extends javax.swing.JFrame {
 
 	}
 }
-

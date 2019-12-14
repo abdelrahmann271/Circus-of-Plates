@@ -7,31 +7,17 @@ import java.util.Map;
 import java.util.Vector;
 
 public class PlateFactory {
-	static int supportedColors=11;
-	static PlateFactory pf=null;
+	static PlateFactory pf=new PlateFactory();
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
 	public PlateFactory getInstance()
 	{
-		if(pf==null)
-		{
-			pf=new PlateFactory();
-		}
 		return pf;
 	}
 	/**
-	 * number of supported plate colors 1-11
-	 * @param n
+	 * 
+	 * @return random plate with random color;
+	 * @throws IOException 
 	 */
-	public void setSupportedColors(int n)
-	{
-		supportedColors=n;
-	}
-	public int getSupportedColors()
-	{
-		return supportedColors;
-	}
-	
-	
 	public void addToGarbage(Plate garbage)
 	{
 		Vector<Plate>v=new Vector<Plate>();
@@ -73,35 +59,32 @@ public class PlateFactory {
 		}
 		
 	}
-	/**
-	 * 
-	 * @return random plate with random color;
-	 * @throws IOException 
-	 */
 	public Plate GenerateRandomPlate() throws IOException
 	{
 		int plateType=(int) (Math.random()*4);
-		int plateColor=(int)(Math.random()*supportedColors);
-		//System.out.println(plateColor+ " "+plateType);
+		int plateColor=(int)(Math.random()*11);
 		Plate a=null;
 		if(Garbage.get(plateType)==null||Garbage.get(plateType).size()==0)
 		{
 			if(plateType==0)//BasedPlate
 			{
-				a=new BasedPlate();
+				a=new BasedPlate(plateColor);
+
 			}
 			else if(plateType==1)//nonBasedPlate
 			{
-				a=new NonBasedPlate();
+				a=new NonBasedPlate(plateColor);
 			}
 			else if(plateType==2)//deepPlate
 			{
-				a=new DeepPlate();
+				a=new DeepPlate(plateColor);
 			}
 			else//potplate
 			{
-				a=new PotPlate();
+				a=new PotPlate(plateColor);
 			}
+			a.setX(-150);
+			a.setY(75-a.getHeight());
 			a.setColor(plateColor);
 		}
 		else
@@ -113,6 +96,8 @@ public class PlateFactory {
 			a=v.firstElement();
 			v.remove(0);
 			Garbage.put(plateType, v);
+			a.setX(-150);
+			a.setY(75-a.getHeight());
 		}
 
 		return a;

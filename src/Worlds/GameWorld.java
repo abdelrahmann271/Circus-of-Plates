@@ -8,6 +8,8 @@ import Objects.*;
 import Objects.Plate;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
+import Players.*;
+
 
 public class GameWorld implements World {
 	
@@ -24,11 +26,29 @@ public class GameWorld implements World {
 		this.width = screenWidth;
 		this.height = screenHeight;
 		
-		PotPlate pp = new PotPlate(100,100);
-		pp.SetSpriteImages();
-		control.add(pp);
+//		NonBasedPlate pp = new NonBasedPlate(100,100);
+		//pp.SetSpriteImages();
+//		control.add(pp);
 		
-		Bar bar1 = new Bar();
+		
+		
+		Clown c = new Clown(400, 400, "E:\\JavaProjectsEclipse\\CircusOfPlates\\clowns\\output-onlinepngtools.png");
+		control.add(c);
+		
+//		
+//		
+		Bar bar1 = new Bar(0,100,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar1);
+		Bar bar6 = new Bar(200,100,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar6);
+		Bar bar2 = new Bar(0,200,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar2);
+		Bar bar3 = new Bar(0,300,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar3);
+//		Bar bar4 = new Bar(200,400,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+//		constant.add(bar4);
+		Bar bar5 = new Bar(0,400,"E:\\JavaProjectsEclipse\\CircusOfPlates\\plates\\bar.png");
+		constant.add(bar5);
 		
 		
 		
@@ -67,7 +87,7 @@ public class GameWorld implements World {
 	@Override
 	public boolean refresh() {
 
-		return false;
+		return true;
 	}
 
 	@Override
@@ -79,13 +99,13 @@ public class GameWorld implements World {
 	@Override
 	public int getSpeed() {
 
-		return 0;
+		return 10;
 	}
 
 	@Override
 	public int getControlSpeed() {
 
-		return 0;
+		return 10;
 	}
 
 }

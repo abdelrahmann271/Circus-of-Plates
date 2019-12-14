@@ -83,8 +83,19 @@ public class Player extends JPanel implements Observer, GameObject  {
 	@Override
 	public BufferedImage[] getSpriteImages() {
 		// TODO Auto-generated method stub
-		return SpriteImages;
+		File file=new File("clowns\\avatar.png");
+		BufferedImage img[]=new BufferedImage[1];
+		try {
+			img[0]=ImageIO.read(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return img;
+		
 	}
+
+	
 	public void setSpriteImages() throws IOException
 	{
 		BufferedImage[] out=new BufferedImage[9];
@@ -99,6 +110,8 @@ public class Player extends JPanel implements Observer, GameObject  {
 			out[i]=ImageIO.read(file);
 		}
 		this.SpriteImages=out;
+		
+		
 	
 	}
 	/**
@@ -143,7 +156,8 @@ public class Player extends JPanel implements Observer, GameObject  {
 	public void update(Observable o, Object newScore) {
 		// TODO Auto-generated method stub
 		UpdatePlayerScore((int)newScore);
-		//kjljkljlk
+		
+		
 	}
 
 }

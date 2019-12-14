@@ -8,9 +8,10 @@ import javax.imageio.ImageIO;
 
 public class BasedPlate extends Plate {
 
-	BasedPlate() throws IOException {
+	BasedPlate(int color) throws IOException {
 		super();
 		setType("platewithbase");
+		this.setColor(color);
 		this.SetSpriteImages();
 		// TODO Auto-generated constructor stub
 	}
@@ -20,7 +21,7 @@ public class BasedPlate extends Plate {
 		this.x=X;
 		this.y=Y;
 		setType("platewithbase");
-		//this.setColor((int) ((Math.random()*11)));
+		this.setColor((int) ((Math.random()*11)));
 		SetSpriteImages();
 	}
 }

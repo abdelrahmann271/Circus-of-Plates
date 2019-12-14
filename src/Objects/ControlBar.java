@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
-public class ControlBar extends Plate  implements GameObject  {
+public class ControlBar   implements GameObject  {
     int x,y,width,height;
     
 	 public ControlBar(int x,int y)throws IOException{

@@ -12,13 +12,10 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 public class DeepPlate extends Plate {
 	
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	DeepPlate() throws IOException {
+	DeepPlate(int color) throws IOException {
 		super();
 		this.type="platewithdeepbase";
+		this.setColor(color);
 		this.SetSpriteImages();
 		// TODO Auto-generated constructor stub
 	}
@@ -28,11 +25,7 @@ public class DeepPlate extends Plate {
 		this.x=X;
 		this.y=Y;
 		this.type="platewithdeepbase";
-//<<<<<<< HEAD
-	//	this.setColor((int) ((Math.random()*11)));
-
-		//this.setColor((int) ((Math.random()*11)));
-//>>>>>>> branch 'ayman' of https://Hagrass@bitbucket.org/youssefraouf/circusofplates.git
+		this.setColor((int) ((Math.random()*11)));
 		this.SetSpriteImages();
 		
 	}
