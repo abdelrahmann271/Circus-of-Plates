@@ -113,7 +113,7 @@ public Test() throws IOException
       int a=1;
       File file;
       if(a==1)
-     file =new File("C:\\Users\\OWNER\\git\\circusofplates6\\plates\\goldplatewithdeepbase.png");
+     file =new File("plates\\goldplatewithdeepbase.png");
       else
       {
     	  file=new File("C:\\Users\\OWNER\\git\\circusofplates6\\plates\\blackplatewithdeepbase.png");
