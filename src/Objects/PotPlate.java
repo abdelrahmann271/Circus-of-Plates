@@ -4,9 +4,10 @@ import java.io.IOException;
 
 public class PotPlate extends Plate  {
 
-	PotPlate() throws IOException {
+	public PotPlate() throws IOException {
 		super();
 		setType("pot");
+		this.SetSpriteImages();
 		// TODO Auto-generated constructor stub
 	}
 	public PotPlate(int X,int Y) throws IOException
@@ -15,7 +16,7 @@ public class PotPlate extends Plate  {
 		this.x=X;
 		this.y=Y;
 		setType("pot");
-		this.setColor((int) ((Math.random()*11)));
+		//this.setColor((int) ((Math.random()*11)));
 		this.SetSpriteImages();
 	}
 
