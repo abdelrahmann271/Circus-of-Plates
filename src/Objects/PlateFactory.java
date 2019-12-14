@@ -7,17 +7,31 @@ import java.util.Map;
 import java.util.Vector;
 
 public class PlateFactory {
-	static PlateFactory pf=new PlateFactory();
+	static int supportedColors=11;
+	static PlateFactory pf=null;
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
 	public PlateFactory getInstance()
 	{
+		if(pf==null)
+		{
+			pf=new PlateFactory();
+		}
 		return pf;
 	}
 	/**
-	 * 
-	 * @return random plate with random color;
-	 * @throws IOException 
+	 * number of supported plate colors 1-11
+	 * @param n
 	 */
+	public void setSupportedColors(int n)
+	{
+		supportedColors=n;
+	}
+	public int getSupportedColors()
+	{
+		return supportedColors;
+	}
+	
+	
 	public void addToGarbage(Plate garbage)
 	{
 		Vector<Plate>v=new Vector<Plate>();
@@ -59,10 +73,16 @@ public class PlateFactory {
 		}
 		
 	}
+	/**
+	 * 
+	 * @return random plate with random color;
+	 * @throws IOException 
+	 */
 	public Plate GenerateRandomPlate() throws IOException
 	{
 		int plateType=(int) (Math.random()*4);
-		int plateColor=(int)(Math.random()*11);
+		int plateColor=(int)(Math.random()*supportedColors);
+		//System.out.println(plateColor+ " "+plateType);
 		Plate a=null;
 		if(Garbage.get(plateType)==null||Garbage.get(plateType).size()==0)
 		{
@@ -83,7 +103,6 @@ public class PlateFactory {
 				a=new PotPlate();
 			}
 			a.setColor(plateColor);
-			
 		}
 		else
 		{
