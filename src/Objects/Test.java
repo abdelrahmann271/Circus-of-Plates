@@ -48,7 +48,7 @@ public Test() throws IOException
    public void paint(Graphics g) {
 	   super.paint(g);
       Image img = createImageWithText();
-<<<<<<< Upstream, based on origin/ayman
+
     
       Plate a = null;
 	try {
@@ -72,17 +72,8 @@ public Test() throws IOException
 	  // g.drawImage(img, 50,50, this);
 	   a.draw(g);
 	   g.drawLine(0, 10+x*10, 20, 30);
-=======
-      for(int i=0;i<list.size();i++)
-      {
-    	  Plate a=list.get(i);
-    	  a.setX(50+i*20);
-    	  a.setY(50+i*20);
-    	//  a.draw(g);
-    	  BufferedImage[]out=a.getSpriteImages();
-    	  g.drawImage(out[0], 50+i*20,50+i*20, this);
-    	  
-      }
+
+     
   /*
      Plate a = null;
 	try {
@@ -109,7 +100,7 @@ public Test() throws IOException
   	  // g.drawImage(img, 50,50, this);
   	   a.draw(g);
   	   */
->>>>>>> 0d885cf jkk
+
 	   repaint();
         
 
