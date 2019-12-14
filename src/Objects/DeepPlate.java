@@ -12,6 +12,10 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 public class DeepPlate extends Plate {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	DeepPlate() throws IOException {
 		super();
 		this.type="platewithdeepbase";

@@ -12,6 +12,10 @@ import javax.swing.JPanel;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
 public abstract class Plate extends JPanel implements GameObject  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int x=400;
 	int y=500;
 	int height;

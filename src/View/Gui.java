@@ -1,5 +1,6 @@
 package View;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,22 +14,36 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import Objects.*;
 
+import java.awt.Toolkit;
+
+import Objects.*;
 import eg.edu.alexu.csd.oop.game.GameEngine;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
-import eg.edu.alexu.csd.oop.game.sample.object.ImageObject;
+import Players.*;
 
 public class Gui implements World {
+	
+	
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private final double width = screenSize.getWidth();
+	private final double height = screenSize.getHeight();
+	
 	static List<GameObject> constant = new LinkedList<GameObject>();
 	static List<GameObject> moving = new LinkedList<GameObject>();
 	static List<GameObject> control = new LinkedList<GameObject>();
 	static List<GameObject> temp = new LinkedList<GameObject>();
-	public int create=0,x=400,y=500,ads,width;
+	
+	public int create=0;
+	int x=400; 
+	int y=500;
+	int ads;
+
 	boolean caught=false;
-	  public static void main(String[]agrs) {
+	
+	  public static void main(String[]agrs) throws IOException {
 			JMenuBar  menuBar = new JMenuBar();
 			JMenu menu = new JMenu("File");
 			JMenuItem newMenuItem = new JMenuItem("New");
@@ -42,7 +57,12 @@ public class Gui implements World {
 			final GameController gameController = GameEngine.start("Circus of plates", new View.Gui(), menuBar, Color.lightGray);
 			newMenuItem.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-					gameController.changeWorld(new View.Gui());
+					try {
+						gameController.changeWorld(new View.Gui());
+					} catch (IOException e1) {
+
+						e1.printStackTrace();
+					}
 				}
 			});
 			pauseMenuItem.addActionListener(new ActionListener() {
@@ -60,7 +80,7 @@ public class Gui implements World {
 		  
 		  
 	  }
-	  public Gui()  {
+	  public Gui() throws IOException  {
 		         
 		         
 		  
@@ -70,24 +90,20 @@ public class Gui implements World {
 			try {
 				moving.add(new NonBasedPlate(-150,75));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 				
 	        
 		  
-			try {
-				control.add(new ControlBar(150,500));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			control.add(new ControlBar(150,500));
+			//control.add(new Clown(500, 400,"E:\\JavaProjectsEclipse\\CircusOfPlates\\clowns\\output-onlinepngtools.png"));
 		
 		 
 		  try {
 			constant.add(new ConstantBar(0,75+moving.get(0).getHeight()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 			  
@@ -98,37 +114,37 @@ public class Gui implements World {
 	
 	@Override
 	public List<GameObject> getConstantObjects() {
-		// TODO Auto-generated method stub
+
 		return constant;
 	}
 
 	@Override
 	public List<GameObject> getMovableObjects() {
-		// TODO Auto-generated method stub
+
 		return moving;
 	}
 
 	@Override
 	public List<GameObject> getControlableObjects() {
-		// TODO Auto-generated method stub
+
 		return control;
 	}
 
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
-		return 1000;
+
+		return (int) this.width;
 	}
 
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
-		return 700;
+
+		return (int) this.height-100;
 	}
 
 	@Override
 	public boolean refresh() {
-		// TODO Auto-generated method stub
+
 
 		  create++;
 		  if(create%15==0) {
@@ -138,7 +154,6 @@ public class Gui implements World {
 				//p.setColor((int) ((Math.random()*11)));
 				moving.add(p);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			  create=0;
@@ -173,6 +188,7 @@ public class Gui implements World {
 				caught=false;
 				for(int i=0;i<control.size();i++) {
 					Plate t=(Plate)control.get(i);
+					//Clown t = (Clown) control.get(i);
 				if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<=10) {
 						caught=true;i=control.size();
 						p.setY(t.getY()-p.getHeight());
@@ -212,19 +228,19 @@ public class Gui implements World {
 
 	@Override
 	public String getStatus() {
-		// TODO Auto-generated method stub
+
 		return "";
 	}
 
 	@Override
 	public int getSpeed() {
-		// TODO Auto-generated method stub
+
 		return 50;
 	}
 
 	@Override
 	public int getControlSpeed() {
-		// TODO Auto-generated method stub
+
 		return 20;
 	}
 
