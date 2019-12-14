@@ -28,7 +28,7 @@ public class DeepPlate extends Plate {
 		this.x=X;
 		this.y=Y;
 		this.type="platewithdeepbase";
-		this.setColor((int) ((Math.random()*11)));
+		//this.setColor((int) ((Math.random()*11)));
 		this.SetSpriteImages();
 		
 	}
