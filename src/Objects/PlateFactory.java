@@ -61,7 +61,7 @@ public class PlateFactory {
 		}
 		
 	}
-	public Plate GenerateRandomPlate() throws IOException
+	public Plate GenerateRandomPlate(String s) throws IOException
 	{
 		int plateType=(int) (Math.random()*4);
 		int plateColor=(int)(Math.random()*11);
@@ -71,7 +71,7 @@ public class PlateFactory {
 			if(plateType==0)//BasedPlate
 			{
 				a=new BasedPlate(plateColor);
-
+                
 			}
 			else if(plateType==1)//nonBasedPlate
 			{
@@ -85,8 +85,17 @@ public class PlateFactory {
 			{
 				a=new PotPlate(plateColor);
 			}
-			a.setX(-150);
-			a.setY(75-a.getHeight());
+			if(s=="left") {
+				a.setX(-150);
+				a.setY(75-a.getHeight());
+				a.setType(s);
+			}
+			else {
+				a.setX(1610);
+				a.setY(75-a.getHeight());
+				a.setType(s);
+			}
+			
 			a.setColor(plateColor);
 		}
 		else
@@ -98,8 +107,16 @@ public class PlateFactory {
 			a=v.firstElement();
 			v.remove(0);
 			Garbage.put(plateType, v);
-			a.setX(-150);
-			a.setY(75-a.getHeight());
+			if(s=="left") {
+				a.setX(-150);
+				a.setY(75-a.getHeight());
+				a.setType(s);
+			}
+			else {
+				a.setX(1610);
+				a.setY(75-a.getHeight());
+				a.setType(s);
+			}
 		}
 
 		return a;

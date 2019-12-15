@@ -30,7 +30,7 @@ public class Gui implements World {
 	static List<GameObject> control = new LinkedList<GameObject>();
 	static List<GameObject> temp = new LinkedList<GameObject>();
 	
-	public int create=0;
+	public int create=0,speed=50;
 	boolean caught=false;
 	boolean gameover=false;
 	boolean win=false;
@@ -76,12 +76,13 @@ public class Gui implements World {
 		  
 	  }
 	  public Gui()  {
-	
+	  
 	        		
 			try {
 				 
 				//moving.add(new NonBasedPlate(-150,75));
-				moving.add(pf.GenerateRandomPlate());
+				 moving.add(pf.GenerateRandomPlate("left"));
+				 moving.add(pf.GenerateRandomPlate("right"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -111,12 +112,15 @@ public class Gui implements World {
 			}
 		    
 			//Adding two sticks to the clown
-			control.add(new Stick((int)screenSize.getWidth()-670,(int)screenSize.getHeight()-250,0));
-			control.add(new Stick((int)screenSize.getWidth()-540,(int)screenSize.getHeight()-250,1));
+			//670
+			//540
+			control.add(new Stick((int)screenSize.getWidth()-760,(int)screenSize.getHeight()-250,0));
+			control.add(new Stick((int)screenSize.getWidth()-630,(int)screenSize.getHeight()-250,1));
 			
 		 
 		  try {
 			constant.add(new ConstantBar(0,75));
+			constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -163,13 +167,15 @@ public class Gui implements World {
        }
        if(win) {
     	   System.out.println("LEVEL UP!");
-    	   return false;
+    	  return false;
        }
 		
 		  create++;
 		  if(create%15==0) {
 			  try {
-				  moving.add(pf.GenerateRandomPlate());
+				  moving.add(pf.GenerateRandomPlate("left"));
+				  moving.add(pf.GenerateRandomPlate("right"));
+				  
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -179,9 +185,9 @@ public class Gui implements World {
 		
 			temp.clear();
 	
-		    if(control.size()>1) {
-		    	GameObject k=control.get(0);
-				control.remove(0);
+		    if(control.size()>0) {
+		    	//GameObject k=control.get(0);
+				//control.remove(0);
 				GameObject f=null;
 		    	int n=control.size();
 		    for(int j=0;j<n;j++) {
@@ -195,7 +201,7 @@ public class Gui implements World {
 		    	control.remove(f);temp.add(f);
 		       }
 		    control.clear();
-		    control.add(k);
+		    //control.add(k);
 		    for(GameObject O : temp) {control.add(O);}
 		   
 		    }
@@ -222,11 +228,18 @@ public class Gui implements World {
 					}
 				}
 		
-			 if(!caught&&(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth())) {
+		if(!caught&&(((Plate)p).getType()=="left"&&(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth())||
+				((Plate)p).getType()=="right"&&(p.getX()+p.getWidth()<=constant.get(1).getX())
+				)) {
 		    	p.setY(p.getY()+10);
 		    	}
 		    else if(!caught) {
-			p.setX(p.getX()+10);
+		    if(((Plate)p).getType()=="left") {
+		    	p.setX(p.getX()+10);
+		    }
+		    else {
+		    	p.setX(p.getX()-10);
+		    }
 			
 		    }
 			  if(p.getY()>1000) {
@@ -254,7 +267,7 @@ public class Gui implements World {
 	@Override
 	public int getSpeed() {
 		// TODO Auto-generated method stub
-		return 50;
+		return speed;
 	}
 
 	@Override
