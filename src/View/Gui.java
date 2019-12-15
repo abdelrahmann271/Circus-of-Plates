@@ -1,16 +1,20 @@
 package View;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.image.BufferedImage;
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 import java.util.LinkedList;
 import java.util.List;
 
-
+import javax.imageio.ImageIO;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -23,7 +27,7 @@ import eg.edu.alexu.csd.oop.game.World;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
 
 
-public class Gui implements World {
+public class  Gui implements World {
 	
 	static List<GameObject> constant = new LinkedList<GameObject>();
 	static List<GameObject> moving = new LinkedList<GameObject>();
@@ -36,14 +40,14 @@ public class Gui implements World {
 	boolean win=false;
 	
 	PlateFactory pf= PlateFactory.getUniqueInstance();
-	
+    Context context=new Context();
 	
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private final double width = screenSize.getWidth();
 	private final double height = screenSize.getHeight();
 	
 	
-	  public static void main(String[]agrs) {
+	  public static void main(String[]agrs) throws IOException {
 			JMenuBar  menuBar = new JMenuBar();
 			JMenu menu = new JMenu("File");
 			JMenuItem newMenuItem = new JMenuItem("New");
@@ -72,12 +76,12 @@ public class Gui implements World {
 			});
 		
 		
-		  
+			
 		  
 	  }
-	  public Gui()  {
+	  public  Gui()  {
 	  
-	        		
+		  
 			try {
 				 
 				//moving.add(new NonBasedPlate(-150,75));
@@ -159,7 +163,7 @@ public class Gui implements World {
 	}
 
 	@Override
-	public boolean refresh() {
+	public  boolean refresh() {
 		// TODO Auto-generated method stub
        if(gameover) {
     	   System.out.println("GAMEOVER!");
@@ -170,7 +174,7 @@ public class Gui implements World {
     	  return false;
        }
 		
-		  create++;
+		     create++;
 		  if(create%15==0) {
 			  try {
 				  moving.add(pf.GenerateRandomPlate("left"));
@@ -182,8 +186,20 @@ public class Gui implements World {
 			}
 			  create=0;
 		  }
+		  
+		  context.SetLists(constant, moving, control);
+		  
+		  moving=context.getmoving();
+		  
+		  control=context.getcontrol();
+		  
+		  win=context.isWin();
+		  
+		  gameover=context.gameOver();
+		  
+		  
 		
-			temp.clear();
+			/*temp.clear();
 	
 		    if(control.size()>0) {
 		    	//GameObject k=control.get(0);
@@ -253,8 +269,8 @@ public class Gui implements World {
 				pf.addToGarbage((Plate)p);
 			}
 			moving.remove(p);
-		}
-
+		}*/
+        
 		return true;
 	}
 
