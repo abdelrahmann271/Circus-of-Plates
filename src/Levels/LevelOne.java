@@ -23,12 +23,12 @@ public class LevelOne extends Level
 	@Override
 	public Level getMylevel() {
 		// TODO Auto-generated method stub
-		return new LevelOne();
+		return getInstance();
 	}
 	@Override
 	public Level UpgradeLevel() {
 		// TODO Auto-generated method stub
-		return new LevelTwo();
+		return LevelTwo.getInstance();
 	}
 	@Override
 	public void setLevelLimits() {

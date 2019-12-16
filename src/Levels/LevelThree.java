@@ -20,7 +20,7 @@ public class LevelThree extends Level {
 	@Override
 	public Level getMylevel() {
 		// TODO Auto-generated method stub
-		return new LevelThree();
+		return getInstance();
 	}
 
 	@Override

@@ -8,10 +8,10 @@ import Score.Score;
 
 public class LevelFactory extends Observable implements Observer  {
 	private static LevelFactory lf=null;
-	private static Level One =LevelOne.getInstance();
+	public static Level One =LevelOne.getInstance();
 	private static Level Two =LevelTwo.getInstance();
 	private static Level Three =LevelThree.getInstance();
-	private static Level MyLevel=One;
+	public static Level MyLevel=One;
 	public static LevelFactory getInstance()
 	{
 		if(lf==null)
@@ -23,19 +23,7 @@ public class LevelFactory extends Observable implements Observer  {
 	}
 	public void setMyLevel(Level CurrentLevel)
 	{
-		if(CurrentLevel.getcurrentLevel()==1)
-		{
-			this.MyLevel=One;
-		}
-		else if(CurrentLevel.getcurrentLevel()==2)
-		{
-			this.MyLevel=Two;
-		}
-		else
-		{
-			this.MyLevel=Three;
-		}
-		
+		this.MyLevel=CurrentLevel.getMylevel();
 		setChanged();
 		notifyObservers();
 		

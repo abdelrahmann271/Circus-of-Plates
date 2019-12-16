@@ -14,13 +14,13 @@ public class LevelTwo extends Level{
 	@Override
 	public Level getMylevel() {
 		// TODO Auto-generated method stub
-		return new LevelTwo();
+		return getInstance();
 	}
 
 	@Override
 	public Level UpgradeLevel() {
 		// TODO Auto-generated method stub
-		return new LevelThree();
+		return LevelThree.getInstance();
 	}
 
 	@Override
@@ -28,10 +28,7 @@ public class LevelTwo extends Level{
 		// TODO Auto-generated method stub
 		this.begin=50;
 		this.end=100;
-	}
-
-
-	
+	}	
 	public static  Level getInstance() {
 		if(L2==null)
 		{

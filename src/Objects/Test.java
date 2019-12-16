@@ -36,16 +36,20 @@ public Test() throws IOException
 
    // g.drawImage(img,50,50,this);
     Level asd=LevelOne.getInstance();
-    Level asd2=LevelOne.getInstance();
+    Level asd2=LevelTwo.getInstance();
     System.out.println(System.identityHashCode(asd));
     System.out.println(System.identityHashCode(asd2));
     LevelFactory a=LevelFactory.getInstance();
 	PlateFactory b=PlateFactory.getUniqueInstance();
 	Score s=Score.getInstance();
-	s.setScore(51);
-//	a.UpgradeMyLevel(a.getMyLevel());
+	s.setScore(52);
+	
 	Level as=a.getMyLevel();
-	System.out.println(a.getMyLevel().getcurrentLevel());
+
+	System.out.println(as.getcurrentLevel());
+	System.out.println(System.identityHashCode(a.getMyLevel()));
+	System.out.println(System.identityHashCode(a.One));
+	
 	System.out.println(b.getSupportedColors());
 	list.add(b.GenerateRandomPlate("left"));
 	
