@@ -2,13 +2,26 @@ package View;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
+import Score.*;
 import Objects.Plate;
 import Objects.PlateFactory;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
-public class ManageMoving implements Strategy {
+public class ManageMoving implements Strategy, Observer {
 	
+	private static ManageMoving Object = new ManageMoving();
+	public static ManageMoving getUniqueInstance()
+	{
+		return Object;
+		
+	}
+	private ManageMoving() {
+
+	}
+	private int movingSpeedFactor = 10;
 	PlateFactory pf= PlateFactory.getUniqueInstance();
 	List<GameObject> moving;
 	List<GameObject> constant;
@@ -35,14 +48,14 @@ public class ManageMoving implements Strategy {
 			if((((Plate)p).getType()=="left"&&(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth())||
 					((Plate)p).getType()=="right"&&(p.getX()+p.getWidth()<=constant.get(1).getX())||((Plate) p).getfreedome()
 					)) {
-			    	p.setY(p.getY()+10);
+			    	p.setY(p.getY()+movingSpeedFactor);
 			    	}
 			    else if(((Plate)p).getType()=="left") {
 			      
-			    	p.setX(p.getX()+10); }
+			    	p.setX(p.getX()+movingSpeedFactor); }
 			
 			    else {
-			    	p.setX(p.getX()-10);
+			    	p.setX(p.getX()-movingSpeedFactor);
 			    	
 			    }
 			   if(p.getY()>2000) {
@@ -61,4 +74,20 @@ public class ManageMoving implements Strategy {
 
 		return control;
 	}
-    }
+	public void setMovingSpeedFactor(int movingSpeedFactor) {
+		this.movingSpeedFactor = movingSpeedFactor;
+	}
+	public int getMovingSpeedFactor() {
+		return movingSpeedFactor;
+	}
+	public int getScoreDecFactor(Score score)
+	{
+		return (score.getScore()/25);
+	}
+	@Override
+	public void update(Observable score, java.lang.Object arg) {
+		
+		this.movingSpeedFactor += this.getScoreDecFactor((Score) score);
+		System.out.println(movingSpeedFactor + " from class movingmanage");
+	}
+ }

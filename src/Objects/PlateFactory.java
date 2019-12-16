@@ -13,7 +13,7 @@ import Levels.LevelFactory;
 public class PlateFactory implements Observer {
 	private static PlateFactory pf=null;
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
-	public static int SupportedColors=11;
+	public static int SupportedColors=3;
 	public static PlateFactory getUniqueInstance()
 	{
 		if(pf==null)
@@ -83,6 +83,7 @@ public class PlateFactory implements Observer {
 	public Plate GenerateRandomPlate(String s) throws IOException
 	{
 		int plateType=(int) (Math.random()*4);
+		//System.out.println(SupportedColors);
 		int plateColor=(int)(Math.random()*SupportedColors);
 		Plate a=null;
 		if(Garbage.get(plateType)==null||Garbage.get(plateType).size()==0)
@@ -142,10 +143,13 @@ public class PlateFactory implements Observer {
 	}
 	@Override
 	public void update(Observable NewLevelFactory, Object arg) {
-		// TODO Auto-generated method stub
+
 		PlateFactory b=PlateFactory.getUniqueInstance();
 		Level f=LevelFactory.getInstance().getMyLevel();
-		b.setSupportedColors(f.getSupportedColors());
+		//b.setSupportedColors(f.getSupportedColors());
+		PlateFactory.setSupportedColors(f.getSupportedColors());
+		System.out.println("From update method in PlateFactory : level is" + LevelFactory.getInstance().getMyLevel());
+		System.out.println("Supported Colours are .. " + f.getSupportedColors());
 	}
 
 }

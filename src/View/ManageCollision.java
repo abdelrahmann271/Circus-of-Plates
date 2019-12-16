@@ -4,10 +4,13 @@ import java.util.LinkedList;
 import java.util.List;
 import Objects.Plate;
 import eg.edu.alexu.csd.oop.game.GameObject;
+import Score.*;
 
 public class ManageCollision implements Strategy {
-    
-
+	
+	private Score score = Score.getInstance();
+	private int scoreCounter = 0;
+	
 	List<GameObject[]> collided;
 	List<GameObject> control;
 	List<GameObject> moving;
@@ -61,6 +64,9 @@ public class ManageCollision implements Strategy {
 						((Plate)arr[1]).getpreviousplate().getpreviousplate().getnext().remove(((Plate)arr[1]).getpreviousplate());
 					}
 					
+					System.out.println("3 Plates are collected");
+					scoreCounter+=25;
+					score.setScore(scoreCounter);
 					//Get the score
 				}
 			}

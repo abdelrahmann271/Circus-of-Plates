@@ -4,6 +4,7 @@ import Objects.PlateFactory;
 
 public class LevelOne extends Level
 {
+	
 	public static Level L1=null;
 	public LevelOne()
 	{

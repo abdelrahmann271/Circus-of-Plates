@@ -8,7 +8,7 @@ public class Context {
 
 	CheckCollision checkcollision=new CheckCollision();
 	ManageCollision managecollision=new ManageCollision();
-	ManageMoving managemoving=new ManageMoving();
+	ManageMoving managemoving=ManageMoving.getUniqueInstance();
 	   
 	private Strategy strategy;
 

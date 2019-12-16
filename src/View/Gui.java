@@ -14,7 +14,7 @@
  import javax.swing.JMenu;
  import javax.swing.JMenuBar;
  import javax.swing.JMenuItem;
-
+ import Score.*;
  import Objects.*;
  import Players.*;
  import eg.edu.alexu.csd.oop.game.GameEngine;
@@ -24,7 +24,9 @@
  
  
  public class  Gui implements World {
+	 
  	
+	Score score = Score.getInstance();
 	private static List<GameObject> constant = new LinkedList<GameObject>();
 	private static List<GameObject> moving = new LinkedList<GameObject>();
 	private static List<GameObject> control = new LinkedList<GameObject>();
@@ -117,8 +119,8 @@
  			//Adding two sticks to the clown
  			//670
  			//540
-		control.add(new Stick((int)screenSize.getWidth()-760,(int)screenSize.getHeight()-250,0));
-			control.add(new Stick((int)screenSize.getWidth()-630,(int)screenSize.getHeight()-250,1));
+ 			control.add(new Stick((int)screenSize.getWidth()-670,(int)screenSize.getHeight()-250,0));
+			control.add(new Stick((int)screenSize.getWidth()-540,(int)screenSize.getHeight()-250,1));
  			
  		 
  		  try {
@@ -163,6 +165,9 @@
  
  	@Override
  	public  boolean refresh() {
+ 		
+// 		movingObjectsSpeed=movingObjectsSpeed-(score.getScore()/25);
+// 		System.out.println(movingObjectsSpeed);
 
         if(gameover) {
      	   System.out.println("GAMEOVER!");
@@ -181,7 +186,8 @@
  			}
  			  create=0;
  		  }
- 		  
+
+
  		  context.SetLists(constant, moving, control);
  		  
  		  moving=context.getmoving();
@@ -272,19 +278,23 @@
  	@Override
  	public String getStatus() {
 
- 		return "Score ";
+ 		return "Score "+ score.getScore();
  	}
  
  	@Override
  	public int getSpeed() {
-
+	
+// 		int p = movingObjectsSpeed-(score.getScore()/25);
+ 		System.out.println("game speeed " );
 	return movingObjectsSpeed;
+	
  	}
  
  	@Override
  	public int getControlSpeed() {
-
 		return 40;
  	}
+ 	
+
  
  }
