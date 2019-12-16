@@ -33,7 +33,7 @@ public class ManageMoving implements Strategy {
 		for(GameObject p : moving) {
 			
 			if((((Plate)p).getType()=="left"&&(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth())||
-					((Plate)p).getType()=="right"&&(p.getX()+p.getWidth()<=constant.get(1).getX())
+					((Plate)p).getType()=="right"&&(p.getX()+p.getWidth()<=constant.get(1).getX())||((Plate) p).getfreedome()
 					)) {
 			    	p.setY(p.getY()+10);
 			    	}

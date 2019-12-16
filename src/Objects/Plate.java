@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -21,9 +22,11 @@ public abstract class Plate extends JPanel implements GameObject  {
 	int height,width;
 	int dx;
 	BufferedImage[] SpriteImages; 
-	int color,prevcolor;
-	boolean isVisible=true;
+	int color,prevcolor=-1;
+	boolean isVisible=true,freedome=false;
+	Plate prev;
 	String type;
+	Vector<Plate> next=new Vector<>();
 	//X and Y 
 	
 	Plate() throws IOException
@@ -89,6 +92,12 @@ public abstract class Plate extends JPanel implements GameObject  {
 		int Height=SpriteImages[0].getHeight();
 		return Height;
 	}
+	public void addnext(Plate p) {
+		this.next.add(p);
+	}
+	public Vector<Plate> getnext(){
+		return next;
+	}
 
 	@Override
 	public boolean isVisible() {
@@ -128,6 +137,12 @@ public abstract class Plate extends JPanel implements GameObject  {
 		//System.out.println(SpriteImages.length+" s "+color);
 		return SpriteImages[color];
 	}
+	public void setpreviousplate(Plate p) {
+		this.prev=p;
+	}
+	public Plate getpreviousplate() {
+		return prev;
+	}
 
 	@Override
 	public BufferedImage[] getSpriteImages() {
@@ -136,7 +151,12 @@ public abstract class Plate extends JPanel implements GameObject  {
 		img[0]=getImage();
 		return img;
 	}
-	
+	public void setfreedome(boolean f) {
+		this.freedome=f;
+	}
+	public boolean getfreedome() {
+		return freedome;
+	}
 	public void draw(Graphics g)
 	{
 		if(isVisible==false)
