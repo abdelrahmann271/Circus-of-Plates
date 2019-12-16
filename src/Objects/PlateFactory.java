@@ -6,16 +6,30 @@ import java.util.Map;
 import java.util.Vector;
 
 public class PlateFactory {
-	private static PlateFactory pf=new PlateFactory();
+	private static PlateFactory pf=null;
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
+	public static int SupportedColors=11;
 	public static PlateFactory getUniqueInstance()
 	{
+		if(pf==null)
+		{
+			pf=new PlateFactory();
+		}
 		return pf;
 	}
 	private PlateFactory() {
 		// TODO Auto-generated constructor stub
 	}
+	public static void setSupportedColors(int n)
+	{
+		SupportedColors=n;
+	}
+	public static int getSupportedColors()
+	{
+		return SupportedColors;
+	}
 	/**
+	 * 
 	 * 
 	 * @return random plate with random color;
 	 * @throws IOException 
@@ -64,7 +78,7 @@ public class PlateFactory {
 	public Plate GenerateRandomPlate(String s) throws IOException
 	{
 		int plateType=(int) (Math.random()*4);
-		int plateColor=(int)(Math.random()*11);
+		int plateColor=(int)(Math.random()*SupportedColors);
 		Plate a=null;
 		if(Garbage.get(plateType)==null||Garbage.get(plateType).size()==0)
 		{
