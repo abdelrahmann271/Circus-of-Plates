@@ -3,9 +3,14 @@ package Objects;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 
-public class PlateFactory {
+import Levels.Level;
+import Levels.LevelFactory;
+
+public class PlateFactory implements Observer {
 	private static PlateFactory pf=null;
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
 	public static int SupportedColors=11;
@@ -134,6 +139,13 @@ public class PlateFactory {
 		}
 
 		return a;
+	}
+	@Override
+	public void update(Observable NewLevelFactory, Object arg) {
+		// TODO Auto-generated method stub
+		PlateFactory b=PlateFactory.getUniqueInstance();
+		Level f=LevelFactory.getInstance().getMyLevel();
+		b.setSupportedColors(f.getSupportedColors());
 	}
 
 }

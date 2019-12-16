@@ -17,17 +17,37 @@ import javax.imageio.ImageTypeSpecifier;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Levels.Level;
+import Levels.LevelFactory;
+import Levels.LevelOne;
+import Levels.LevelThree;
+import Levels.LevelTwo;
+import Score.Score;
+
 public class Test extends JPanel {
 int x=20;
 int ads=(int) ((Math.random()*11));
-ArrayList<Image> list=new ArrayList<Image>();
-public Test()
+ArrayList<Plate> list=new ArrayList<Plate>();
+public Test() throws IOException
 {
 	this.setFocusable(true);
     this.requestFocusInWindow();
     Image img = createImageWithText();
 
    // g.drawImage(img,50,50,this);
+    Level asd=LevelOne.getInstance();
+    Level asd2=LevelOne.getInstance();
+    System.out.println(System.identityHashCode(asd));
+    System.out.println(System.identityHashCode(asd2));
+    LevelFactory a=LevelFactory.getInstance();
+	PlateFactory b=PlateFactory.getUniqueInstance();
+	Score s=Score.getInstance();
+	s.setScore(51);
+//	a.UpgradeMyLevel(a.getMyLevel());
+	Level as=a.getMyLevel();
+	System.out.println(a.getMyLevel().getcurrentLevel());
+	System.out.println(b.getSupportedColors());
+	list.add(b.GenerateRandomPlate("left"));
 	
 	  final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 	    executorService.scheduleAtFixedRate(new Runnable() {
@@ -35,7 +55,7 @@ public Test()
 	        public void run() {	
 	        	
 	       x++;
-	       System.out.println("asd");
+	    //   System.out.println("asd");
 	          repaint();
 	          
 	        }
@@ -45,27 +65,16 @@ public Test()
 	   super.paint(g);
       Image img = createImageWithText();
     
-      Plate a = null;
-	try {
-		a = new NonBasedPlate(50,50);
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	//System.out.println("sd");
-	
-	
-	
-	
-	   a.setColor(2);
-	   img=a.getImage();
+   for(int i=0;i<list.size();i++)
+   {
+	   Plate a=list.get(i);
+	   a.setX(50+i*30);
+	   a.setY(50+i*30);
+	   a.draw(g);
+   }
 	  // System.out.println();
 	  //a.draw(g);
-	   a.setX(60+x*10);
-       
-  //g.drawImage(img, 50-100,50, this);
-	  // g.drawImage(img, 50,50, this);
-	   a.draw(g);
+	
 	   g.drawLine(0, 10+x*10, 20, 30);
 	   repaint();
         
@@ -79,7 +88,7 @@ public Test()
       int a=1;
       File file;
       if(a==1)
-     file =new File("C:\\Users\\OWNER\\git\\circusofplates6\\plates\\goldplatewithdeepbase.png");
+     file =new File("plates\\goldplatewithdeepbase.png");
       else
       {
     	  file=new File("C:\\Users\\OWNER\\git\\circusofplates6\\plates\\blackplatewithdeepbase.png");
