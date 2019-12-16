@@ -6,10 +6,13 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import Logger.LoggerSingle;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
 
@@ -74,6 +77,9 @@ public class Bar extends JPanel implements GameObject  {
 			File f = new File(path);
 			spriteImages[0] = ImageIO.read(f);
 		} catch (IOException e) {
+			Logger log = LoggerSingle.getInstance();
+			log.setLevel(Level.ALL);
+			log.severe(e.getMessage());
 			e.printStackTrace();
 		}
 	}

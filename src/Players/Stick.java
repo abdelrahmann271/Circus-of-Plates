@@ -3,10 +3,13 @@ package Players;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import Logger.LoggerSingle;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
 public class Stick extends JPanel implements GameObject {
@@ -77,6 +80,9 @@ public class Stick extends JPanel implements GameObject {
 		try {
 			img[0]=ImageIO.read(file);
 		} catch (IOException e) {
+			Logger log = LoggerSingle.getInstance();
+			log.setLevel(Level.ALL);
+			log.severe(e.getMessage());
 
 			e.printStackTrace();
 		}

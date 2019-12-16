@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -20,6 +22,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import Logger.LoggerSingle;
 import Worlds.GameWorld;
 import eg.edu.alexu.csd.oop.game.GameEngine;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
@@ -51,6 +54,9 @@ public class GUItestFeatures extends javax.swing.JFrame {
 					window.frame.setVisible(true);
 					window.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);	//Make The Game window take all the screen				
 				} catch (Exception e) {
+					Logger log = LoggerSingle.getInstance();
+					log.setLevel(Level.ALL);
+					log.severe(e.getMessage());
 					e.printStackTrace();
 				}
 			}

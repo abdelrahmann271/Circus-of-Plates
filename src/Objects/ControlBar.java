@@ -6,10 +6,13 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import Logger.LoggerSingle;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
 public class ControlBar   implements GameObject  {
@@ -51,6 +54,9 @@ public class ControlBar   implements GameObject  {
 		try {
 			img[0]=ImageIO.read(file);
 		} catch (IOException e) {
+			Logger log = LoggerSingle.getInstance();
+			log.setLevel(Level.ALL);
+			log.severe(e.getMessage());
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
