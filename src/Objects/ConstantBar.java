@@ -2,9 +2,12 @@ package Objects;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import Logger.LoggerSingle;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
 public class ConstantBar  implements GameObject {
@@ -66,6 +69,9 @@ public class ConstantBar  implements GameObject {
 			img[0]=ImageIO.read(file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			Logger log = LoggerSingle.getInstance();
+			log.setLevel(Level.ALL);
+			log.severe(e.getMessage());
 			e.printStackTrace();
 		}
 		return img;

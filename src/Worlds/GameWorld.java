@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import Logger.LoggerSingle;
 import Objects.*;
 import Objects.Plate;
 import eg.edu.alexu.csd.oop.game.GameObject;
@@ -86,7 +90,10 @@ public class GameWorld implements World {
 
 	@Override
 	public boolean refresh() {
-
+          Logger log = LoggerSingle.getInstance();
+//          System.out.println("refresh");
+          log.setLevel(Level.INFO);
+          log.info("refreshed");
 		return true;
 	}
 

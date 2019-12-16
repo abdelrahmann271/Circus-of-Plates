@@ -1,15 +1,27 @@
 package View;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import Logger.LoggerSingle;
 import Objects.*;
 import Players.*;
 import eg.edu.alexu.csd.oop.game.GameEngine;
@@ -24,7 +36,8 @@ public class  Gui implements World {
 	private static List<GameObject> moving = new LinkedList<GameObject>();
 	private static List<GameObject> control = new LinkedList<GameObject>();
 	//private static List<GameObject> temp = new LinkedList<GameObject>();
-	
+	Player clown ;
+	 static Logger log = LoggerSingle.getInstance();
 	private int create=0;
 	private int movingObjectsSpeed=50;
 	//private boolean caught=false;
@@ -54,16 +67,22 @@ public class  Gui implements World {
 			final GameController gameController = GameEngine.start("Circus of plates", new View.Gui(), menuBar, Color.BLACK);
 			newMenuItem.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
+		          log.setLevel(Level.INFO);
+		          log.info("new world");
 					gameController.changeWorld(new View.Gui());
 				}
 			});
 			pauseMenuItem.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
+				log.setLevel(Level.INFO);
+		          log.info("game paused");
 					gameController.pause();
 				}
 			});
 			resumeMenuItem.addActionListener(new ActionListener() {
 				@Override public void actionPerformed(ActionEvent e) {
+					log.setLevel(Level.INFO);
+			          log.info("game resumed");
 					gameController.resume();
 				}
 			});
@@ -74,6 +93,10 @@ public class  Gui implements World {
 	  }
 	  public  Gui()  {
 	  
+		  moving.clear();
+		  constant.clear();
+			 control.clear();
+		 temp.clear();
 		  
 			try {
 				 
@@ -81,12 +104,14 @@ public class  Gui implements World {
 				 moving.add(pf.GenerateRandomPlate("left"));
 				 moving.add(pf.GenerateRandomPlate("right"));
 			} catch (IOException e) {
-
+				// TODO Auto-generated catch block
+				log.setLevel(Level.ALL);
+				log.severe(e.getMessage());
 				e.printStackTrace();
 			}
 			try {
 				
-				Player clown =new Player("");
+				 clown =new Player("");
 				//Ayman Set Dimensions 
 				//clown.setX(150);
 				//clown.setY(600);
@@ -104,7 +129,9 @@ public class  Gui implements World {
 				control.add(clown);
 				
 			} catch (IOException e) {
-
+				// TODO Auto-generated catch block
+				log.setLevel(Level.ALL);
+				log.severe(e.getMessage());
 				e.printStackTrace();
 			}
 		    
@@ -119,7 +146,9 @@ public class  Gui implements World {
 			constant.add(new ConstantBar(0,75));
 			constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75));
 		} catch (IOException e) {
-
+			// TODO Auto-generated catch block
+			log.setLevel(Level.ALL);
+			log.severe(e.getMessage());
 			e.printStackTrace();
 		}
 			  
@@ -157,23 +186,29 @@ public class  Gui implements World {
 
 	@Override
 	public  boolean refresh() {
-
+	log.setLevel(Level.ALL);
+		// TODO Auto-generated method stub
        if(gameover) {
     	   System.out.println("GAMEOVER!");
+    	   log.info("GAMEOVER");
     	   return false;
        }
-//       if(win) {
-//    	   System.out.println("LEVEL UP!");
-//    	  return false;
-//       }
+       if(win) {
+    	   log.info("LEVEL UP");
+    	   System.out.println("LEVEL UP!");
+    	  return false;
+       }
 		
-		  create++;
+		     create++;
 		  if(create%15==0) {
 			  try {
 				  moving.add(pf.GenerateRandomPlate("left"));
 				  moving.add(pf.GenerateRandomPlate("right"));
 				  
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				
+				log.severe(e.getMessage());
 				e.printStackTrace();
 			}
 			  create=0;
