@@ -19,7 +19,6 @@ public class Score extends Observable {
 	public int getScore()
 	{
 		return Value;
-		//a7a
 	}
 	
 
