@@ -1,37 +1,25 @@
 package Objects;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 public class PlateFactory {
-	static int supportedColors=11;
-	static PlateFactory pf=null;
+	private static PlateFactory pf=new PlateFactory();
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
-	public PlateFactory getInstance()
+	public static PlateFactory getUniqueInstance()
 	{
-		if(pf==null)
-		{
-			pf=new PlateFactory();
-		}
 		return pf;
 	}
+	private PlateFactory() {
+		// TODO Auto-generated constructor stub
+	}
 	/**
-	 * number of supported plate colors 1-11
-	 * @param n
+	 * 
+	 * @return random plate with random color;
+	 * @throws IOException 
 	 */
-	public void setSupportedColors(int n)
-	{
-		supportedColors=n;
-	}
-	public int getSupportedColors()
-	{
-		return supportedColors;
-	}
-	
-	
 	public void addToGarbage(Plate garbage)
 	{
 		Vector<Plate>v=new Vector<Plate>();
@@ -73,22 +61,17 @@ public class PlateFactory {
 		}
 		
 	}
-	/**
-	 * 
-	 * @return random plate with random color;
-	 * @throws IOException 
-	 */
-	public Plate GenerateRandomPlate() throws IOException
+	public Plate GenerateRandomPlate(String s) throws IOException
 	{
 		int plateType=(int) (Math.random()*4);
-		int plateColor=(int)(Math.random()*supportedColors);
-		//System.out.println(plateColor+ " "+plateType);
+		int plateColor=(int)(Math.random()*11);
 		Plate a=null;
 		if(Garbage.get(plateType)==null||Garbage.get(plateType).size()==0)
 		{
 			if(plateType==0)//BasedPlate
 			{
 				a=new BasedPlate(plateColor);
+                
 			}
 			else if(plateType==1)//nonBasedPlate
 			{
@@ -102,6 +85,18 @@ public class PlateFactory {
 			{
 				a=new PotPlate(plateColor);
 			}
+			if(s=="left") {
+				a.setX(-150);
+				a.setY(75-a.getHeight());
+				a.setType(s);
+			}
+			else {
+				a.setX(1610);
+				a.setY(75-a.getHeight());
+				a.setType(s);
+			}
+			
+			a.setColor(plateColor);
 		}
 		else
 		{
@@ -112,6 +107,16 @@ public class PlateFactory {
 			a=v.firstElement();
 			v.remove(0);
 			Garbage.put(plateType, v);
+			if(s=="left") {
+				a.setX(-150);
+				a.setY(75-a.getHeight());
+				a.setType(s);
+			}
+			else {
+				a.setX(1610);
+				a.setY(75-a.getHeight());
+				a.setType(s);
+			}
 		}
 
 		return a;
