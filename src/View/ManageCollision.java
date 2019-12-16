@@ -11,6 +11,7 @@ public class ManageCollision implements Strategy {
 	List<GameObject> control;
 	List<GameObject> moving;
 	boolean isWin=false;
+	
 	public void Managecollision(List<GameObject[]> collided,List<GameObject> moving,List<GameObject> control) {
 		this.collided=collided;
 		this.moving=moving;
@@ -30,7 +31,7 @@ public class ManageCollision implements Strategy {
 	
 	@Override
 	public void excute() {
-		// TODO Auto-generated method stub
+
 	for(GameObject[] arr : collided) {
 			
 			arr[0].setY(arr[1].getY()-arr[0].getHeight());
@@ -40,6 +41,7 @@ public class ManageCollision implements Strategy {
 				((Plate)arr[0]).setpreviouscolor(((Plate)arr[1]).getColor());
 				if(((Plate)arr[0]).getColor()==((Plate)arr[1]).getColor()&&((Plate)arr[1]).getColor()==((Plate)arr[1]).getpreviouscolor()) {
 					isWin=true;
+					//Get the score
 				}
 			}
 			

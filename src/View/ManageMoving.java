@@ -58,7 +58,7 @@ public class ManageMoving implements Strategy {
 	    }
 	@Override
 	public List<GameObject> getcontrol() {
-		// TODO Auto-generated method stub
+
 		return control;
 	}
     }

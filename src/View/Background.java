@@ -6,7 +6,11 @@ import java.awt.Image;
 import javax.swing.JComponent;
 
 class Background extends JComponent {
-    private Image image;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Image image;
     public Background(Image image) {
         this.image = image;
     }

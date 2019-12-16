@@ -15,6 +15,7 @@ public class CheckCollision implements Strategy {
 	List<GameObject[]> collided=new ArrayList<>();
 	List<GameObject> temp= new ArrayList<>();
 	boolean gameOver=false;
+	
 	public void Checkcollision(List<GameObject> moving,List<GameObject> control) {
 		this.moving=moving;
 		this.control=control;

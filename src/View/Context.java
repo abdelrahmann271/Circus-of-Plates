@@ -6,13 +6,14 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 
 public class Context {
 
-	    CheckCollision checkcollision=new CheckCollision();
-	    ManageCollision managecollision=new ManageCollision();
-	    ManageMoving managemoving=new ManageMoving();
+	CheckCollision checkcollision=new CheckCollision();
+	ManageCollision managecollision=new ManageCollision();
+	ManageMoving managemoving=new ManageMoving();
 	   
 	private Strategy strategy;
 
 	public void SetLists(List<GameObject> constant,List<GameObject> moving,List<GameObject> control) {
+		
 		checkcollision.Checkcollision(moving, control);
 		strategy=checkcollision;
 		excutestrategy();
