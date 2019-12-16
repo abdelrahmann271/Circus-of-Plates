@@ -117,8 +117,8 @@
  			//Adding two sticks to the clown
  			//670
  			//540
-		control.add(new Stick((int)screenSize.getWidth()-670,(int)screenSize.getHeight()-250,0));
-			control.add(new Stick((int)screenSize.getWidth()-540,(int)screenSize.getHeight()-250,1));
+		control.add(new Stick((int)screenSize.getWidth()-760,(int)screenSize.getHeight()-250,0));
+			control.add(new Stick((int)screenSize.getWidth()-630,(int)screenSize.getHeight()-250,1));
  			
  		 
  		  try {

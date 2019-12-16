@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import Logger.LoggerSingle;
+import Score.Score;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
 public class Player extends JPanel implements Observer, GameObject  {
@@ -162,9 +163,10 @@ public class Player extends JPanel implements Observer, GameObject  {
 		g.drawImage(img, getX(), getY(), this);
 	}
 	@Override
-	public void update(Observable o, Object newScore) {
+	public void update(Observable newScore, Object arg) {
 		// TODO Auto-generated method stub
-		UpdatePlayerScore((int)newScore);
+		Score s=Score.getInstance();
+		UpdatePlayerScore(s.getScore());
 		
 		
 	}

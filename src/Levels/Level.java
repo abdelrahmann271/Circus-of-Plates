@@ -6,18 +6,19 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Level  {
+public abstract class Level  {
 	
 	int currentLevel;
-	int PlatesSpeed=1;
+	int PlatesSpeed=50;
 	int PlayerSpeed=1;
 	int SupportedColors;
 	String BackgroundURl;
 	Image BackgroundImg;
-	
-	public Level(int currentLevel)
+	int begin,end;
+
+	public Level()
 	{
-		this.currentLevel=currentLevel;
+		
 	}
 	
 	public void setPlatesSpeed(int newPlatesSpeed)
@@ -72,7 +73,26 @@ public class Level  {
 		return SupportedColors;
 
 	}
+	public void setcurrentLevel(int currentLevel)
+	{
+		this.currentLevel=currentLevel;
+	}
+	public abstract Level getMylevel();
+	public abstract Level UpgradeLevel();
 	
+	public int getcurrentLevel()
+	{
+		return this.currentLevel;
+	}
+	public abstract void setLevelLimits();
+	public int getbegin()
+	{
+		return this.begin;
+	}
+	public int getend()
+	{
+		return this.end;
+	}
 
 }
 

@@ -20,7 +20,7 @@ public class Context {
 		managecollision.Managecollision(checkcollision.getcollided(),moving,control);
 		strategy=managecollision;
 		excutestrategy();
-		managemoving.Managemoving(moving, constant,managecollision.getcontrol());
+		managemoving.Managemoving(managecollision.getmoving(), constant,managecollision.getcontrol());
 		strategy=managemoving;
 		excutestrategy();
 	}

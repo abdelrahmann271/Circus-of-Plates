@@ -73,6 +73,7 @@ public class CheckCollision implements Strategy {
 					GameObject arr[]=new GameObject[2];
 					arr[0]=p;
 					arr[1]=t;
+					control.add(p);
 					collided.add(arr);
 					break;
 				}

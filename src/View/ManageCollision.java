@@ -1,5 +1,6 @@
 package View;
 
+import java.util.LinkedList;
 import java.util.List;
 import Objects.Plate;
 import eg.edu.alexu.csd.oop.game.GameObject;
@@ -10,8 +11,9 @@ public class ManageCollision implements Strategy {
 	List<GameObject[]> collided;
 	List<GameObject> control;
 	List<GameObject> moving;
+	List<GameObject> temp=new LinkedList<GameObject>();
 	boolean isWin=false;
-	
+	int height;
 	public void Managecollision(List<GameObject[]> collided,List<GameObject> moving,List<GameObject> control) {
 		this.collided=collided;
 		this.moving=moving;
@@ -28,6 +30,13 @@ public class ManageCollision implements Strategy {
 	public List<GameObject> getcontrol(){
 		return control;
 	}
+    public void DFS(Plate p) {
+    	control.remove(p);
+    	moving.add(p);
+    	for(Plate t : p.getnext()) {
+    		DFS(t);
+    	}
+    }
 	
 	@Override
 	public void excute() {
@@ -35,12 +44,23 @@ public class ManageCollision implements Strategy {
 	for(GameObject[] arr : collided) {
 			
 			arr[0].setY(arr[1].getY()-arr[0].getHeight());
+			((Plate)arr[0]).setfreedome(true);
 			moving.remove(arr[0]);
-			control.add(arr[0]);
+			//control.add(arr[0]);
 			if(arr[1] instanceof Plate) {
+				((Plate)arr[0]).setpreviousplate(((Plate)arr[1]));
 				((Plate)arr[0]).setpreviouscolor(((Plate)arr[1]).getColor());
+				((Plate)arr[1]).addnext(((Plate)arr[0]));
 				if(((Plate)arr[0]).getColor()==((Plate)arr[1]).getColor()&&((Plate)arr[1]).getColor()==((Plate)arr[1]).getpreviouscolor()) {
 					isWin=true;
+					DFS(((Plate)arr[1]).getpreviousplate());
+					moving.remove(arr[0]);
+					moving.remove(arr[1]);
+					moving.remove(((Plate)arr[1]).getpreviousplate());
+					if(((Plate)arr[1]).getpreviousplate().getpreviousplate()!=null) {
+						((Plate)arr[1]).getpreviousplate().getpreviousplate().getnext().remove(((Plate)arr[1]).getpreviousplate());
+					}
+					
 					//Get the score
 				}
 			}
