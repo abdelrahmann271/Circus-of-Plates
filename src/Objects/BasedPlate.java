@@ -15,13 +15,14 @@ public class BasedPlate extends Plate {
 		this.SetSpriteImages();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public BasedPlate(int X,int Y) throws IOException
 	{
 		super();
 		this.x=X;
 		this.y=Y;
 		setType("platewithbase");
-		this.setColor((int) ((Math.random()*11)));
+		//this.setColor((int) ((Math.random()*11)));
 		SetSpriteImages();
 	}
 }
