@@ -10,12 +10,18 @@
 
  import java.util.LinkedList;
  import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
- import javax.swing.JMenu;
+import javax.swing.JMenu;
  import javax.swing.JMenuBar;
  import javax.swing.JMenuItem;
- import Score.*;
- import Objects.*;
+
+import Logger.LoggerSingle;
+import Score.*;
+import SnapShot.Memento;
+import SnapShot.Originator;
+import Objects.*;
  import Players.*;
  import eg.edu.alexu.csd.oop.game.GameEngine;
  import eg.edu.alexu.csd.oop.game.GameObject;
@@ -30,6 +36,7 @@
 	private static List<GameObject> constant = new LinkedList<GameObject>();
 	private static List<GameObject> moving = new LinkedList<GameObject>();
 	private static List<GameObject> control = new LinkedList<GameObject>();
+	private static List<Memento> mementos = new LinkedList<Memento>();
 	//private static List<GameObject> temp = new LinkedList<GameObject>();
  	
 	private int create=0;
@@ -81,15 +88,19 @@
  		  
  	  }
  	  public  Gui()  {
- 	  
- 		  
+ 	  constant.clear();
+ 	  control.clear();
+ 	  moving.clear();
+ 	  mementos.clear();
  			try {
  				 
  				//moving.add(new NonBasedPlate(-150,75));
  				 moving.add(pf.GenerateRandomPlate("left"));
  				 moving.add(pf.GenerateRandomPlate("right"));
  			} catch (IOException e) {
-
+ 				Logger log = LoggerSingle.getInstance();
+ 				log.setLevel(Level.ALL);
+ 				log.severe(e.getMessage());
  				e.printStackTrace();
  			}
  			try {
@@ -112,7 +123,9 @@
  				control.add(clown);
  				
  			} catch (IOException e) {
-
+ 				Logger log = LoggerSingle.getInstance();
+ 				log.setLevel(Level.ALL);
+ 				log.severe(e.getMessage());
  				e.printStackTrace();
  			}
  		    
@@ -127,7 +140,9 @@
  			constant.add(new ConstantBar(0,75));
  			constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75));
  		} catch (IOException e) {
-
+ 			Logger log = LoggerSingle.getInstance();
+			log.setLevel(Level.ALL);
+			log.severe(e.getMessage());
  			e.printStackTrace();
  		}
  			  
@@ -168,7 +183,8 @@
  		
 // 		movingObjectsSpeed=movingObjectsSpeed-(score.getScore()/25);
 // 		System.out.println(movingObjectsSpeed);
-
+ 		Originator originator = new Originator(constant,moving,control);
+ 		mementos.add(originator.createMemento());
         if(gameover) {
      	   System.out.println("GAMEOVER!");
      	   return false;
@@ -182,6 +198,9 @@
  				  
  			} catch (IOException e) {
 				// TODO Auto-generated catch block
+ 				Logger log = LoggerSingle.getInstance();
+ 				log.setLevel(Level.ALL);
+ 				log.severe(e.getMessage());
  				e.printStackTrace();
  			}
  			  create=0;
