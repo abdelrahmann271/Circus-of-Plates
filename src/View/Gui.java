@@ -40,7 +40,7 @@ import Objects.*;
 	//private static List<GameObject> temp = new LinkedList<GameObject>();
 	 private static Logger log = LoggerSingle.getInstance();
  	
-	private int create=0;
+	private int create=0,iterator=0;
 	private int movingObjectsSpeed=50;
 	//private boolean caught=false;
 	private boolean gameover=false;
@@ -190,11 +190,22 @@ import Objects.*;
  		
 // 		movingObjectsSpeed=movingObjectsSpeed-(score.getScore()/25);
 // 		System.out.println(movingObjectsSpeed);
- 		Originator originator = new Originator(constant,moving,control);
- 		mementos.add(originator.createMemento());
-        if(gameover) {
+ 		if(!gameover) {
+ 			Originator originator = new Originator(constant,moving,control);
+ 			mementos.add(originator.createMemento());
+ 		}
+ 		
+       if(gameover) {
+        	control.clear();
+      
+        	if(iterator==mementos.size()) {
+        		return false;
+        	}
+        	moving=mementos.get(iterator++).getAll();
+        	
      	   System.out.println("GAMEOVER!");
-     	   return false;
+ 
+     	   return true;
         }
  		
 		  create++;
@@ -225,78 +236,7 @@ import Objects.*;
  		  gameover=context.gameOver();
  		  
  		  
- 		
- 			/*temp.clear();
- 	
- 		    if(control.size()>0) {
- 		    	//GameObject k=control.get(0);
- 				//control.remove(0);
- 				GameObject f=null;
- 		    	int n=control.size();
- 		    for(int j=0;j<n;j++) {
- 		    	int miny=1500;
- 		    	for(int i=0;i<n-j;i++) {
- 		    		if(control.get(i).getY()<miny) {
- 		    			miny=control.get(i).getY();
- 		    			f=control.get(i);
- 		    		}
- 		    	}
- 		    	control.remove(f);temp.add(f);
- 		       }
- 		    control.clear();
- 		    //control.add(k);
- 		    for(GameObject O : temp) {control.add(O);}
- 		   
- 		    }
- 		    
- 			for(GameObject p : moving) {
- 				
- 				caught=false;
- 				for(int i=0;i<control.size();i++) {
- 					GameObject t=control.get(i);
- 					if(t.getY()<constant.get(0).getY()) {
- 						gameover=true;
- 						}
- 				if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<=10) {
- 						caught=true;i=control.size();
- 						p.setY(t.getY()-p.getHeight());
- 						control.add(p);temp.add(p);
- 						if(t instanceof Plate) {
- 						Plate P=(Plate)p,T=(Plate)t;
- 						P.setpreviouscolor(T.getColor());
- 						if(P.getColor()==T.getColor()&&T.getColor()==T.getpreviouscolor()) {
- 							win=true;
- 						}
- 					  }
- 					}
- 				}
- 		
- 		if(!caught&&(((Plate)p).getType()=="left"&&(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth())||
- 				((Plate)p).getType()=="right"&&(p.getX()+p.getWidth()<=constant.get(1).getX())
- 				)) {
- 		    	p.setY(p.getY()+10);
- 		    	}
- 		    else if(!caught) {
- 		    if(((Plate)p).getType()=="left") {
- 		    	p.setX(p.getX()+10);
- 		    }
- 		    else {
- 		    	p.setX(p.getX()-10);
- 		    }
- 			
- 		    }
- 			  if(p.getY()>1000) {
- 			    	temp.add(p);
- 			    }
- 		}
- 	
- 		for(GameObject p : temp) {
- 			
- 			if(p.getY()>1000) {
- 				pf.addToGarbage((Plate)p);
- 			}
- 			moving.remove(p);
- 		}*/
+
          
  		return true;
  	}

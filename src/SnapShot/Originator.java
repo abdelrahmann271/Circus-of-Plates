@@ -22,8 +22,9 @@ public class Originator {
 	     
 	    public Memento createMemento() 
 	    { 
-//	    	System.out.println("bnsyev");
+//	    	
 	        Memento m = new Memento(constant,moving, control);
+	     
 	        return m;
 	    }
 	     
