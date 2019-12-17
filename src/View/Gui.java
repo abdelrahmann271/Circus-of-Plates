@@ -38,6 +38,7 @@ import Objects.*;
 	private static List<GameObject> control = new LinkedList<GameObject>();
 	private static List<Memento> mementos = new LinkedList<Memento>();
 	//private static List<GameObject> temp = new LinkedList<GameObject>();
+	 private static Logger log = LoggerSingle.getInstance();
  	
 	private int create=0;
 	private int movingObjectsSpeed=50;
@@ -70,16 +71,22 @@ import Objects.*;
  			newMenuItem.addActionListener(new ActionListener() {
  			@Override public void actionPerformed(ActionEvent e) {
  					gameController.changeWorld(new View.Gui());
+ 	 				log.setLevel(Level.ALL);
+ 	 				log.info("game start");
  				}
  			});
  			pauseMenuItem.addActionListener(new ActionListener() {
  			@Override public void actionPerformed(ActionEvent e) {
  					gameController.pause();
+ 	 				log.setLevel(Level.ALL);
+ 	 				log.info("game paused");
  				}
  			});
  			resumeMenuItem.addActionListener(new ActionListener() {
  				@Override public void actionPerformed(ActionEvent e) {
  					gameController.resume();
+ 	 				log.setLevel(Level.ALL);
+ 	 				log.info("game resumed");
  				}
  			});
  		
