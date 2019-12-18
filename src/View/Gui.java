@@ -89,18 +89,17 @@ import Objects.*;
  			});	  
  	  }
  	  public  Gui()  {
+ 		  
  		  gameover=false;
  		  score.setScore(0);
- 	  constant.clear();
- 	  control.clear();
- 	  moving.clear();
- 	  mementos.clear();
- 	  context=new Context();
+ 		  constant.clear();
+ 		  control.clear();
+ 		  moving.clear();
+ 		  mementos.clear();
+ 		  context=new Context();
  	  
  			try {
- 				 
- 				//moving.add(new NonBasedPlate(-150,75));
- 				
+ 								
  				 moving.add(pf.GenerateRandomPlate("left"));
  				 moving.add(pf.GenerateRandomPlate("right"));
  			} catch (IOException e) {
@@ -128,8 +127,13 @@ import Objects.*;
 			control.add(new Stick((int)screenSize.getWidth()*906/1536,(int)screenSize.getHeight()*614/864,1));
 
  		  try {
- 			constant.add(new ConstantBar(0,75*(int)screenSize.getHeight()/864));
+ 			
+ 	 		constant.add(new ConstantBar(0,75*(int)screenSize.getHeight()/864));
+ 	 		constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75*(int)screenSize.getHeight()/864));
+ 			constant.add(new Background(4));  
+			constant.add(new ConstantBar(0,75*(int)screenSize.getHeight()/864));
  			constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75*(int)screenSize.getHeight()/864));
+ 			
  			
  			
  			
@@ -164,13 +168,18 @@ import Objects.*;
  	@Override
  	public int getWidth() {
 
- 		return (int) this.width;
+
+ 		//return (int) this.width;
+ 		return 1366;
+ 		
  	}
  
  	@Override
  	public int getHeight() {
-
- 		return (int) this.height-100;
+//
+// 		System.out.println((int) this.height-100);
+// 		return (int) this.height-100;
+ 		return 668;
  	}
 
  	@Override

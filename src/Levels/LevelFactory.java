@@ -10,11 +10,13 @@ import Score.Score;
 import View.ManageMoving;
 
 public class LevelFactory extends Observable implements Observer  {
+	
 	private static LevelFactory lf=null;
 	public static Level One =LevelOne.getInstance();
 	private static Level Two =LevelTwo.getInstance();
 	private static Level Three =LevelThree.getInstance();
-	public static Level MyLevel=One;
+	public static Level MyLevel=One; // State
+	
 	public static LevelFactory getInstance()
 	{
 		if(lf==null)
@@ -86,7 +88,7 @@ public class LevelFactory extends Observable implements Observer  {
 	
 	@Override
 	public void update(Observable Score, Object arg) {
-		this.MyLevel=LevelFactory.getInstance().getLevelByScore((Score) Score);
+		this.MyLevel=LevelFactory.getInstance().getLevelByScore((Score) Score); // Changing State
 		setChanged();
 		notifyObservers();
 	}

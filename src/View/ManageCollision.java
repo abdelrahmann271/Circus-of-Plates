@@ -44,6 +44,7 @@ public class ManageCollision implements Strategy {
     	for(Plate t : p.getnext()) {
     		DFS(t);
     	}
+    	p.getnext().clear();
     }
 	
 	@Override
