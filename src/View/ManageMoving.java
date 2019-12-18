@@ -4,13 +4,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
+import Levels.*;
 import Score.*;
 import Objects.Plate;
 import Objects.PlateFactory;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
-public class ManageMoving implements Strategy, Observer {
+public class ManageMoving implements Observer,Strategy {
 	
 	private static ManageMoving Object = new ManageMoving();
 	public static ManageMoving getUniqueInstance()
@@ -34,23 +34,41 @@ public class ManageMoving implements Strategy, Observer {
 		 this.constant=constant;
 	 }
 	 public List<GameObject> getmoving(){
-		 if(moving==null) {System.out.println("ggg");}
+//		 if(moving==null) {System.out.println("ggg");}
 			return moving;
 		}
 		public List<GameObject> getconstant(){
 			return constant;
 		}
+		
+	public boolean checkcollision(GameObject p) {
+		
+		for(GameObject t : control) {
+			
+			if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<=10) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public void excute() {
 	 temp.clear();
 		for(GameObject p : moving) {
 			
-			if((((Plate)p).getType()=="left"&&(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth())||
-					((Plate)p).getType()=="right"&&(p.getX()+p.getWidth()<=constant.get(1).getX())||((Plate) p).getfreedome()
+			if((((Plate)p).getdirection()=="left"&&(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth())||
+					((Plate)p).getdirection()=="right"&&(p.getX()+p.getWidth()<=constant.get(1).getX())||((Plate) p).getfreedome()
 					)) {
-			    	p.setY(p.getY()+movingSpeedFactor);
+				     for(int i=1;i<=movingSpeedFactor;i++) {
+				    	 
+				    	 p.setY(p.getY()+1);
+				    	 if(checkcollision(p)) {
+				    		 i=movingSpeedFactor+1;
+				    	 }
+				     }
+			    	
 			    	}
-			    else if(((Plate)p).getType()=="left") {
+			    else if(((Plate)p).getdirection()=="left") {
 			      
 			    	p.setX(p.getX()+movingSpeedFactor); }
 			
@@ -87,7 +105,6 @@ public class ManageMoving implements Strategy, Observer {
 	@Override
 	public void update(Observable score, java.lang.Object arg) {
 		
-		this.movingSpeedFactor += this.getScoreDecFactor((Score) score);
-		System.out.println(movingSpeedFactor + " from class movingmanage");
+		this.movingSpeedFactor = LevelFactory.getInstance().getMyLevel().getPlatesSpeed();
 	}
  }

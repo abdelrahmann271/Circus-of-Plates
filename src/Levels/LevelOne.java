@@ -1,10 +1,13 @@
 package Levels;
 
+import java.awt.Color;
+
 import Objects.PlateFactory;
 
 public class LevelOne extends Level
 {
 	
+	public Color lvlColor = Color.white;
 	public static Level L1=null;
 	public LevelOne()
 	{
@@ -36,6 +39,16 @@ public class LevelOne extends Level
 		this.begin=0;
 		this.end=50;
 		
+	}
+	@Override
+	public Color getBackground()
+	{
+		return this.lvlColor;
+	}
+	@Override
+	public int getPlatesSpeed()
+	{
+		return 10;
 	}
 	
 	

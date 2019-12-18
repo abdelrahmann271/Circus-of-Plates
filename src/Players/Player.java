@@ -128,7 +128,6 @@ public class Player extends JPanel implements Observer, GameObject  {
 	public void ChoosePlayerCharacter(int ClownNumber)
 	{
 		this.ClownNumber=ClownNumber;
-		System.out.println(this.ClownNumber+"a7o");
 	}
 	public BufferedImage getImage()
 	{

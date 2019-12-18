@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import Objects.PlateFactory;
 import Score.Score;
+import View.ManageMoving;
 
 public class LevelFactory extends Observable implements Observer  {
 	private static LevelFactory lf=null;
@@ -18,15 +19,15 @@ public class LevelFactory extends Observable implements Observer  {
 		{
 			lf=new LevelFactory();
 			lf.addObserver(PlateFactory.getUniqueInstance());
+			lf.addObserver(ManageMoving.getUniqueInstance());
 		}
 		return lf;
 	}
 	public void setMyLevel(Level CurrentLevel)
 	{
-		this.MyLevel=CurrentLevel.getMylevel();
+		this.MyLevel=CurrentLevel;
 		setChanged();
-		notifyObservers();
-		
+		notifyObservers();	
 	}
 	public Level getMyLevel()
 	{
@@ -73,11 +74,12 @@ public class LevelFactory extends Observable implements Observer  {
 		{
 			 a=Three;
 		}
+
 		return a;
 	}
+	
 	@Override
 	public void update(Observable Score, Object arg) {
-		// TODO Auto-generated method stub
 		this.MyLevel=LevelFactory.getInstance().getLevelByScore((Score) Score);
 		setChanged();
 		notifyObservers();

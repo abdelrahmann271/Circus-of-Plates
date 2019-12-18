@@ -1,5 +1,7 @@
 package Objects;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,7 @@ public class PlateFactory implements Observer {
 	private static PlateFactory pf=null;
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
 	public static int SupportedColors=3;
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static PlateFactory getUniqueInstance()
 	{
 		if(pf==null)
@@ -106,14 +109,14 @@ public class PlateFactory implements Observer {
 				a=new PotPlate(plateColor);
 			}
 			if(s=="left") {
-				a.setX(-150);
-				a.setY(75-a.getHeight());
-				a.setType(s);
+				a.setX(-150*(int)screenSize.getWidth()/1536);
+				a.setY(75*(int)screenSize.getHeight()/864-a.getHeight());
+				a.Setdirection(s);
 			}
 			else {
-				a.setX(1610);
-				a.setY(75-a.getHeight());
-				a.setType(s);
+				a.setX(1610*(int)screenSize.getWidth()/1536);
+				a.setY(75*(int)screenSize.getHeight()/864-a.getHeight());
+				a.Setdirection(s);
 			}
 			
 			a.setColor(plateColor);
@@ -128,14 +131,14 @@ public class PlateFactory implements Observer {
 			v.remove(0);
 			Garbage.put(plateType, v);
 			if(s=="left") {
-				a.setX(-150);
-				a.setY(75-a.getHeight());
-				a.setType(s);
+				a.setX(-150*(int)screenSize.getWidth()/1536);
+				a.setY(75*(int)screenSize.getHeight()/864-a.getHeight());
+				a.Setdirection(s);
 			}
 			else {
-				a.setX(1610);
-				a.setY(75-a.getHeight());
-				a.setType(s);
+				a.setX(1610*(int)screenSize.getWidth()/1536);
+				a.setY(75*(int)screenSize.getHeight()/864-a.getHeight());
+				a.Setdirection(s);
 			}
 		}
 

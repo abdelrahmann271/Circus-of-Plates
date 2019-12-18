@@ -17,10 +17,10 @@ public class LoggerSingle {
 				fh = new FileHandler("MyLogFile_"
 				        +".log");
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
        

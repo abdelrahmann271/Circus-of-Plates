@@ -17,12 +17,19 @@ public class Context {
 		checkcollision.Checkcollision(moving, control);
 		strategy=checkcollision;
 		excutestrategy();
-		managecollision.Managecollision(checkcollision.getcollided(),moving,control);
+		managecollision.Managecollision(checkcollision.getcollided(),moving,checkcollision.getcontrol());
 		strategy=managecollision;
 		excutestrategy();
 		managemoving.Managemoving(managecollision.getmoving(), constant,managecollision.getcontrol());
 		strategy=managemoving;
 		excutestrategy();
+		checkcollision.Checkcollision(managemoving.getmoving(), managemoving.getcontrol());
+		strategy=checkcollision;
+		excutestrategy();
+		managecollision.Managecollision(checkcollision.getcollided(),managemoving.getmoving(),checkcollision.getcontrol());
+		strategy=managecollision;
+		excutestrategy();
+		
 	}
 	
 	public List<GameObject> getmoving(){

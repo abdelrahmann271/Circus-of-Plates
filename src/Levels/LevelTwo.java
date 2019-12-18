@@ -1,6 +1,11 @@
 package Levels;
 
+import java.awt.Color;
+
 public class LevelTwo extends Level{
+	
+	public Color lvlColor = Color.gray;
+	
 	public static Level L2=null;
 	public LevelTwo()
 	{
@@ -10,22 +15,21 @@ public class LevelTwo extends Level{
 		setLevelLimits();
 	}
 	
-
 	@Override
 	public Level getMylevel() {
-		// TODO Auto-generated method stub
+
 		return getInstance();
 	}
 
 	@Override
 	public Level UpgradeLevel() {
-		// TODO Auto-generated method stub
+
 		return LevelThree.getInstance();
 	}
 
 	@Override
 	public void setLevelLimits() {
-		// TODO Auto-generated method stub
+		
 		this.begin=50;
 		this.end=100;
 	}	
@@ -36,8 +40,15 @@ public class LevelTwo extends Level{
 		}
 		return L2;
 	}
-
-
-	
+	@Override
+	public Color getBackground()
+	{
+		return this.lvlColor;
+	}
+	@Override
+	public int getPlatesSpeed()
+	{
+		return 15;
+	}
 
 }

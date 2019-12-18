@@ -1,6 +1,11 @@
 package Levels;
 
+import java.awt.Color;
+
 public class LevelThree extends Level {
+	
+	public Color lvlColor = Color.darkGray;
+	
 	public static Level L3=null;
 	public static  Level getInstance() {
 		if(L3==null)
@@ -19,23 +24,32 @@ public class LevelThree extends Level {
 
 	@Override
 	public Level getMylevel() {
-		// TODO Auto-generated method stub
+
 		return getInstance();
 	}
 
 	@Override
 	public Level UpgradeLevel() {
-		// TODO Auto-generated method stub
+
 		System.out.println("YOU Completed The Game");
 		return null;
 	}
 
 	@Override
 	public void setLevelLimits() {
-		// TODO Auto-generated method stub
+
 		this.begin=101;
 		this.end=Integer.MAX_VALUE;
 	}
+	@Override
+	public Color getBackground()
+	{
+		return this.lvlColor;
+	}
+	@Override
+	public int getPlatesSpeed()
+	{
+		return 20;
+	}
 	
-
 }

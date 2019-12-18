@@ -3,13 +3,12 @@ package Score;
 
 import java.util.Observable;
 import java.util.Observer;
-
 import Levels.LevelFactory;
-import Objects.PlateFactory;
-import View.ManageMoving;
+
 
 
 public class Score extends Observable {
+	
 	private static Score s=null;
 	static int Value=0;
 	public Score()
@@ -22,9 +21,6 @@ public class Score extends Observable {
 		{
 			s=new Score();
 			s.addObserver(LevelFactory.getInstance());
-			s.addObserver(ManageMoving.getUniqueInstance());
-
-
 		}
 		return s;
 	}
@@ -36,10 +32,7 @@ public class Score extends Observable {
 	}
 	public int getScore()
 	{
-		return Value;
-
-		
+		return Value;	
 	}
 	
-
 }

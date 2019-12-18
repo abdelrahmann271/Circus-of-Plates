@@ -1,4 +1,4 @@
- package View;
+package View;
  import java.awt.Color;
  import java.awt.Dimension;
 
@@ -17,6 +17,7 @@ import javax.swing.JMenu;
  import javax.swing.JMenuBar;
  import javax.swing.JMenuItem;
 
+import Levels.LevelFactory;
 import Logger.LoggerSingle;
 import Score.*;
 import SnapShot.Memento;
@@ -30,34 +31,31 @@ import Objects.*;
  
  
  public class  Gui implements World {
-	 
- 	
+	 	
 	Score score = Score.getInstance();
 	private static List<GameObject> constant = new LinkedList<GameObject>();
 	private static List<GameObject> moving = new LinkedList<GameObject>();
 	private static List<GameObject> control = new LinkedList<GameObject>();
-	private static List<Memento> mementos = new LinkedList<Memento>();
-	//private static List<GameObject> temp = new LinkedList<GameObject>();
-	 private static Logger log = LoggerSingle.getInstance();
- 	
+	private  List<Memento> mementos = new LinkedList<Memento>();
+	private static Logger log = LoggerSingle.getInstance();
+	static JMenuBar  menuBar;
 	private int create=0,iterator=0;
 	private int movingObjectsSpeed=50;
-	//private boolean caught=false;
 	private boolean gameover=false;
 	private boolean win=false;
  	
-
 	private PlateFactory pf= PlateFactory.getUniqueInstance();
 	private Context context=new Context();
- 	
+	private static  Color levelColor;
+	static GameController gameController;
+
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
  	private final double width = screenSize.getWidth();
  	private final double height = screenSize.getHeight();
  	
- 	
  	  public static void main(String[]agrs) throws IOException {
 	  
- 			JMenuBar  menuBar = new JMenuBar();
+ 			menuBar = new JMenuBar();
  			JMenu menu = new JMenu("File");
  			JMenuItem newMenuItem = new JMenuItem("New");
  			JMenuItem pauseMenuItem = new JMenuItem("Pause");
@@ -67,7 +65,7 @@ import Objects.*;
  			menu.add(pauseMenuItem);
  			menu.add(resumeMenuItem);
  			menuBar.add(menu);
- 			final GameController gameController = GameEngine.start("Circus of plates", new View.Gui(), menuBar, Color.BLACK);
+ 			gameController = GameEngine.start("Circus of plates", new View.Gui(), menuBar, levelColor);			
  			newMenuItem.addActionListener(new ActionListener() {
  			@Override public void actionPerformed(ActionEvent e) {
  					gameController.changeWorld(new View.Gui());
@@ -88,11 +86,7 @@ import Objects.*;
  	 				log.setLevel(Level.ALL);
  	 				log.info("game resumed");
  				}
- 			});
- 		
- 		
- 			
- 		  
+ 			});	  
  	  }
  	  public  Gui()  {
  	  constant.clear();
@@ -102,6 +96,7 @@ import Objects.*;
  			try {
  				 
  				//moving.add(new NonBasedPlate(-150,75));
+ 				
  				 moving.add(pf.GenerateRandomPlate("left"));
  				 moving.add(pf.GenerateRandomPlate("right"));
  			} catch (IOException e) {
@@ -113,20 +108,9 @@ import Objects.*;
  			try {
  				
  				Player clown =new Player("");
- 				//Ayman Set Dimensions 
- 				//clown.setX(150);
- 				//clown.setY(600);
- 				
- 				//Dimensions for screen suitability
  				clown.setX((int)screenSize.getWidth()/2);
- 				clown.setY((int)screenSize.getHeight()-300);
- 				
- 				// Mlhash Lzma now
- 				//System.out.println((int)Math.random()*8);
- 				//clown.ChoosePlayerCharacter(2);		
- 				//clown.SetScaleImage(1, 1);
+ 				clown.setY(564*(int)screenSize.getHeight()/864);
  				clown.setSpriteImages();
- 				//clown.SetScaleImage(100, 100);
  				control.add(clown);
  				
  			} catch (IOException e) {
@@ -136,16 +120,16 @@ import Objects.*;
  				e.printStackTrace();
  			}
  		    
- 			//Adding two sticks to the clown
- 			//670
- 			//540
- 			control.add(new Stick((int)screenSize.getWidth()-670,(int)screenSize.getHeight()-250,0));
-			control.add(new Stick((int)screenSize.getWidth()-540,(int)screenSize.getHeight()-250,1));
- 			
- 		 
+ 			control.add(new Stick((int)screenSize.getWidth()*776/1536,(int)screenSize.getHeight()*614/864,0));
+			control.add(new Stick((int)screenSize.getWidth()*906/1536,(int)screenSize.getHeight()*614/864,1));
+
  		  try {
- 			constant.add(new ConstantBar(0,75));
- 			constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75));
+ 			constant.add(new ConstantBar(0,75*(int)screenSize.getHeight()/864));
+ 			constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75*(int)screenSize.getHeight()/864));
+ 			
+ 			
+ 			
+ 			
  		} catch (IOException e) {
  			Logger log = LoggerSingle.getInstance();
 			log.setLevel(Level.ALL);
@@ -184,88 +168,50 @@ import Objects.*;
 
  		return (int) this.height-100;
  	}
- 
+
  	@Override
  	public  boolean refresh() {
- 		
-// 		movingObjectsSpeed=movingObjectsSpeed-(score.getScore()/25);
-// 		System.out.println(movingObjectsSpeed);
- 		if(!gameover) {
- 			Originator originator = new Originator(constant,moving,control);
+ 		if(!gameover) 
+ 		{
  			
-// 		  System.out.println("Moving "+ moving.size());
-// 		  System.out.println();
-// 		  for (GameObject o : moving )
-// 		  {
-// 			  System.out.print(o.hashCode() + "  ");
-// 		  }
-// 			System.out.println("From saving hereeee");
-// 			System.out.println("control size"+control.size());
-// 			System.out.println("moving size"+moving.size());
- 			
- 			mementos.add(originator.createMemento());
- 			
-// 			System.out.println("saved moving Objects" + mementos.get(0).getMoving().size());
-// 			System.out.println("mementos size " +mementos.size());
-// 			System.out.println("mementos size last obetc " +mementos.get(mementos.size()-1).getMoving().size());
- 		}
- 		
-       if(gameover) {
-        	control.clear();
-      
-        	if(iterator==mementos.size()) {
+ 			Originator originator = new Originator(moving,control);
+ 			mementos.add(originator.createMemento()); 			
+ 		} 		
+       if(gameover)
+       {    	   
+        	control.clear();       	
+        	if(iterator==mementos.size())
+        	{
         		return false;
         	}
-//        	System.out.println("wna b get " + mementos.get(iterator++).getAll().size() );
-        	//moving=mementos.get(iterator++).getAll();
-        	moving = new LinkedList<GameObject>(mementos.get(iterator++).getAll());
-
-        	//System.out.println(mementos.get(0).getMoving().size());
-        	
-     	   System.out.println("GAMEOVER!");
- 
-     	   return true;
-        }
- 		
+        	moving= mementos.get(iterator++).getAll();
+     	 
+        	return true;
+        }		
 		  create++;
- 		  if(create%15==0) {
- 			  try {
- 				  moving.add(pf.GenerateRandomPlate("left"));
- 				  moving.add(pf.GenerateRandomPlate("right"));
- 				  
- 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+ 		  if(create%15==0) 
+ 		  {
+ 			  try 
+ 			  {
+ 				 moving.add(pf.GenerateRandomPlate("left"));
+ 				 moving.add(pf.GenerateRandomPlate("right"));  
+ 			  } 
+ 			  catch (IOException e) 
+ 			  {
  				Logger log = LoggerSingle.getInstance();
  				log.setLevel(Level.ALL);
  				log.severe(e.getMessage());
  				e.printStackTrace();
- 			}
+ 			  }
  			  create=0;
  		  }
-
-// 		  System.out.println("Moving "+ moving.size());
-// 		  System.out.println();
-// 		  for (GameObject o : moving )
-// 		  {
-// 			  System.out.print(o.hashCode() + "  ");
-// 		  }
- 		  
- 		  context.SetLists(constant, moving, control);
- 		  
- 		  moving=context.getmoving();
- 		  
+ 		  context.SetLists(constant, moving, control); 		  
+ 		  moving=context.getmoving();	  
  		  control=context.getcontrol();
- 		  
  		  win=context.isWin();
- 		  
  		  gameover=context.gameOver();
- 		  
- 		  
-
-         
  		return true;
  	}
- 
  	@Override
  	public String getStatus() {
 
@@ -275,8 +221,6 @@ import Objects.*;
  	@Override
  	public int getSpeed() {
 	
-// 		int p = movingObjectsSpeed-(score.getScore()/25);
- 		System.out.println("game speeed " );
 	return movingObjectsSpeed;
 	
  	}
@@ -286,6 +230,4 @@ import Objects.*;
 		return 40;
  	}
  	
-
- 
  }

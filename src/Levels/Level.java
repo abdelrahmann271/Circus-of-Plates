@@ -1,5 +1,6 @@
 package Levels;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import javax.imageio.ImageIO;
 
 public abstract class Level  {
 	
+	public Color lvlColor;
 	int currentLevel;
 	int PlatesSpeed=50;
 	int PlayerSpeed=1;
@@ -57,6 +59,10 @@ public abstract class Level  {
 	public Image getBackgroundImg()
 	{
 		return BackgroundImg;
+	}
+	public Color getBackground()
+	{
+		return this.lvlColor;
 	}
 	
 	/**
