@@ -50,5 +50,9 @@ public class LevelTwo extends Level{
 	{
 		return 15;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Level 2 ";
+	}
 }

@@ -5,11 +5,15 @@ package View;
  import java.awt.Toolkit;
  import java.awt.event.ActionEvent;
  import java.awt.event.ActionListener;
-
- import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
  import java.util.LinkedList;
  import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +28,7 @@ import SnapShot.Memento;
 import SnapShot.Originator;
 import Objects.*;
  import Players.*;
- import eg.edu.alexu.csd.oop.game.GameEngine;
+import eg.edu.alexu.csd.oop.game.GameEngine;
  import eg.edu.alexu.csd.oop.game.GameObject;
  import eg.edu.alexu.csd.oop.game.World;
  import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
@@ -43,6 +47,7 @@ import Objects.*;
 	private int movingObjectsSpeed=50;
 	private boolean gameover=false;
 	private boolean win=false;
+	private int HighestScore;
  	
 	private PlateFactory pf= PlateFactory.getUniqueInstance();
 	private LevelFactory lf = LevelFactory.getInstance();
@@ -55,6 +60,8 @@ import Objects.*;
  	private final double height = screenSize.getHeight();
  	
  	  public static void main(String[]agrs) throws IOException {
+ 		  
+
 	  
  			menuBar = new JMenuBar();
  			JMenu menu = new JMenu("File");
@@ -69,7 +76,15 @@ import Objects.*;
  			gameController = GameEngine.start("Circus of plates", new View.Gui(), menuBar, levelColor);			
  			newMenuItem.addActionListener(new ActionListener() {
  			@Override public void actionPerformed(ActionEvent e) {
- 					gameController.changeWorld(new View.Gui());
+ 					try {
+						gameController.changeWorld(new View.Gui());
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
  	 				log.setLevel(Level.ALL);
  	 				log.info("game start");
  				}
@@ -89,7 +104,15 @@ import Objects.*;
  				}
  			});	  
  	  }
- 	  public  Gui()  {
+ 	  public  Gui() throws NumberFormatException, IOException  {
+ 		  
+		  	BufferedReader br = new BufferedReader(new FileReader(".\\highestscore.txt"));
+           // while ( br.readLine() !=null)
+           // {
+            	//System.out.println(br.read);
+            	this.HighestScore = Integer.parseInt(br.readLine());
+           // }
+            br.close();
  		  
  		  gameover=false;
  		  score.setScore(0);
@@ -185,6 +208,31 @@ import Objects.*;
 
  	@Override
  	public  boolean refresh() {
+ 		
+ 		if(score.getScore() > this.HighestScore)
+ 		{
+ 			this.HighestScore = score.getScore();
+ 	        BufferedWriter bw = null;
+			try {
+				bw = new BufferedWriter(new FileWriter(".\\highestscore.txt"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+ 	        try {
+ 	        	
+				bw.write( new Integer(score.getScore()).toString() );
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+ 	        try {
+				bw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+ 		}
  		if(!gameover) 
  		{
 
@@ -239,7 +287,7 @@ import Objects.*;
  	@Override
  	public String getStatus() {
 
- 		return "Score "+ score.getScore();
+ 		return "Score "+ score.getScore() +"   |    "+ LevelFactory.getInstance().getMyLevel().toString() + "  |   "+"Highest Score " + this.HighestScore;
  	}
  
  	@Override
