@@ -151,8 +151,8 @@ public class PlateFactory implements Observer {
 		Level f=LevelFactory.getInstance().getMyLevel();
 		//b.setSupportedColors(f.getSupportedColors());
 		PlateFactory.setSupportedColors(f.getSupportedColors());
-		System.out.println("From update method in PlateFactory : level is" + LevelFactory.getInstance().getMyLevel());
-		System.out.println("Supported Colours are .. " + f.getSupportedColors());
+		//System.out.println("From update method in PlateFactory : level is" + LevelFactory.getInstance().getMyLevel());
+		//System.out.println("Supported Colours are .. " + f.getSupportedColors());
 	}
 
 }

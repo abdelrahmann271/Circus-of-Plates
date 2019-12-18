@@ -89,10 +89,14 @@ import Objects.*;
  			});	  
  	  }
  	  public  Gui()  {
+ 		  gameover=false;
+ 		  score.setScore(0);
  	  constant.clear();
  	  control.clear();
  	  moving.clear();
  	  mementos.clear();
+ 	  context=new Context();
+ 	  
  			try {
  				 
  				//moving.add(new NonBasedPlate(-150,75));
@@ -173,7 +177,7 @@ import Objects.*;
  	public  boolean refresh() {
  		if(!gameover) 
  		{
- 			
+
  			Originator originator = new Originator(moving,control);
  			mementos.add(originator.createMemento()); 			
  		} 		
@@ -182,12 +186,15 @@ import Objects.*;
         	control.clear();       	
         	if(iterator==mementos.size())
         	{
-        		return false;
+        		return true;
+
         	}
         	moving= mementos.get(iterator++).getAll();
+
      	 
         	return true;
         }		
+
 		  create++;
  		  if(create%15==0) 
  		  {
