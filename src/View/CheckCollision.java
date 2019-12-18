@@ -3,7 +3,10 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import Logger.LoggerSingle;
 import Players.Player;
 import Players.Stick;
 import eg.edu.alexu.csd.oop.game.GameObject;
@@ -57,6 +60,11 @@ public class CheckCollision implements Strategy {
 	}
 	
 	public boolean gameover() {
+		if(gameOver) {
+			Logger log = LoggerSingle.getInstance();
+				log.setLevel(Level.ALL);
+				log.info("game over");
+		}
 		return gameOver;
 	}
 	

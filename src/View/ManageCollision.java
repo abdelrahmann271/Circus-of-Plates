@@ -2,6 +2,10 @@ package View;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import Logger.LoggerSingle;
 import Objects.Plate;
 import Players.*;
 import eg.edu.alexu.csd.oop.game.GameObject;
@@ -77,6 +81,9 @@ public class ManageCollision implements Strategy {
 					
 					System.out.println("3 Plates are collected");
 					scoreCounter+=25;
+					Logger log = LoggerSingle.getInstance();
+	 				log.setLevel(Level.ALL);
+	 				log.info("3 plates are collected and score = " + scoreCounter);
 					score.setScore(scoreCounter);
 					//Get the score
 				}

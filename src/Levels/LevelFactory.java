@@ -2,7 +2,9 @@ package Levels;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Logger;
 
+import Logger.LoggerSingle;
 import Objects.PlateFactory;
 import Score.Score;
 
@@ -52,8 +54,12 @@ public class LevelFactory extends Observable implements Observer  {
 		}
 		Level a= MyLevel.UpgradeLevel();
 		this.MyLevel=a;
+			Logger log = LoggerSingle.getInstance();
+			log.setLevel(java.util.logging.Level.ALL);
+			log.info("level is upgraded to level " + MyLevel.getcurrentLevel());
 		setChanged();
 		notifyObservers();
+		
 		return a;
 		
 	}
