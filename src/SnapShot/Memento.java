@@ -15,9 +15,12 @@ public class Memento {
 	
 	    public Memento(List<GameObject> constant, List<GameObject> moving, List<GameObject> control) {
 	        super();
-	        this.constant = constant;
-	        this.moving = moving;
-	        this.control = control;
+//	        this.constant = constant;
+//	        this.moving = moving;
+//	        this.control = control;
+	        this.constant = new LinkedList<GameObject>(constant);
+	        this.moving = new LinkedList<GameObject>(moving);
+	        this.control=new LinkedList<GameObject>(control);
 	        for(GameObject O : moving) {
 	        	All.add(O);
 	        }

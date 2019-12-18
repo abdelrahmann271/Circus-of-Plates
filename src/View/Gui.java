@@ -192,7 +192,22 @@ import Objects.*;
 // 		System.out.println(movingObjectsSpeed);
  		if(!gameover) {
  			Originator originator = new Originator(constant,moving,control);
+ 			
+// 		  System.out.println("Moving "+ moving.size());
+// 		  System.out.println();
+// 		  for (GameObject o : moving )
+// 		  {
+// 			  System.out.print(o.hashCode() + "  ");
+// 		  }
+// 			System.out.println("From saving hereeee");
+// 			System.out.println("control size"+control.size());
+// 			System.out.println("moving size"+moving.size());
+ 			
  			mementos.add(originator.createMemento());
+ 			
+// 			System.out.println("saved moving Objects" + mementos.get(0).getMoving().size());
+// 			System.out.println("mementos size " +mementos.size());
+// 			System.out.println("mementos size last obetc " +mementos.get(mementos.size()-1).getMoving().size());
  		}
  		
        if(gameover) {
@@ -201,7 +216,11 @@ import Objects.*;
         	if(iterator==mementos.size()) {
         		return false;
         	}
-        	moving=mementos.get(iterator++).getAll();
+//        	System.out.println("wna b get " + mementos.get(iterator++).getAll().size() );
+        	//moving=mementos.get(iterator++).getAll();
+        	moving = new LinkedList<GameObject>(mementos.get(iterator++).getAll());
+
+        	//System.out.println(mementos.get(0).getMoving().size());
         	
      	   System.out.println("GAMEOVER!");
  
@@ -224,7 +243,13 @@ import Objects.*;
  			  create=0;
  		  }
 
-
+// 		  System.out.println("Moving "+ moving.size());
+// 		  System.out.println();
+// 		  for (GameObject o : moving )
+// 		  {
+// 			  System.out.print(o.hashCode() + "  ");
+// 		  }
+ 		  
  		  context.SetLists(constant, moving, control);
  		  
  		  moving=context.getmoving();
