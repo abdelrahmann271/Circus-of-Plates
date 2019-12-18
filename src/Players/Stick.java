@@ -1,5 +1,7 @@
 package Players;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,14 +19,17 @@ public class Stick extends JPanel implements GameObject {
 	/**
 	 * 
 	 */
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private static final long serialVersionUID = 1L;
 	private int x;
 	private int y;
 	private int type; // 0 --> left , 1 --> right
-	
+	private int dx,dy;
 	public Stick( int x , int y , int type  ){
 		this.x=x-this.getWidth();
 		this.y=y-this.getHeight();
+		this.dx=this.x-(int)screenSize.getWidth()/2;
+		this.dy=this.y-564*(int)screenSize.getHeight()/864;
 		this.type= type ;
 		setX(this.x);
 		setY(this.y);
@@ -52,6 +57,12 @@ public class Stick extends JPanel implements GameObject {
 	public void setY(int y) {
 
 		this.y=y;
+	}
+	public int getdx() {
+		return dx;
+	}
+	public int getdy() {
+		return dy;
 	}
 
 	@Override

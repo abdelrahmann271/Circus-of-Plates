@@ -4,6 +4,8 @@ package View;
 import java.util.ArrayList;
 import java.util.List;
 
+import Players.Player;
+import Players.Stick;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
 
@@ -31,7 +33,7 @@ public class CheckCollision implements Strategy {
 	
 	public void sort(List<GameObject> control) {
 		temp.clear();
-	    if(control.size()>0) {
+	   // if(control.size()>0) {
 	    
 			GameObject f=null;
 	    	int n=control.size();
@@ -51,7 +53,7 @@ public class CheckCollision implements Strategy {
 	   
 	    for(GameObject O : temp) {control.add(O);}
 	   
-	    }
+	  //  }
 	}
 	
 	public boolean gameover() {

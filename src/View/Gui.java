@@ -1,4 +1,4 @@
- package View;
+package View;
  import java.awt.Color;
  import java.awt.Dimension;
 
@@ -36,7 +36,7 @@ import Objects.*;
 	private static List<GameObject> constant = new LinkedList<GameObject>();
 	private static List<GameObject> moving = new LinkedList<GameObject>();
 	private static List<GameObject> control = new LinkedList<GameObject>();
-	private static List<Memento> mementos = new LinkedList<Memento>();
+	private  List<Memento> mementos = new LinkedList<Memento>();
 	//private static List<GameObject> temp = new LinkedList<GameObject>();
 	 private static Logger log = LoggerSingle.getInstance();
  	
@@ -102,6 +102,7 @@ import Objects.*;
  			try {
  				 
  				//moving.add(new NonBasedPlate(-150,75));
+ 				
  				 moving.add(pf.GenerateRandomPlate("left"));
  				 moving.add(pf.GenerateRandomPlate("right"));
  			} catch (IOException e) {
@@ -116,10 +117,10 @@ import Objects.*;
  				//Ayman Set Dimensions 
  				//clown.setX(150);
  				//clown.setY(600);
- 				
+ 				//1536  864
  				//Dimensions for screen suitability
  				clown.setX((int)screenSize.getWidth()/2);
- 				clown.setY((int)screenSize.getHeight()-300);
+ 				clown.setY(564*(int)screenSize.getHeight()/864);
  				
  				// Mlhash Lzma now
  				//System.out.println((int)Math.random()*8);
@@ -139,13 +140,17 @@ import Objects.*;
  			//Adding two sticks to the clown
  			//670
  			//540
- 			control.add(new Stick((int)screenSize.getWidth()-670,(int)screenSize.getHeight()-250,0));
-			control.add(new Stick((int)screenSize.getWidth()-540,(int)screenSize.getHeight()-250,1));
+ 			control.add(new Stick((int)screenSize.getWidth()*776/1536,(int)screenSize.getHeight()*614/864,0));
+			control.add(new Stick((int)screenSize.getWidth()*906/1536,(int)screenSize.getHeight()*614/864,1));
  			
  		 
  		  try {
- 			constant.add(new ConstantBar(0,75));
- 			constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75));
+ 			constant.add(new ConstantBar(0,75*(int)screenSize.getHeight()/864));
+ 			constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75*(int)screenSize.getHeight()/864));
+ 			
+ 			
+ 			
+ 			
  		} catch (IOException e) {
  			Logger log = LoggerSingle.getInstance();
 			log.setLevel(Level.ALL);
@@ -191,8 +196,9 @@ import Objects.*;
 // 		movingObjectsSpeed=movingObjectsSpeed-(score.getScore()/25);
 // 		System.out.println(movingObjectsSpeed);
  		if(!gameover) {
- 			Originator originator = new Originator(constant,moving,control);
+ 			Originator originator = new Originator(moving,control);
  			mementos.add(originator.createMemento());
+ 			
  		}
  		
        if(gameover) {
@@ -201,18 +207,21 @@ import Objects.*;
         	if(iterator==mementos.size()) {
         		return false;
         	}
-        	moving=mementos.get(iterator++).getAll();
-        	
+      
+        	moving= mementos.get(iterator++).getAll();
+     
      	   System.out.println("GAMEOVER!");
+     	
  
-     	   return true;
+     	  return true;
         }
  		
 		  create++;
  		  if(create%15==0) {
  			  try {
- 				  moving.add(pf.GenerateRandomPlate("left"));
- 				  moving.add(pf.GenerateRandomPlate("right"));
+ 				 moving.add(pf.GenerateRandomPlate("left"));
+ 				 moving.add(pf.GenerateRandomPlate("right"));
+ 				
  				  
  			} catch (IOException e) {
 				// TODO Auto-generated catch block

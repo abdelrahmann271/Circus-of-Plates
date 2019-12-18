@@ -3,6 +3,7 @@ package View;
 import java.util.LinkedList;
 import java.util.List;
 import Objects.Plate;
+import Players.*;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import Score.*;
 
@@ -44,12 +45,22 @@ public class ManageCollision implements Strategy {
 	@Override
 	public void excute() {
 
+		Player clown=null;
+		
+		   for(GameObject O : control) {
+			   if(O instanceof Player) {
+				   clown=(Player)O;
+				   break;
+			   }
+		   }
+		
 	for(GameObject[] arr : collided) {
-			
+				
 			arr[0].setY(arr[1].getY()-arr[0].getHeight());
 			((Plate)arr[0]).setfreedome(true);
 			moving.remove(arr[0]);
-			//control.add(arr[0]);
+			((Plate)arr[0]).setdx(((Plate)arr[0]).getX()-clown.getX());
+			((Plate)arr[0]).setdy(((Plate)arr[0]).getY()-clown.getY());
 			if(arr[1] instanceof Plate) {
 				((Plate)arr[0]).setpreviousplate(((Plate)arr[1]));
 				((Plate)arr[0]).setpreviouscolor(((Plate)arr[1]).getColor());
@@ -72,6 +83,21 @@ public class ManageCollision implements Strategy {
 			}
 			
 		}
+	 
+
+	   for(GameObject O : control) {
+		   if(O instanceof Stick) {
+			   Stick stick=(Stick)O;
+			   stick.setX(stick.getdx()+clown.getX());
+			   stick.setY(stick.getdy()+clown.getY());
+		   }
+		   if(O  instanceof Plate) {
+			   Plate p=(Plate)O;
+			   p.setX(p.getdx()+clown.getX());
+			   p.setY(p.getdy()+clown.getY());
+		   }
+	   }
+	
 	}
 
 }

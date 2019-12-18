@@ -20,13 +20,14 @@ public abstract class Plate extends JPanel implements GameObject  {
 	int x=400;
 	int y=500;
 	int height,width;
-	int dx;
+	int dx,dy;
 	BufferedImage[] SpriteImages; 
 	int color,prevcolor=-1;
 	boolean isVisible=true,freedome=false;
 	Plate prev;
-	String type;
+	String type,direction;
 	Vector<Plate> next=new Vector<>();
+	
 	//X and Y 
 	
 	Plate() throws IOException
@@ -42,6 +43,12 @@ public abstract class Plate extends JPanel implements GameObject  {
 	public void setType(String type)
 	{
 		 this.type=type;
+	}
+	public void Setdirection(String s) {
+		this.direction=s;
+	}
+	public String getdirection() {
+		return direction;
 	}
 	public String getType()
 	{
@@ -63,7 +70,6 @@ public abstract class Plate extends JPanel implements GameObject  {
 	@Override
 	public void setX(int x) {
 		this.x=x;
-		
 	}
 
 	@Override
@@ -76,7 +82,6 @@ public abstract class Plate extends JPanel implements GameObject  {
 	public void setY(int y) {
 		// TODO Auto-generated method stub
 		this.y=y;
-		
 	}
 
 	@Override
@@ -143,7 +148,18 @@ public abstract class Plate extends JPanel implements GameObject  {
 	public Plate getpreviousplate() {
 		return prev;
 	}
-
+	public void setdx(int dx) {
+		this.dx=dx;
+	}
+	public void setdy(int dy) {
+		this.dy=dy;
+	}
+	public int getdx() {
+		return dx;
+	}
+	public int getdy() {
+		return dy;
+	}
 	@Override
 	public BufferedImage[] getSpriteImages() {
 		// TODO Auto-generated method stub

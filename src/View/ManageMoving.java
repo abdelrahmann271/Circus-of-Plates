@@ -40,17 +40,35 @@ public class ManageMoving implements Strategy, Observer {
 		public List<GameObject> getconstant(){
 			return constant;
 		}
+		
+	public boolean checkcollision(GameObject p) {
+		
+		for(GameObject t : control) {
+			
+			if(Math.abs(p.getX()-t.getX())<=3*p.getWidth()/4&&Math.abs(p.getY()+p.getHeight()-t.getY())<=10) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public void excute() {
 	 temp.clear();
 		for(GameObject p : moving) {
 			
-			if((((Plate)p).getType()=="left"&&(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth())||
-					((Plate)p).getType()=="right"&&(p.getX()+p.getWidth()<=constant.get(1).getX())||((Plate) p).getfreedome()
+			if((((Plate)p).getdirection()=="left"&&(p.getX()>=constant.get(0).getX()+constant.get(0).getWidth())||
+					((Plate)p).getdirection()=="right"&&(p.getX()+p.getWidth()<=constant.get(1).getX())||((Plate) p).getfreedome()
 					)) {
-			    	p.setY(p.getY()+movingSpeedFactor);
+				     for(int i=1;i<=movingSpeedFactor;i++) {
+				    	 
+				    	 p.setY(p.getY()+1);
+				    	 if(checkcollision(p)) {
+				    		 i=movingSpeedFactor+1;
+				    	 }
+				     }
+			    	
 			    	}
-			    else if(((Plate)p).getType()=="left") {
+			    else if(((Plate)p).getdirection()=="left") {
 			      
 			    	p.setX(p.getX()+movingSpeedFactor); }
 			
