@@ -32,6 +32,7 @@ public class ManageCollision implements Strategy {
 		return isWin;
 	}
 	
+	
 	public List<GameObject> getmoving(){
 		return moving;
 	}

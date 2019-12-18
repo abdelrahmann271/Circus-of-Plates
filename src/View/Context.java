@@ -31,6 +31,9 @@ public class Context {
 		excutestrategy();
 		
 	}
+	public void setWin(boolean w) {
+		managecollision.isWin=w;
+	}
 	
 	public List<GameObject> getmoving(){
 		

@@ -28,7 +28,7 @@ import Objects.*;
  import eg.edu.alexu.csd.oop.game.GameObject;
  import eg.edu.alexu.csd.oop.game.World;
  import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
- 
+ import View.Background;
  
  public class  Gui implements World {
 	 	
@@ -45,6 +45,7 @@ import Objects.*;
 	private boolean win=false;
  	
 	private PlateFactory pf= PlateFactory.getUniqueInstance();
+	private LevelFactory lf = LevelFactory.getInstance();
 	private Context context=new Context();
 	private static  Color levelColor;
 	static GameController gameController;
@@ -130,7 +131,7 @@ import Objects.*;
  			
  	 		constant.add(new ConstantBar(0,75*(int)screenSize.getHeight()/864));
  	 		constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75*(int)screenSize.getHeight()/864));
- 			constant.add(new Background(4));  
+ 			constant.add(new Background(1));  
 			constant.add(new ConstantBar(0,75*(int)screenSize.getHeight()/864));
  			constant.add(new ConstantBar((int)screenSize.getWidth()-constant.get(0).getWidth(),75*(int)screenSize.getHeight()/864));
  			
@@ -203,6 +204,13 @@ import Objects.*;
      	 
         	return true;
         }		
+        if(win) {
+        	
+        	context.setWin(false);
+        	((Background)constant.get(2)).setNum(lf.getMyLevel().getcurrentLevel());
+        	win=false;
+        }
+       
 
 		  create++;
  		  if(create%15==0) 
