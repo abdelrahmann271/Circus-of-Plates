@@ -9,7 +9,7 @@ import java.net.URLClassLoader;
 
 public class ExtensionLoader<C> {
 
-  public C LoadClass(String directory, String classpath, Class<C> parentClass) throws ClassNotFoundException {
+  public Plate LoadClass(String directory, String classpath, Class<Plate> parentClass) throws ClassNotFoundException {
     File pluginsDir = new File(System.getProperty("user.dir") + directory);
     for (File jar : pluginsDir.listFiles()) {
       try {
@@ -18,10 +18,11 @@ public class ExtensionLoader<C> {
             getClass().getClassLoader()
         );
         Class<?> clazz = Class.forName(classpath, true, loader);
-        Class<? extends C> newClass = clazz.asSubclass(parentClass);
+        Class<? extends Plate> newClass = clazz.asSubclass(parentClass);
         // Apparently its bad to use Class.newInstance, so we use 
         // newClass.getConstructor() instead
-        Constructor<? extends C> constructor = newClass.getConstructor();
+        Constructor<? extends Plate> constructor = newClass.getConstructor();
+        System.out.println(clazz.getName());
         return constructor.newInstance();
         
       } catch (ClassNotFoundException e) {

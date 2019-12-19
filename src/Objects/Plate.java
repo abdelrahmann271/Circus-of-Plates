@@ -17,16 +17,16 @@ public abstract class Plate extends JPanel implements GameObject  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	int x=400;
-	int y=500;
-	int height,width;
-	int dx,dy;
-	BufferedImage[] SpriteImages; 
-	int color,prevcolor=-1;
-	boolean isVisible=true,freedome=false;
-	Plate prev;
-	String type,direction;
-	Vector<Plate> next=new Vector<>();
+	public int x=400;
+	public int y=500;
+public 	int height,width;
+	public int dx,dy;
+	public BufferedImage[] SpriteImages; 
+	public int color,prevcolor=-1;
+	public boolean isVisible=true,freedome=false;
+public 	Plate prev;
+	public String type,direction;
+	public Vector<Plate> next=new Vector<>();
 	
 	//X and Y 
 	

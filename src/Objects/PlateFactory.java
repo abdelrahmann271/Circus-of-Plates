@@ -101,27 +101,18 @@ public class PlateFactory implements Observer {
             if(index==0) {
             Class<? extends Plate> classToLoad = (Class<? extends Plate>) Class.forName("Objects.PotPlate", true, child);
             System.out.println(classToLoad.getName());
-//           try {
-//			Plate p = classToLoad.newInstance();
-//		} catch (InstantiationException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//                   arr1[0]=classToLoad;
+                   arr1[0]=classToLoad;
             }
             else if(index==1) {
                 Class<? extends Plate> classToLoad = (Class<? extends Plate>) Class.forName("Objects.NonBasedPlate", true, child);
                 System.out.println(classToLoad.getName());
                 System.out.println("d5l hna");
-//                arr1[1]=classToLoad;
+                arr1[1]=classToLoad;
                 }
             else if(index==2) {
                 Class<? extends Plate> classToLoad = (Class<? extends Plate>) Class.forName("Objects.DeepPlate", true, child);
                 System.out.println(classToLoad.getName());
-                           arr1[0]=classToLoad;
+                           arr1[2]=classToLoad;
                 }
         } catch (MalformedURLException | ClassNotFoundException e) {
             ((Throwable) e).printStackTrace();
@@ -148,65 +139,47 @@ public class PlateFactory implements Observer {
 			}
 			else if(plateType==1)//nonBasedPlate
 			{
-				   try {
-						try {
-							a=(Plate) arr1[0].newInstance();
-						} catch (InstantiationException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IllegalAccessException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IllegalArgumentException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} catch (SecurityException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+
+				try {
+					a=(Plate) arr1[1].newInstance();
+					a.setColor(plateColor);
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 //				a=new NonBasedPlate(plateColor);
 			}
 			else if(plateType==2)//deepPlate
 			{
-				 try {
-						try {
-							a=(Plate) arr1[0].newInstance();
-						} catch (InstantiationException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IllegalAccessException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IllegalArgumentException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} catch (SecurityException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				//				a=new DeepPlate(plateColor);
+
+				try {
+					a=(Plate) arr1[2].newInstance();
+					a.setColor(plateColor);
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+							//				a=new DeepPlate(plateColor);
 			}
 			else//potplate
 			{
-				 try {
-						try {
-							a=(Plate) arr1[0].newInstance();
-						} catch (InstantiationException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IllegalAccessException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IllegalArgumentException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} catch (SecurityException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+
+				try {
+					a=(Plate) arr1[0].newInstance();
+					a.setColor(plateColor);
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 //				a=new PotPlate(plateColor);
 			}
 			if(s=="left") {
