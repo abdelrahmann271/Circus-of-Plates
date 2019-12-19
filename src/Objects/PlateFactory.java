@@ -22,8 +22,9 @@ public class PlateFactory implements Observer {
 	private static PlateFactory pf=null;
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
 	public static int SupportedColors=3;
-	 private Class[]arr1 = new Class[3];
+	 private Class[]arr1 = new Class[4];
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private int index=1;
 	public static PlateFactory getUniqueInstance()
 	{
 		if(pf==null)
@@ -90,7 +91,7 @@ public class PlateFactory implements Observer {
 		}
 		
 	}
-    public void DynamicLoad(String jarPath,int index)
+    public void DynamicLoad(String jarPath)
     {
         URLClassLoader child = null;
         try {
@@ -98,21 +99,22 @@ public class PlateFactory implements Observer {
                     new URL[]{Paths.get(jarPath).toUri().toURL()},
                     this.getClass().getClassLoader()
             );
-            if(index==0) {
+            if(jarPath.contains("PotPlate")) {
             Class<? extends Plate> classToLoad = (Class<? extends Plate>) Class.forName("Objects.PotPlate", true, child);
             System.out.println(classToLoad.getName());
-                   arr1[0]=classToLoad;
+                   arr1[index++]=classToLoad;
+                   
             }
-            else if(index==1) {
+            else if(jarPath.contains("NonBasedPlate")) {
                 Class<? extends Plate> classToLoad = (Class<? extends Plate>) Class.forName("Objects.NonBasedPlate", true, child);
                 System.out.println(classToLoad.getName());
                 System.out.println("d5l hna");
-                arr1[1]=classToLoad;
+                arr1[index++]=classToLoad;
                 }
-            else if(index==2) {
+            else if(jarPath.contains("DeepPlate")) {
                 Class<? extends Plate> classToLoad = (Class<? extends Plate>) Class.forName("Objects.DeepPlate", true, child);
                 System.out.println(classToLoad.getName());
-                           arr1[2]=classToLoad;
+                           arr1[index++]=classToLoad;
                 }
         } catch (MalformedURLException | ClassNotFoundException e) {
             ((Throwable) e).printStackTrace();
@@ -126,7 +128,7 @@ public class PlateFactory implements Observer {
 
 	public Plate GenerateRandomPlate(String s) throws IOException
 	{
-		int plateType=(int) (Math.random()*4);
+		int plateType=(int) (Math.random()*index);
 		//System.out.println(SupportedColors);
 		int plateColor=(int)(Math.random()*SupportedColors);
 		Plate a=null;
@@ -171,7 +173,7 @@ public class PlateFactory implements Observer {
 			{
 
 				try {
-					a=(Plate) arr1[0].newInstance();
+					a=(Plate) arr1[3].newInstance();
 					a.setColor(plateColor);
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
