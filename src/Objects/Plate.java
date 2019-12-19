@@ -30,7 +30,7 @@ public abstract class Plate extends JPanel implements GameObject  {
 	
 	//X and Y 
 	
-	Plate() throws IOException
+	public Plate() throws IOException
 	{
 		
 	}

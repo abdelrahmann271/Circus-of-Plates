@@ -1,16 +1,2 @@
-Dec 19, 2019 12:49:30 AM Logger.LoggerSingle getInstance
+Dec 19, 2019 2:53:32 PM Logger.LoggerSingle getInstance
 INFO: game start
-Dec 19, 2019 12:49:37 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 25
-Dec 19, 2019 12:49:44 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 50
-Dec 19, 2019 12:49:46 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 75
-Dec 19, 2019 12:49:54 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 100
-Dec 19, 2019 12:50:03 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 125
-Dec 19, 2019 12:50:05 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 150
-Dec 19, 2019 12:50:11 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 175

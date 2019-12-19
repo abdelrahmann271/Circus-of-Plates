@@ -3,6 +3,12 @@ package Objects;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -16,6 +22,7 @@ public class PlateFactory implements Observer {
 	private static PlateFactory pf=null;
 	static Map<Integer,Vector<Plate>> Garbage=new HashMap<Integer,Vector<Plate>>();
 	public static int SupportedColors=3;
+	 private Class[]arr1 = new Class[3];
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static PlateFactory getUniqueInstance()
 	{
@@ -83,6 +90,49 @@ public class PlateFactory implements Observer {
 		}
 		
 	}
+    public void DynamicLoad(String jarPath,int index)
+    {
+        URLClassLoader child = null;
+        try {
+            child = new URLClassLoader(
+                    new URL[]{Paths.get(jarPath).toUri().toURL()},
+                    this.getClass().getClassLoader()
+            );
+            if(index==0) {
+            Class<? extends Plate> classToLoad = (Class<? extends Plate>) Class.forName("Objects.PotPlate", true, child);
+            System.out.println(classToLoad.getName());
+//           try {
+//			Plate p = classToLoad.newInstance();
+//		} catch (InstantiationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//                   arr1[0]=classToLoad;
+            }
+            else if(index==1) {
+                Class<? extends Plate> classToLoad = (Class<? extends Plate>) Class.forName("Objects.NonBasedPlate", true, child);
+                System.out.println(classToLoad.getName());
+                System.out.println("d5l hna");
+//                arr1[1]=classToLoad;
+                }
+            else if(index==2) {
+                Class<? extends Plate> classToLoad = (Class<? extends Plate>) Class.forName("Objects.DeepPlate", true, child);
+                System.out.println(classToLoad.getName());
+                           arr1[0]=classToLoad;
+                }
+        } catch (MalformedURLException | ClassNotFoundException e) {
+            ((Throwable) e).printStackTrace();
+        }
+        
+    }
+
+//// pf.DynamicLoad("D:\\projects\\Circus5\\src\\Objects\\DeepPlate.jar",1);
+ 
+//// pf.DynamicLoad("D:\\projects\\Circus5\\src\\Objects\\NonBasedPlate.jar",2);
+
 	public Plate GenerateRandomPlate(String s) throws IOException
 	{
 		int plateType=(int) (Math.random()*4);
@@ -98,15 +148,66 @@ public class PlateFactory implements Observer {
 			}
 			else if(plateType==1)//nonBasedPlate
 			{
-				a=new NonBasedPlate(plateColor);
+				   try {
+						try {
+							a=(Plate) arr1[0].newInstance();
+						} catch (InstantiationException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalArgumentException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+//				a=new NonBasedPlate(plateColor);
 			}
 			else if(plateType==2)//deepPlate
 			{
-				a=new DeepPlate(plateColor);
+				 try {
+						try {
+							a=(Plate) arr1[0].newInstance();
+						} catch (InstantiationException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalArgumentException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				//				a=new DeepPlate(plateColor);
 			}
 			else//potplate
 			{
-				a=new PotPlate(plateColor);
+				 try {
+						try {
+							a=(Plate) arr1[0].newInstance();
+						} catch (InstantiationException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalArgumentException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+//				a=new PotPlate(plateColor);
 			}
 			if(s=="left") {
 				a.setX(-150*(int)screenSize.getWidth()/1536);
@@ -123,7 +224,6 @@ public class PlateFactory implements Observer {
 		}
 		else
 		{
-			
 			//System.out.println("ReUsed");
 			Vector<Plate>v=new Vector<Plate>();
 			v=Garbage.get(plateType);

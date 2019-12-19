@@ -106,6 +106,11 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
  	  }
  	  public  Gui() throws NumberFormatException, IOException  {
  		  
+// 		 pf.DynamicLoad("D:\\projects\\Circus5\\src\\Objects\\PotPlate.jar",0);
+
+// 		 pf.DynamicLoad("D:\\projects\\Circus5\\src\\Objects\\NonBasedPlate.jar",1);
+
+ 		 pf.DynamicLoad("D:\\projects\\Circus5\\src\\Objects\\DeepPlate.jar",2);
 		  	BufferedReader br = new BufferedReader(new FileReader(".\\highestscore.txt"));
            // while ( br.readLine() !=null)
            // {
