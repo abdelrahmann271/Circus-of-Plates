@@ -10,8 +10,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
- import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.LinkedList;
  import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -118,6 +118,8 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
  		 
  		try {
 			JFileChooser filechooser = new JFileChooser();
+			filechooser.setDialogTitle("shapes");
+			
 			filechooser.setMultiSelectionEnabled(true);
 			java.io.File[] file = null;
 			
@@ -277,7 +279,7 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
  			mementos.add(originator.createMemento()); 			
  		} 		
        if(gameover)
-       {    	   
+       {       
         	control.clear();       	
         	if(iterator==mementos.size())
         	{
@@ -285,8 +287,7 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
 
         	}
         	moving= mementos.get(iterator++).getAll();
-
-     	 
+       
         	return true;
         }		
         if(win) {
@@ -298,7 +299,7 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
        
 
 		  create++;
- 		  if(create%15==0) 
+ 		  if(create%(17-2*lf.getMyLevel().getcurrentLevel())==0) 
  		  {
  			  try 
  			  {
