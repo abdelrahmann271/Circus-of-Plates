@@ -58,7 +58,7 @@ public class ManageCollision implements Strategy {
 		   }
 		   
 		   for(GameObject O : control) {
-			   if(O.getX()<-10) {
+			   if(O.getX()<0) {
 				   O.setX(0);
 				   if(O instanceof Stick) {
 						  clown.setX(O.getX()-((Stick)O).getdx());
