@@ -1,39 +1,6 @@
-<<<<<<< HEAD
-Dec 19, 2019 1:13:40 AM Logger.LoggerSingle getInstance
+Dec 20, 2019 11:48:33 PM Logger.LoggerSingle getInstance
 INFO: game start
-Dec 19, 2019 1:13:49 AM View.ManageCollision excute
+Dec 20, 2019 11:49:33 PM View.ManageCollision excute
 INFO: 3 plates are collected and score = 25
-Dec 19, 2019 1:13:52 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 50
-Dec 19, 2019 1:13:55 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 75
-Dec 19, 2019 1:13:57 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 100
-Dec 19, 2019 1:14:02 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 125
-Dec 19, 2019 1:14:05 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 150
-Dec 19, 2019 1:14:12 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 175
-Dec 19, 2019 1:14:21 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 200
-Dec 19, 2019 1:14:31 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 225
-Dec 19, 2019 1:14:41 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 250
-Dec 19, 2019 1:15:14 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 275
-Dec 19, 2019 1:15:29 AM View.ManageCollision excute
-INFO: 3 plates are collected and score = 300
-Dec 19, 2019 1:15:44 AM View.CheckCollision gameover
+Dec 20, 2019 11:49:33 PM View.CheckCollision gameover
 INFO: game over
-Dec 19, 2019 1:15:53 AM View.Gui$2 actionPerformed
-INFO: game paused
-Dec 19, 2019 1:15:55 AM View.Gui$3 actionPerformed
-INFO: game resumed
-Dec 19, 2019 1:16:07 AM View.Gui$1 actionPerformed
-INFO: game start
-=======
-Dec 19, 2019 4:00:14 PM Logger.LoggerSingle getInstance
-INFO: game start
->>>>>>> 4be61c7e88b7c0dad9836ad1d224bbc0691ca23a
