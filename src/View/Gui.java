@@ -10,13 +10,15 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
- import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.LinkedList;
  import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
  import javax.swing.JMenuBar;
  import javax.swing.JMenuItem;
@@ -48,7 +50,7 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
 	private boolean gameover=false;
 	private boolean win=false;
 	private int HighestScore;
- 	
+ 	private Iterator t=null;
 	private PlateFactory pf= PlateFactory.getUniqueInstance();
 	private LevelFactory lf = LevelFactory.getInstance();
 	private Context context=new Context();
@@ -106,6 +108,43 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
  	  }
  	  public  Gui() throws NumberFormatException, IOException  {
  		  
+ 		/* pf.DynamicLoad("C:\\Users\\OWNER\\eclipse-workspace\\circus14\\src\\Objects\\PotPlate.jar",0);
+
+ 		 pf.DynamicLoad("C:\\Users\\OWNER\\eclipse-workspace\\circus14\\src\\Objects\\NonBasedPlate.jar",1);
+ 		 
+ 		 pf.DynamicLoad("C:\\Users\\OWNER\\eclipse-workspace\\circus14\\src\\Objects\\DeepPlate.jar",2);*/
+ 		
+ 			 
+ 		 
+ 		try {
+			JFileChooser filechooser = new JFileChooser();
+			filechooser.setDialogTitle("shapes");
+			
+			filechooser.setMultiSelectionEnabled(true);
+			java.io.File[] file = null;
+			
+			if(filechooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+			{
+				file = filechooser.getSelectedFiles();
+			}
+		   for(int i=0;i<file.length;i++) {
+			   pf.DynamicLoad(file[i].getAbsolutePath());
+		   }
+			try {
+				//pf.DynamicLoad(spath);
+			} catch (Exception e2) {
+				
+			}
+				
+		} catch (Exception e2) {
+		
+ 		/*JFrame fr=new JFrame("Plate Shape");
+		fr.setBackground(Color.pink);
+		fr.getContentPane().setLayout(null);
+		fr.setBounds(259, 115, 500, 500);
+		fr.getContentPane().setBackground(Color.pink);
+		fr.setVisible(true);*/
+      } 
 		  	BufferedReader br = new BufferedReader(new FileReader(".\\highestscore.txt"));
            // while ( br.readLine() !=null)
            // {
@@ -240,16 +279,18 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
  			mementos.add(originator.createMemento()); 			
  		} 		
        if(gameover)
-       {    	   
+       {       
+    	   if(t==null) {
+    		   t=mementos.iterator();
+    	   }
         	control.clear();       	
-        	if(iterator==mementos.size())
+        	if(!t.hasNext())
         	{
         		return true;
 
         	}
-        	moving= mementos.get(iterator++).getAll();
-
-     	 
+//        	moving= mementos.get(iterator++).getAll();
+           moving = ((Memento) t.next()).getAll();       
         	return true;
         }		
         if(win) {
@@ -261,7 +302,7 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
        
 
 		  create++;
- 		  if(create%15==0) 
+ 		  if(create%(17-2*lf.getMyLevel().getcurrentLevel())==0) 
  		  {
  			  try 
  			  {

@@ -47,19 +47,47 @@ public class ManageCollision implements Strategy {
     	}
     	p.getnext().clear();
     }
-	
-	@Override
-	public void excute() {
-
-		Player clown=null;
+	public Player boundaries() {
 		
+		Player clown=null;
 		   for(GameObject O : control) {
 			   if(O instanceof Player) {
 				   clown=(Player)O;
 				   break;
 			   }
 		   }
-		
+		   
+		   for(GameObject O : control) {
+			   if(O.getX()<0) {
+				   O.setX(0);
+				   if(O instanceof Stick) {
+						  clown.setX(O.getX()-((Stick)O).getdx());
+					  }
+				  else if(O instanceof Plate) {
+						  clown.setX(O.getX()-((Plate)O).getdx());
+					 }
+			   }
+			   else if(O.getX()>1366) {
+				   O.setX(1366);
+				   if(O instanceof Stick) {
+						  clown.setX(O.getX()-((Stick)O).getdx());
+					  }
+				  else if(O instanceof Plate) {
+						  clown.setX(O.getX()-((Plate)O).getdx());
+					 }
+			   }
+		   }
+		   
+		   
+		return clown;
+	}
+    
+    
+	@Override
+	public void excute() {
+
+		Player clown=boundaries();	
+	
 	for(GameObject[] arr : collided) {
 				
 			arr[0].setY(arr[1].getY()-arr[0].getHeight());
@@ -104,6 +132,7 @@ public class ManageCollision implements Strategy {
 			   p.setX(p.getdx()+clown.getX());
 			   p.setY(p.getdy()+clown.getY());
 		   }
+		  
 	   }
 	
 	}

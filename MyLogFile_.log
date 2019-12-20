@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Dec 19, 2019 1:13:40 AM Logger.LoggerSingle getInstance
 INFO: game start
 Dec 19, 2019 1:13:49 AM View.ManageCollision excute
@@ -32,3 +33,7 @@ Dec 19, 2019 1:15:55 AM View.Gui$3 actionPerformed
 INFO: game resumed
 Dec 19, 2019 1:16:07 AM View.Gui$1 actionPerformed
 INFO: game start
+=======
+Dec 19, 2019 4:00:14 PM Logger.LoggerSingle getInstance
+INFO: game start
+>>>>>>> 4be61c7e88b7c0dad9836ad1d224bbc0691ca23a
