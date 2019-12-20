@@ -50,7 +50,7 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
 	private boolean gameover=false;
 	private boolean win=false;
 	private int HighestScore;
- 	
+ 	private Iterator t=null;
 	private PlateFactory pf= PlateFactory.getUniqueInstance();
 	private LevelFactory lf = LevelFactory.getInstance();
 	private Context context=new Context();
@@ -280,14 +280,17 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
  		} 		
        if(gameover)
        {       
+    	   if(t==null) {
+    		   t=mementos.iterator();
+    	   }
         	control.clear();       	
-        	if(iterator==mementos.size())
+        	if(!t.hasNext())
         	{
         		return true;
 
         	}
-        	moving= mementos.get(iterator++).getAll();
-       
+//        	moving= mementos.get(iterator++).getAll();
+           moving = ((Memento) t.next()).getAll();       
         	return true;
         }		
         if(win) {
