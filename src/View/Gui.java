@@ -113,38 +113,41 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
  		 pf.DynamicLoad("C:\\Users\\OWNER\\eclipse-workspace\\circus14\\src\\Objects\\NonBasedPlate.jar",1);
  		 
  		 pf.DynamicLoad("C:\\Users\\OWNER\\eclipse-workspace\\circus14\\src\\Objects\\DeepPlate.jar",2);*/
+ 		pf.index=1;
+ 		pf.DynamicLoad("Objects\\DeepPlate.jar");
+ 		pf.DynamicLoad("Objects\\NonBasedPlate.jar");
+ 		pf.DynamicLoad("Objects\\PotPlate.jar");
  		
- 			 
  		 
- 		try {
-			JFileChooser filechooser = new JFileChooser();
-			filechooser.setDialogTitle("shapes");
-			
-			filechooser.setMultiSelectionEnabled(true);
-			java.io.File[] file = null;
-			
-			if(filechooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-			{
-				file = filechooser.getSelectedFiles();
-			}
-		   for(int i=0;i<file.length;i++) {
-			   pf.DynamicLoad(file[i].getAbsolutePath());
-		   }
-			try {
-				//pf.DynamicLoad(spath);
-			} catch (Exception e2) {
-				
-			}
-				
-		} catch (Exception e2) {
-		
- 		/*JFrame fr=new JFrame("Plate Shape");
-		fr.setBackground(Color.pink);
-		fr.getContentPane().setLayout(null);
-		fr.setBounds(259, 115, 500, 500);
-		fr.getContentPane().setBackground(Color.pink);
-		fr.setVisible(true);*/
-      } 
+// 		try {
+//			JFileChooser filechooser = new JFileChooser();
+//			filechooser.setDialogTitle("shapes");
+//			
+//			filechooser.setMultiSelectionEnabled(true);
+//			java.io.File[] file = null;
+//			
+//			if(filechooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+//			{
+//				file = filechooser.getSelectedFiles();
+//			}
+//		   for(int i=0;i<file.length;i++) {
+//			   pf.DynamicLoad(file[i].getAbsolutePath());
+//		   }
+//			try {
+//				//pf.DynamicLoad(spath);
+//			} catch (Exception e2) {
+//				
+//			}
+//				
+//		} catch (Exception e2) {
+//		
+// 		/*JFrame fr=new JFrame("Plate Shape");
+//		fr.setBackground(Color.pink);
+//		fr.getContentPane().setLayout(null);
+//		fr.setBounds(259, 115, 500, 500);
+//		fr.getContentPane().setBackground(Color.pink);
+//		fr.setVisible(true);*/
+//      } 
 		  	BufferedReader br = new BufferedReader(new FileReader(".\\highestscore.txt"));
            // while ( br.readLine() !=null)
            // {

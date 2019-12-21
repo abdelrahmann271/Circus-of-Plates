@@ -24,7 +24,7 @@ public class PlateFactory implements Observer {
 	public static int SupportedColors=3;
 	 private Class[]arr1 = new Class[4];
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	private int index=1;
+	public int index=1;
 	public static PlateFactory getUniqueInstance()
 	{
 		if(pf==null)
